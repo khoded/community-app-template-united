@@ -3,7 +3,7 @@ name: Deploy to United Capital to ECR
 on:
  
   push:
-    branches: [ fiter/africa/dev  ]
+    branches: [ fiter/africa/dev ]
 
 jobs:
   

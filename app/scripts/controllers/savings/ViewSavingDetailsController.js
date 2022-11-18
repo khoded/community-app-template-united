@@ -12,6 +12,7 @@
             scope.savingaccountdetails = [];
             scope.transactions = [];
             scope.subStatus = false;
+            scope.transactionsPerPage = 15;
 
             scope.isDebit = function (savingsTransactionType) {
                 return savingsTransactionType.withdrawal == true || savingsTransactionType.feeDeduction == true
@@ -146,7 +147,10 @@
             };
 
 
-            resourceFactory.savingsResource.get({accountId: routeParams.id, associations: 'all'}, function (data) {
+            resourceFactory.savingsResource.get({accountId: routeParams.id, associations: 'all',
+                offset: 0,
+                limit: scope.transactionsPerPage
+                }, function (data) {
                 scope.savingaccountdetails = data;
                 scope.savingaccountdetails.availableBalance = scope.savingaccountdetails.enforceMinRequiredBalance?((!scope.savingaccountdetails.lienAllowed)?(scope.savingaccountdetails.summary.accountBalance - scope.savingaccountdetails.minRequiredBalance):scope.savingaccountdetails.summary.availableBalance):scope.savingaccountdetails.summary.availableBalance;
                 scope.convertDateArrayToObject('date');
@@ -162,6 +166,9 @@
                 scope.staffData.staffId = data.staffId;
                 scope.date.toDate = new Date();
                 scope.date.fromDate = new Date(data.timeline.activatedOnDate);
+
+                scope.totalTransactions = scope.savingaccountdetails.transactionSize;
+                scope.transactions = scope.savingaccountdetails.transactions;
 
                 scope.status = data.status.value;
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
@@ -378,7 +385,6 @@
                 });
             });
 
-           scope.transactionsPerPage = 15;
 
             scope.getResultsPage = function (pageNumber) {
                 if(scope.searchText){

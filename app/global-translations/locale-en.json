@@ -4508,7 +4508,7 @@
   "label.button.topupamount": "Top Up Amount",
   "label.button.newdepositamount": "New Deposit Amount",
   "label.input.lga": "LGA",
-
-
+  "label.input.isusdproduct" : "Requires Forex Setup",
+  "label.tooltip.isusdproduct": "An boolean flag for check this product is usd product",
   "----End---": "--End of file--- "
 }
