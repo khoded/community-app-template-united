@@ -196,11 +196,11 @@
                 case "waive":
                     scope.waiveCharge = true;
                     break;
-        case "postAccrualInterestAsOn":
+                case "postAccrualInterestAsOn":
                     scope.labelName = 'label.input.transactiondate';
                     scope.modelName = 'transactionDate';
                     scope.showDateField = true;
-          scope.showAccountNumber = true;
+                    scope.showAccountNumber=true;
                     break;
             }
 
@@ -214,11 +214,11 @@
                     this.formData.locale = scope.optlang.code;
                     this.formData.dateFormat = scope.df;
                 }
-        if (scope.action == "postAccrualInterestAsOn") {
+                if(scope.action=="postAccrualInterestAsOn"){
                     if (this.formData.transactionDate) {
                         this.formData.transactionDate = dateFilter(this.formData.transactionDate, scope.df);
                     }
-          }
+                    this.formData.isPostInterestAsOn=true;
                 }
                 if (scope.action == "deposit" || scope.action == "withdrawal" || scope.action == "modifytransaction") {
                     if (scope.action == "withdrawal") {

@@ -58,7 +58,7 @@
                         });
                         break;
                     case "postAccrualInterest":
-            resourceFactory.fixedDepositAccountResource.save(
+                        resourceFactory.fixedDepositAccountResource.save({accountId: accountId, command: 'postAccrualInterest'}, {}, function (data) {
                             route.reload();
                         });
                         break;
@@ -91,7 +91,7 @@
                         });
                         break;
                     case "postAccrualInterestAsOn":
-            location.path(
+                        location.path('/fixeddepositaccount/' + accountId + '/postAccrualInterestAsOn');
                         break;
                 }
             };
@@ -112,10 +112,10 @@
                 scope.status = data.status.value;
                 scope.heading = (!scope.savingaccountdetails.status.rejected && !scope.savingaccountdetails.status.submittedAndPendingApproval)?'label.heading.interestchart':'label.heading.summary';
 
-          if (scope.savingaccountdetails.accruedInterestCarriedForward) {
+                if (scope.savingaccountdetails.accruedInterestCarriedForward) {
                     scope.savingaccountdetails.summary.totalInterestEarned += scope.savingaccountdetails.accruedInterestCarriedForward;
                 } else {
-            scope.savingaccountdetails.accruedInterestCarriedForward = 0;
+                    scope.savingaccountdetails.accruedInterestCarriedForward = 0;
                 }
 
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
@@ -183,7 +183,7 @@
                         {
                             name: "button.postAccrualInterestAsOn",
                             icon: "icon-arrow-right",
-                  taskPermissionName: "POSTACCRUALINTERESTASON_SAVINGSACCOUNT",
+                            taskPermissionName:"POSTACCRUALINTERESTASON_SAVINGSACCOUNT"
                         }
                     ],
                         options: [
@@ -191,7 +191,7 @@
                                 name: "button.postInterest"
                             },
                             {
-                  name: "button.postAccrualInterest",
+                                name: "button.postAccrualInterest"
                             },
                             {
                                 name: "button.addcharge"
