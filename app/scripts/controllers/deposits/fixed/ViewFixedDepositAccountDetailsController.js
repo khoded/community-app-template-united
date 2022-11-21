@@ -57,14 +57,11 @@
                             route.reload();
                         });
                         break;
-                    /*          case "applyAnnualFees":
-                     location.path('/savingaccountcharge/' + accountId + '/applyAnnualFees/' + scope.annualChargeId);
-                     break;
-                     case "transferFunds":
-                     if (scope.savingaccountdetails.clientId) {
-                     location.path('/accounttransfers/fromsavings/'+accountId);
-                     }
-                     break;*/
+                    case "postAccrualInterest":
+            resourceFactory.fixedDepositAccountResource.save(
+                            route.reload();
+                        });
+                        break;
                     case "close":
                         location.path('/fixeddepositaccount/' + accountId + '/close');
                         break;
@@ -93,6 +90,9 @@
                             route.reload();
                         });
                         break;
+                    case "postAccrualInterestAsOn":
+            location.path(
+                        break;
                 }
             };
 
@@ -111,6 +111,13 @@
                 scope.chartSlabs = scope.savingaccountdetails.accountChart.chartSlabs;
                 scope.status = data.status.value;
                 scope.heading = (!scope.savingaccountdetails.status.rejected && !scope.savingaccountdetails.status.submittedAndPendingApproval)?'label.heading.interestchart':'label.heading.summary';
+
+          if (scope.savingaccountdetails.accruedInterestCarriedForward) {
+                    scope.savingaccountdetails.summary.totalInterestEarned += scope.savingaccountdetails.accruedInterestCarriedForward;
+                } else {
+            scope.savingaccountdetails.accruedInterestCarriedForward = 0;
+                }
+
                 if (scope.status == "Submitted and pending approval" || scope.status == "Active" || scope.status == "Approved") {
                     scope.choice = true;
                 }
@@ -172,11 +179,19 @@
                         {
                             name: "button.calculateInterest",
                             icon: "fa fa-table"
+                        },
+                        {
+                            name: "button.postAccrualInterestAsOn",
+                            icon: "icon-arrow-right",
+                  taskPermissionName: "POSTACCRUALINTERESTASON_SAVINGSACCOUNT",
                         }
                     ],
                         options: [
                             {
                                 name: "button.postInterest"
+                            },
+                            {
+                  name: "button.postAccrualInterest",
                             },
                             {
                                 name: "button.addcharge"

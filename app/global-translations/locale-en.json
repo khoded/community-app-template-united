@@ -4510,5 +4510,9 @@
   "label.input.lga": "LGA",
   "label.input.isusdproduct" : "Requires Forex Setup",
   "label.tooltip.isusdproduct": "An boolean flag for check this product is usd product",
+  "label.totalinterestpayable": "Total Interest Payable",
+  "label.totalinterestposted": "Interest posted",
+  "label.totalinterestaccrued": "Total Interest Accrued",
+  "label.accruedinterestcarriedfored": "Interest Accrued (carried forward)",
   "----End---": "--End of file--- "
 }
