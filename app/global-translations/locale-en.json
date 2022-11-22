@@ -3359,6 +3359,7 @@
   "chargeTimeType.atmWithdrawalFee":"ATM Withdrawal Fee",
   "chargeTimeType.atmPurchaseFee":"ATM Purchase Fee",
   "chargeTimeType.tranchedisbursement": "Tranche Disbursement",
+  "chargeTimeType.fdaPartialLiquidationFee": "Partial Liquidation Fee",
   "chargeCalculationType.percent.of.amount": "% Approved Amount",
   "chargeCalculationType.percent.of.amount.and.interest": "% Loan Amount + Interest",
   "chargeCalculationType.percent.of.interest": "% Interest",
@@ -4511,8 +4512,10 @@
   "label.input.isusdproduct" : "Requires Forex Setup",
   "label.tooltip.isusdproduct": "An boolean flag for check this product is usd product",
   "label.totalinterestpayable": "Total Interest Payable",
-  "label.totalinterestposted": "Interest posted",
   "label.totalinterestaccrued": "Total Interest Accrued",
   "label.accruedinterestcarriedfored": "Interest Accrued (carried forward)",
+  "validation.msg.fixeddepositaccount.liquidationAmount.is.less.than.min": "Liquidation amount must not be less than the minimum value 1",
+  "validation.msg.fixeddepositaccount.deposit.period.not.between.min.and.max.deposit.term": "Deposit period not between allowed min and max deposit term",
+  "validation.msg.fixeddepositaccount.liquidationAmount.liquidation.amount.must.be.less.than.maturity.amount": "Amount to liquidate must be less than maturity amount",
   "----End---": "--End of file--- "
 }

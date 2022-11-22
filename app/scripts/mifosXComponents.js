@@ -364,6 +364,7 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'client/AddEmploymentInfoController',
             'client/EditEmploymentInfoController',
             'client/BusinessOwnerDocumentController',
+            'deposits/fixed/FixedDepositAccountPartialLiquidationController'
         ],
         filters: [
             'StatusLookup',
