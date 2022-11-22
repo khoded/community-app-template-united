@@ -4517,5 +4517,6 @@
   "validation.msg.fixeddepositaccount.liquidationAmount.is.less.than.min": "Liquidation amount must not be less than the minimum value 1",
   "validation.msg.fixeddepositaccount.deposit.period.not.between.min.and.max.deposit.term": "Deposit period not between allowed min and max deposit term",
   "validation.msg.fixeddepositaccount.liquidationAmount.liquidation.amount.must.be.less.than.maturity.amount": "Amount to liquidate must be less than maturity amount",
+  "label.button.postAccrualInterest": "Post Accrual Interest",
   "----End---": "--End of file--- "
 }
