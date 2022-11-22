@@ -1,6 +1,8 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
         ViewFixedDepositAccountDetailsController: function (scope, routeParams, resourceFactory, paginatorService, location, route, dateFilter,$uibModal) {
+            scope.transactions = [];
+
             scope.isDebit = function (savingsTransactionType) {
                 return savingsTransactionType.withdrawal == true || savingsTransactionType.feeDeduction == true || savingsTransactionType.withholdTax == true;
             };
@@ -104,7 +106,10 @@
                 }
             };
 
-            resourceFactory.fixedDepositAccountResource.get({accountId: routeParams.id, associations: 'all'}, function (data) {
+            resourceFactory.fixedDepositAccountResource.get({accountId: routeParams.id, associations: 'all',
+                offset: 0,
+                limit: scope.clientsPerPage
+            }, function (data) {
                 scope.savingaccountdetails = data;
                 scope.savingaccountdetails.availableBalance = scope.savingaccountdetails.enforceMinRequiredBalance?(scope.savingaccountdetails.summary.accountBalance - scope.savingaccountdetails.minRequiredOpeningBalance):scope.savingaccountdetails.summary.accountBalance;
                 scope.convertDateArrayToObject('date');
@@ -279,6 +284,35 @@
                 scope.isCollapsed = false;
             };
 
+            scope.transactionsPerPage = 15;
+
+            scope.getResultsPage = function (pageNumber) {
+                if(scope.searchText){
+                    var startPosition = (pageNumber - 1) * scope.transactionsPerPage;
+                    scope.transactions = scope.savingaccountdetails.transactions.slice(startPosition, startPosition + scope.transactionsPerPage);
+                    return;
+                }
+                resourceFactory.fixedDepositAccountResource.get({accountId: routeParams.id, associations: 'all',
+                 offset: ((pageNumber - 1) * scope.transactionsPerPage),
+                 limit: scope.clientsPerPage
+                 }, function (data) {
+                 scope.savingaccountdetails = data;
+                 scope.transactions = scope.savingaccountdetails.transactions;
+                   });
+              }
+            scope.initPage = function () {
+                 resourceFactory.fixedDepositAccountResource.get({accountId: routeParams.id, associations: 'all',
+                 offset: 0,
+                 limit: scope.transactionsPerPage
+                 }, function (data) {
+                 scope.savingaccountdetails = data;
+                 scope.totalTransactions = scope.savingaccountdetails.transactionSize;
+                 scope.transactions = scope.savingaccountdetails.transactions;
+                   });
+
+              }
+
+             scope.initPage();
             scope.deletestandinginstruction = function (id) {
                 $uibModal.open({
                     templateUrl: 'delInstruction.html',
