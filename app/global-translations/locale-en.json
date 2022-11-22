@@ -4514,5 +4514,6 @@
   "label.totalinterestposted": "Interest posted",
   "label.totalinterestaccrued": "Total Interest Accrued",
   "label.accruedinterestcarriedfored": "Interest Accrued (carried forward)",
+  "label.button.postAccrualInterest": "Post Accrual Interest",
   "----End---": "--End of file--- "
 }
