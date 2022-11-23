@@ -337,6 +337,11 @@
                 <uib-tab heading="{{'label.heading.transactions' | translate}}"
                          ng-show="savingaccountdetails.transactions" select="convertDateArrayToObject('date')">
                     <br>
+                    <button class="btn btn-primary pull-right" ng-show="!checkStatus()"
+                            ng-click="viewAccrualTransaction()" style="margin-right: 8px;">
+                        {{'label.input.show.accrual.transactions' | translate}}
+                    </button>
+                    <br>
                     <table class="table table-bordered">
                         <colgroup span="4"></colgroup>
                         <thead>

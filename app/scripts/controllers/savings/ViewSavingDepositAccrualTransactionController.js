@@ -11,6 +11,7 @@
             scope.savingaccountdetails = [];
             scope.subStatus = false;
             scope.transactions = [];
+            scope.pages = 0;
 
             scope.transactionsPerPage = 15;
 
@@ -26,6 +27,16 @@
                 }
             };
 
+            scope.getResultsPage = function (pageNumber) {
+                if (location.search().savingsId != null) {
+                    scope.getSavingsAccruals(pageNumber);
+                } else if (location.search().recurringDepositId != null) {
+                    scope.getRecurringDepositAccruals(pageNumber);
+                } else if (location.search().fixedDepositId != null) {
+                    scope.getFixedDepositAccruals(pageNumber);
+                }
+            }
+
             scope.routeTo = function (savingsAccountId, transactionId, accountTransfer) {
                 if (location.search().savingsId != null) {
                     location.path('/viewsavingtrxn/' + savingsAccountId + '/trxnId/' + transactionId);
@@ -35,16 +46,18 @@
                     location.path('/viewfixeddepositaccounttrxn/' + savingsAccountId + '/' + transactionId);
                 }
             };
-              scope.transactionsPerPage = 15;
 
-                scope.getResultsPage = function (pageNumber) {
+                scope.getSavingsAccruals = function (pageNumber) {
                     if(scope.searchText){
                         var startPosition = (pageNumber - 1) * scope.transactionsPerPage;
                         scope.transactions = scope.savingaccountdetails.transactions.slice(startPosition, startPosition + scope.transactionsPerPage);
                         return;
                     }
+                    if(pageNumber != null){
+                    scope.pages = ((pageNumber - 1) * scope.transactionsPerPage);
+                    }
                     resourceFactory.savingsResource.get({ accountId: location.search().savingsId, associations: 'accrualTransactions,transactions',
-                     offset: ((pageNumber - 1) * scope.transactionsPerPage),
+                     offset: scope.pages,
                      limit: scope.clientsPerPage
                      }, function (data) {
                      scope.savingaccountdetails = data;
@@ -52,25 +65,14 @@
                        });
                   }
 
-
-                 scope.initPage = function () {
-                 resourceFactory.savingsResource.get({ accountId: location.search().savingsId, associations: 'accrualTransactions,transactions',
-                 offset: 0,
-                 limit: scope.transactionsPerPage
-                 }, function (data) {
-                 scope.savingaccountdetails = data;
-                 scope.totalTransactions = scope.savingaccountdetails.transactionSize;
-                 scope.transactions = scope.savingaccountdetails.transactions;
-                   });
-
-              }
-
-                 scope.initPage();
-
             scope.getFixedDepositAccruals = function (pageNumber) {
+                if(pageNumber != null){
+                scope.pages = ((pageNumber - 1) * scope.transactionsPerPage);
+                }
                 resourceFactory.fixedDepositAccountResource.get({
-                    accountId: location.search().fixedDepositId, associations: 'accrualTransactions',
-                    pageNumber: pageNumber, pageSize: scope.transactionsPerPage
+                    accountId: location.search().fixedDepositId, associations: 'accrualTransactions,transactions',
+                    offset: scope.pages,
+                    limit: scope.clientsPerPage
                 }, function (data) {
                     scope.savingaccountdetails = data;
                     scope.convertDateArrayToObject('date');
@@ -92,6 +94,18 @@
                     }
                 });
             }
+
+            scope.initPage = function () {
+              if (location.search().savingsId != null) {
+                      scope.getSavingsAccruals(null);
+                  } else if (location.search().recurringDepositId != null) {
+                      scope.getRecurringDepositAccruals(null);
+                  } else if (location.search().fixedDepositId != null) {
+                      scope.getFixedDepositAccruals(null);
+                  }
+             }
+
+             scope.initPage();
 
             if (location.search().savingsId != null) {
                 scope.initPage();
