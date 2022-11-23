@@ -56,11 +56,12 @@
                     if(pageNumber != null){
                     scope.pages = ((pageNumber - 1) * scope.transactionsPerPage);
                     }
-                    resourceFactory.savingsResource.get({ accountId: location.search().savingsId, associations: 'accrualTransactions,transactions',
+                    resourceFactory.savingsResource.get({ accountId: location.search().savingsId, associations: 'accrualTransactions',
                      offset: scope.pages,
-                     limit: scope.clientsPerPage
+                     limit: scope.transactionsPerPage
                      }, function (data) {
                      scope.savingaccountdetails = data;
+                     scope.totalTransactions = scope.savingaccountdetails.transactionSize;
                      scope.transactions = scope.savingaccountdetails.transactions;
                        });
                   }
@@ -70,28 +71,30 @@
                 scope.pages = ((pageNumber - 1) * scope.transactionsPerPage);
                 }
                 resourceFactory.fixedDepositAccountResource.get({
-                    accountId: location.search().fixedDepositId, associations: 'accrualTransactions,transactions',
+                    accountId: location.search().fixedDepositId, associations: 'accrualTransactions',
                     offset: scope.pages,
-                    limit: scope.clientsPerPage
+                    limit: scope.transactionsPerPage
                 }, function (data) {
                     scope.savingaccountdetails = data;
                     scope.convertDateArrayToObject('date');
-                    if (scope.savingaccountdetails.transactions) {
-                        scope.totalTransactions = data.transactionCount;
-                    }
+                    scope.totalTransactions = scope.savingaccountdetails.transactionSize;
+                    scope.transactions = scope.savingaccountdetails.transactions;
                 });
             }
 
             scope.getRecurringDepositAccruals = function (pageNumber) {
+                if(pageNumber != null){
+                scope.pages = ((pageNumber - 1) * scope.transactionsPerPage);
+                }
                 resourceFactory.recurringDepositAccountResource.get({
                     accountId: location.search().recurringDepositId, associations: 'accrualTransactions',
-                    pageNumber: pageNumber, pageSize: scope.transactionsPerPage
+                    offset: scope.pages,
+                    limit: scope.transactionsPerPage
                 }, function (data) {
                     scope.savingaccountdetails = data;
                     scope.convertDateArrayToObject('date');
-                    if (scope.savingaccountdetails.transactions) {
-                        scope.totalTransactions = data.transactionCount;
-                    }
+                   scope.totalTransactions = scope.savingaccountdetails.transactionSize;
+                   scope.transactions = scope.savingaccountdetails.transactions;
                 });
             }
 
