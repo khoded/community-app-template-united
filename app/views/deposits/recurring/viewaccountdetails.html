@@ -395,8 +395,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="pointer-main" ng-class="{strikeoff : transaction.reversed==true}"
-                            ng-repeat="transaction in savingaccountdetails.transactions | orderBy:transactionSort.column:transactionSort.descending ">
+                        <tr dir-paginate="transaction in savingaccountdetails.transactions | orderBy:transactionSort.column[2]:transactionSort.ascending  | filter:filterText | itemsPerPage: transactionsPerPage" class="pointer-main"
+                            total-items="totalTransactions"  pagination-id="transactions" ng-show="!transaction.reversed">
                             <td class="pointer"
                                 data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
                                 {{transaction.id}}
@@ -427,6 +427,10 @@
                             </td>
                         </tbody>
                     </table>
+                    <dir-pagination-controls align="center" boundary-links="true"
+                                             template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html"
+                                             on-page-change="getResultsPage(newPageNumber)" pagination-id="transactions">
+                    </dir-pagination-controls>
                 </uib-tab>
                 <uib-tab heading="{{'label.anchor.standinginstruction' | translate}}" ng-show="instructions.currentPageItems.length > 0">
                     <br>
