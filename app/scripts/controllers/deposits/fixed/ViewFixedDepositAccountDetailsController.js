@@ -70,9 +70,9 @@
                     case "prematureClose":
                         location.path('/fixeddepositaccount/' + accountId + '/prematureClose');
                         break;
-                    /*case "partiallyLiquidate":
+                    case "partiallyLiquidate":
                         location.path('/fixeddepositaccount/' + accountId + '/partiallyLiquidate');
-                        break;*/
+                        break;
                     case "topUp":
                         location.path('/fixeddepositaccount/' + accountId + '/topUp');
                         break;
@@ -201,9 +201,9 @@
                             {
                                 name: "button.addcharge"
                             },
-                            /*{
+                            {
                                 name: "button.partiallyLiquidate"
-                            },*/
+                            },
                             {
                                 name: "button.topUp"
                             }
