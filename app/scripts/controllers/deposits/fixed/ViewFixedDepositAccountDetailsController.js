@@ -309,7 +309,6 @@
                  scope.totalTransactions = scope.savingaccountdetails.transactionSize;
                  scope.transactions = scope.savingaccountdetails.transactions;
                    });
-
               }
 
              scope.initPage();
@@ -371,7 +370,9 @@
                     }
                 });
             };
-
+            scope.viewAccrualTransaction = function(){
+                location.path("/viewaccrualtransaction/").search({fixedDepositId: scope.savingaccountdetails.id});
+                };
             scope.deleteAll = function (apptableName, entityId) {
                 resourceFactory.DataTablesResource.delete({datatablename: apptableName, entityId: entityId, genericResultSet: 'true'}, {}, function (data) {
                     route.reload();

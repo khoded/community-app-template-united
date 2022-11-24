@@ -416,7 +416,9 @@
             scope.modifyTransaction = function (accountId, transactionId) {
                 location.path('/recurringdepositaccount/' + accountId + '/modifytransaction?transactionId=' + transactionId);
             };
-
+            scope.viewAccrualTransaction = function(){
+                location.path("/viewaccrualtransaction/").search({recurringDepositId: scope.savingaccountdetails.id});
+            };
             scope.incentives = function(index){
                 $uibModal.open({
                     templateUrl: 'incentive.html',
