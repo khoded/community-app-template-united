@@ -309,7 +309,6 @@
                  scope.totalTransactions = scope.savingaccountdetails.transactionSize;
                  scope.transactions = scope.savingaccountdetails.transactions;
                    });
-
               }
 
              scope.initPage();
