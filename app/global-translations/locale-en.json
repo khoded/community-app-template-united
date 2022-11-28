@@ -4134,6 +4134,8 @@
   "label.input.division": "Division",
   "label.input.township": "Township",
   "label.input.wardvillage": "Ward Village",
+  "label.input.vaultTargetDate": "Vault Target Date",
+  "label.input.vaultTargetAmount": "Vault Target Amount",
   "label.menu.selectnationalId": "Select NationalId",
   "label.S3.description": "S3 Amazon Service Configuration",
   "label.SMTP.description": "Email Service Configuration",
