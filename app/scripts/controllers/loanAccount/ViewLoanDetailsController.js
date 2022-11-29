@@ -572,13 +572,18 @@
                 location.path('/loan/'+scope.loandetails.id+'/viewcharge/'+chargeId).search({loanstatus:scope.loandetails.status.value});
             };
 
-            scope.viewprintdetails = function () {
+            scope.viewprintdetails = function (outputType) {
                 //scope.printbtn = true;
                 scope.report = true;
                 scope.viewTransactionReport = false;
                 scope.viewReport = true;
                 scope.hidePentahoReport = true;
-                scope.formData.outputType = 'PDF';
+                if(outputType === 'PDF'){
+                 scope.formData.outputType = 'PDF';
+                }else{
+                 scope.formData.outputType = 'XLS';
+                }
+
 
                 var reportURL = $rootScope.hostUrl + API_VERSION + "/runreports/" + encodeURIComponent("Client Loan Account Schedule");
                 reportURL += "?output-type=" + encodeURIComponent(scope.formData.outputType) + "&tenantIdentifier=" + $rootScope.tenantIdentifier+"&locale="+scope.optlang.code;

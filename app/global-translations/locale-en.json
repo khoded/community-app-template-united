@@ -4523,5 +4523,6 @@
   "chargeTimeType.interestForfeited": "Interest Forfeited",
   "label.checkbox.allowFreeWithdrawal": "Allow Free Withdrawals",
   "error.msg.deposit.period.is.please.select.charge.which.have.no.free.withdrawal": "Deposit Period select `{{params[0].value}}` So please select charge with  no of free withdrawals allowed for that",
+  "label.button.generatexls" : "Generate Excel",
   "----End---": "--End of file--- "
 }
