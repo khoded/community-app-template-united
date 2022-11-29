@@ -26,7 +26,6 @@
                         }
                     }
                 }
-
                 if (data.clientId) {
                     scope.formData.clientId = data.clientId;
                     scope.clientName = data.clientName;
