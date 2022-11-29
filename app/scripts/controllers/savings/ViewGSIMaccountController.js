@@ -116,7 +116,7 @@
             scope.routeToSaving = function (id) {
                 location.path('/viewsavingaccount/' + id);
             };
-            console.log("outer"+parentGSIMId);
+
 
             scope.clickEvent = function (eventName, accountId) {
                 eventName = eventName || "";
