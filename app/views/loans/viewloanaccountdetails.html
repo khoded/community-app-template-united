@@ -39,7 +39,10 @@
              </div>
              <div class="col-md-11 center" ng-show="viewLoanReport">
                  <button ng-click="viewLoanDetails()" class="btn btn-default ng-binding">{{'label.button.back' | translate}} </button>
-                 <button ng-click="viewprintdetails()" class="btn btn-primary ng-binding">{{'label.button.viewprint' | translate}} </button>
+                 <button ng-click="viewprintdetails('PDF')" class="btn btn-primary ng-binding">{{'label.button.viewprint' | translate}} </button>
+                 <button ng-click="viewprintdetails('XLS')" class="btn btn-primary ng-binding">
+                     {{'label.button.generatexls' | translate}}
+                 </button>
              </div>
 
 
