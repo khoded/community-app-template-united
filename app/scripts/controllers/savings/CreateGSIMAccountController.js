@@ -290,8 +290,6 @@
                         z++;
                         if(z===applicationCount)
                         {
-                            console.log("z is"+z);
-                            console.log("val of z"+applicationCount);
                             scope.formData1.lastApplication=true; //
                         }
                         var temp={};
