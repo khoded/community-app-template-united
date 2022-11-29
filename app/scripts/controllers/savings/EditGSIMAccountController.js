@@ -114,7 +114,6 @@
                                 data.feeOnMonthDay = new Date(dateFilter(data.feeOnMonthDay, scope.df));
                             }
                         }
-
                         delete data.id;
                         scope.charges.push(data);
                         scope.chargeId = undefined;
