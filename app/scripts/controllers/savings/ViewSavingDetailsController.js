@@ -142,6 +142,9 @@
                     case "unhold":
                         location.path('/savingaccount/'+accountId+ '/hold');
                         break;
+                    case "unlock":
+                        location.path('/savingaccount/'+accountId+ '/unlock');
+                        break;
 
                 }
             };
@@ -297,6 +300,10 @@
                             {
                                 name: "button.freeze",
                                 taskPermissionName : ""
+                            },
+                            {
+                                name: "button.unlock",
+                                taskPermissionName : "UNLOCK_SAVINGSACCOUNT"
                             }
                         ]
 

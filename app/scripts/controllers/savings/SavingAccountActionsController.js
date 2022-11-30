@@ -420,6 +420,13 @@
                        scope.holdAmount= true;
                        scope.taskPermissionName = 'HOLDAMOUNT_SAVINGSACCOUNT';
                    break;
+                case "unlock":
+                       scope.title = 'label.heading.unlocksavingsaccount';
+                       scope.labelName = 'label.input.unlockdate';
+                       scope.modelName = 'unlockdate';
+                       scope.showDateField = true;
+                       scope.taskPermissionName = 'UNLOCK_SAVINGSACCOUNT';
+                   break;
             }
 
             scope.cancel = function () {
@@ -466,6 +473,12 @@
                         if (this.formData.transactionDate) {
                             this.formData.transactionDate = dateFilter(this.formData.transactionDate, scope.df);
                         }
+                    }
+                    if(scope.action=="unlock"){
+                        if (this.formData.unlockdate) {
+                           this.formData.unlockdate = dateFilter(this.formData.unlockdate, scope.df);
+                        }
+                        this.formData.unlocked=true;
                     }
                     params.savingsId = scope.accountId;
 
