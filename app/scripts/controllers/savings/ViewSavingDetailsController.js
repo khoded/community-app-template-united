@@ -344,7 +344,7 @@
                             name: "button.unlock",
                             taskPermissionName:"UNLOCK_SAVINGSACCOUNT"
                         });
-                        console.log("Account Type "+data.accountType);
+
                     }
                     if (data.charges) {
                         for (var i in scope.charges) {
