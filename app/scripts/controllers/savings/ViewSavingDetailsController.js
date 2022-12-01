@@ -300,10 +300,6 @@
                             {
                                 name: "button.freeze",
                                 taskPermissionName : ""
-                            },
-                            {
-                                name: "button.unlock",
-                                taskPermissionName : "UNLOCK_SAVINGSACCOUNT"
                             }
                         ]
 
@@ -342,6 +338,13 @@
                             name: "button.transferFunds",
                             taskPermissionName:"CREATE_ACCOUNTTRANSFER"
                         });
+                    }
+                    if (data.accountType == "GSIM") {
+                        scope.buttons.options.push({
+                            name: "button.unlock",
+                            taskPermissionName:"UNLOCK_SAVINGSACCOUNT"
+                        });
+                        console.log("Account Type "+data.accountType);
                     }
                     if (data.charges) {
                         for (var i in scope.charges) {
