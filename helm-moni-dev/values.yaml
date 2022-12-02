@@ -58,7 +58,7 @@ fineract-ui:
     pathType: ImplementationSpecific
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt-prod-issuer"
-      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "false"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"      
   resources:
     limits:
