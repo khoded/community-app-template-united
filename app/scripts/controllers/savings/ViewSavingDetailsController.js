@@ -377,7 +377,6 @@
                                 name: "button.unhold",
                                 icon: "icon-arrow-stop",
                                 taskPermissionName: "UNHOLD_SAVINGSACCOUNT"
-
                             }
                             ]
                     };
