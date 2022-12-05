@@ -319,8 +319,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">{{ 'label.input.withholdtax' | translate }}</label>
-                        <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.withholdtax' | translate}}"></i>
+                        <label class="control-label col-sm-3">{{ 'label.input.withholdtax' | translate }}
+                            <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.withholdtax' | translate}}"></i>
+
+                        </label>
+                       
                         <div class="col-sm-2">
                             <input id="withHoldTax" type="checkbox" ng-model="formData.withHoldTax" ng-true-value="true"
                                 ng-false-value="false">
@@ -345,6 +348,30 @@
                                    ng-false-value="false">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{ 'label.input.liquidation.allow'  | translate }}
+                            <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.isusdproduct' | translate}}" tooltip-append-to-body="true"></i>
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="checkbox"
+                                   ng-model="formData.allowPartialLiquidation" ng-true-value="true"
+                                   ng-false-value="false">
+                        </div>
+
+                        <div ng-show="formData.allowPartialLiquidation">
+                            <label class="control-label col-sm-3">{{ 'label.input.liquidation.maximum'  | translate }}
+                                <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.isusdproduct' | translate}}" tooltip-append-to-body="true"></i>
+                            </label>
+    
+                            <div class="col-sm-2">
+                                    <input id="totalLiquidationAllowed" type="text" class="form-control" 
+                                 ng-model="formData.totalLiquidationAllowed" >
+                            </div>
+            
+                       </div>
+                            
+                   </div>
+                  
                     <hr>
                     <button class="btn btn-default pull-left" wz-previous><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Previous
                     </button>
@@ -970,6 +997,17 @@
                             <td>{{'label.heading.withholdtaxgroup' | translate}}</td>
                             <td colspan="3">{{depositproduct.taxGroup.name}}</td>
                         </tr>
+
+                        <tr>
+                            <td>{{ 'label.input.liquidation.allow' | translate }}</td>
+                            <td colspan="6">{{formData.allowParitalLiquidation}}
+                            </td>
+                        <tr>
+                        <tr>
+                            <td>{{ 'label.input.liquidation.maximum' | translate }}</td>
+                            <td colspan="6">{{formData.totalLiquidationAllowed}}
+                            </td>
+                        <tr>
                         <tr>
                             <td colspan="4"><br /></td>
                         </tr>

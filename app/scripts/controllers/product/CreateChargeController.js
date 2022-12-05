@@ -17,6 +17,9 @@
             scope.showMinAndMaxAmountSettings = false;
             scope.loanChargeCalculationType = false;
             scope.loanChargeTimeChange = false;
+            scope.varyAmounts = false;
+            scope.showAmountRangeSelector = false;
+            scope.chart = {};
 
             resourceFactory.chargeTemplateResource.get(function (data) {
                 scope.template = data;
@@ -33,7 +36,9 @@
                 scope.expenseAccountOptions = data.expenseAccountOptions;
                 scope.accountMappingForChargeConfig = data.accountMappingForChargeConfig;
                 scope.accountMappingForCharge = [];
-                
+                scope.chart.periodTypes = data.periodTypes;
+                scope.chart.chartSlabs = [];
+
                 var accountMappingForChargeConfigVar = scope.accountMappingForChargeConfig.toLowerCase();
 
                 if(accountMappingForChargeConfigVar.indexOf("asset") > -1){
@@ -106,9 +111,9 @@
                     scope.showFrequencyOptions = true;
                 }
                 if(chargeTimeType == 2){
-                scope.loanChargeTimeChange = false;
+                    scope.loanChargeTimeChange = false;
                 }else{
-                scope.loanChargeTimeChange = true;
+                    scope.loanChargeTimeChange = true;
                 }
                 if (scope.showChargePaymentByField === false) {
                     for (var i in scope.chargeTimeTypeOptions) {
@@ -147,7 +152,79 @@
                         }
                     }
 
+                    if(chargeTimeType == 19){
+                        scope.showAmountRangeSelector = true;
+                    }else{
+                        scope.showAmountRangeSelector = false;
+                    }
+
             }
+
+                     /**
+             * Add a new row with default values for entering chart details
+             */
+                      scope.addNewRow = function () {
+                        var fromPeriod = '';
+                        var amountRangeFrom = '';
+                        var periodType = {}; 
+                        var toPeriod = '';
+                        var amountRangeTo = '';
+                        if (_.isNull(scope.chart.chartSlabs) || _.isUndefined(scope.chart.chartSlabs)) {
+                            scope.chart.chartSlabs = [];
+                        } else {
+                            var lastChartSlab = {};
+                            if (scope.chart.chartSlabs.length > 0) {
+                                lastChartSlab = angular.copy(scope.chart.chartSlabs[scope.chart.chartSlabs.length - 1]);
+                            }else{
+                                lastChartSlab = null;
+                            }
+                            if (!(_.isNull(lastChartSlab) || _.isUndefined(lastChartSlab))) {
+                                if(scope.isPrimaryGroupingByAmount){
+                                    if((_.isNull(lastChartSlab.toPeriod) || _.isUndefined(lastChartSlab.toPeriod) || lastChartSlab.toPeriod.length == 0)){
+                                        amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseFloat(lastChartSlab.amountRangeTo) + 1;
+                                        fromPeriod = (_.isNull(lastChartSlab.fromPeriod) || _.isUndefined(lastChartSlab.fromPeriod) || lastChartSlab.fromPeriod.length == 0)? '' : 1;
+                                    }else{
+                                        amountRangeFrom = lastChartSlab.amountRangeFrom;
+                                        amountRangeTo = lastChartSlab.amountRangeTo;
+                                        fromPeriod = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.toPeriod) + 1;
+                                    }
+                                }else{
+                                    if((_.isNull(lastChartSlab.amountRangeTo) || _.isUndefined(lastChartSlab.amountRangeTo) || lastChartSlab.amountRangeTo.length == 0)){
+                                        amountRangeFrom = (_.isNull(lastChartSlab.amountRangeFrom) || _.isUndefined(lastChartSlab.amountRangeFrom) || lastChartSlab.amountRangeFrom.length == 0) ? '' : 1;
+                                        fromPeriod = _.isNull(lastChartSlab) ? '' : parseFloat(lastChartSlab.toPeriod) + 1;
+                                    }else{
+                                        fromPeriod = lastChartSlab.fromPeriod;
+                                        toPeriod = lastChartSlab.toPeriod;
+                                        amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.amountRangeTo) + 1;
+                                    }
+                                }
+                                periodType = angular.copy(lastChartSlab.periodType);
+                            }
+                        }
+        
+        
+                        var chartSlab = {
+                            "periodType": periodType,
+                            "fromPeriod": fromPeriod,
+                            "amountRangeFrom": amountRangeFrom,
+                            "incentives":[]
+                        };
+                        if(!_.isUndefined(toPeriod) && toPeriod.length > 0){
+                            chartSlab.toPeriod = toPeriod;
+                        }
+                        if(!_.isUndefined(amountRangeTo) && amountRangeTo.length > 0){
+                            chartSlab.amountRangeTo = amountRangeTo;
+                        }
+                        scope.chart.chartSlabs.push(chartSlab);
+                    }
+        
+                    /**
+                     * Remove chart details row
+                     */
+                    scope.removeRow = function (index) {
+                        scope.chart.chartSlabs.splice(index, 1);
+                    }
+        
 
             resourceFactory.paymentTypeResource.getAll( function (data) {
                 scope.paymentTypes = data;
