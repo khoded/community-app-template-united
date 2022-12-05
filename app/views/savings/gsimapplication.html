@@ -56,13 +56,6 @@
                                                         <option value="">{{'label.selectfieldofficer' | translate}}</option>
                                                     </select>
                                                 </td>
-                                                <td class="width14">
-                                                    <label ng-show="formData1.productId" class="control-label">{{ 'label.input.externalid' | translate
-                                                        }}</label>
-                                                </td>
-                                                <td class="width36 paddedbottom10">
-                                                    <input ng-show="formData1.productId" id="externalId" ng-model="formData1.externalId" class="form-control"/>
-                                                </td>
                                             </tr>
                                         </table>
                                         <hr data-ng-show="formData1.productId"/>
@@ -232,6 +225,23 @@
                                                             }}&nbsp;</label></td>
                                                     <td class="width36 paddedbottom10" ng-show="formData1.withHoldTax">
                                                         {{data.taxGroup.name}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="width14">
+                                                        <label class="control-label">{{ 'label.input.vaultTargetAmount' | translate }}&nbsp;</label></td>
+                                                    <td class="width36 paddedbottom10" >
+                                                        <input id="vaultTargetAmount" type="text" class="form-control"
+                                                               ng-model="formData1.vaultTargetAmount" number-format>
+                                                    </td>
+                                                    <td class="width14">
+                                                        <label  class="control-label">{{ 'label.input.vaultTargetDate' | translate
+                                                            }}&nbsp;</label>
+                                                    </td>
+                                                    <td class="width36 paddedbottom10">
+                                                        <input  id="vaultTargetDate" sort type="text" datepicker-pop="dd MMMM yyyy"
+                                                               ng-model="date.vaultTargetDate" is-open="opened" min="minDate" max="restrictDate"
+                                                               class="form-control"/>
                                                     </td>
                                                 </tr>
                                                 <tr>

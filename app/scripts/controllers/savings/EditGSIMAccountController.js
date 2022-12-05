@@ -26,7 +26,6 @@
                         }
                     }
                 }
-
                 if (data.clientId) {
                     scope.formData.clientId = data.clientId;
                     scope.clientName = data.clientName;
@@ -41,8 +40,11 @@
                 if (data.timeline) {
                     var submittedOnDate = dateFilter(data.timeline.submittedOnDate, scope.df);
                     scope.formData.submittedOnDate = new Date(submittedOnDate);
+
+                     var vaultTargetDate = dateFilter(data.vaultTargetDate, scope.df);
+                     scope.formData.vaultTargetDate = new Date(vaultTargetDate);
                 }
-                scope.formData.externalId = data.externalId;
+
                 scope.fieldOfficers = data.fieldOfficerOptions;
                 scope.formData.nominalAnnualInterestRate = data.nominalAnnualInterestRate;
                 scope.formData.minRequiredOpeningBalance = data.minRequiredOpeningBalance;
@@ -57,7 +59,7 @@
                 scope.formData.enforceMinRequiredBalance = data.enforceMinRequiredBalance;
                 scope.formData.minRequiredBalance = data.minRequiredBalance;
                 scope.formData.withHoldTax = data.withHoldTax;
-
+                scope.formData.vaultTargetAmount = data.vaultTargetAmount;
                 if (data.interestCompoundingPeriodType) scope.formData.interestCompoundingPeriodType = data.interestCompoundingPeriodType.id;
                 if (data.interestPostingPeriodType) scope.formData.interestPostingPeriodType = data.interestPostingPeriodType.id;
                 if (data.interestCalculationType) scope.formData.interestCalculationType = data.interestCalculationType.id;
@@ -83,6 +85,8 @@
                     scope.formData.withdrawalFeeAmount = data.withdrawalFeeAmount;
                     scope.formData.withdrawalFeeForTransfers = data.withdrawalFeeForTransfers;
                     scope.formData.withHoldTax = data.withHoldTax;
+                    scope.formData.vaultTargetAmount = data.vaultTargetAmount;
+                    scope.formData.vaultTargetDate = data.vaultTargetDate;
 
                     if (data.interestCompoundingPeriodType) scope.formData.interestCompoundingPeriodType = data.interestCompoundingPeriodType.id;
                     if (data.interestPostingPeriodType) scope.formData.interestPostingPeriodType = data.interestPostingPeriodType.id;
@@ -109,7 +113,6 @@
                                 data.feeOnMonthDay = new Date(dateFilter(data.feeOnMonthDay, scope.df));
                             }
                         }
-
                         delete data.id;
                         scope.charges.push(data);
                         scope.chargeId = undefined;
@@ -130,6 +133,7 @@
 
             scope.submit = function () {
                 if (this.formData.submittedOnDate)  this.formData.submittedOnDate = dateFilter(this.formData.submittedOnDate, scope.df);
+                if (this.formData.vaultTargetDate)  this.formData.vaultTargetDate = dateFilter(this.formData.vaultTargetDate, scope.df);
                 this.formData.locale = scope.optlang.code;
                 this.formData.dateFormat = scope.df;
                 this.formData.monthDayFormat = "dd MMM";
@@ -152,7 +156,7 @@
                 }
 
                 resourceFactory.gsimResource.update({'parentAccountId':  scope.parentAccountId}, this.formData, function (data) {
-                    location.path('/viewsavingaccount/' + data.savingsId);
+                    location.path('/viewgsimaccount/' + scope.groupId+"/"+scope.gsimAccountNumber);
                 });
             };
         }

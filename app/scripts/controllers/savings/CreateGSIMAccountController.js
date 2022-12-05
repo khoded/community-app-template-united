@@ -11,6 +11,7 @@
             scope.groupId = routeParams.groupId;
             scope.date = {};
             scope.date.submittedOnDate = new Date();
+            scope.date.vaultTargetDate = new Date();
             scope.datatables = [];
             scope.noOfTabs = 1;
             scope.step = '-';
@@ -208,6 +209,7 @@
 
                 if (scope.date) {
                     this.formData1.submittedOnDate = dateFilter(scope.date.submittedOnDate, scope.df);
+                    this.formData1.vaultTargetDate = dateFilter(scope.date.vaultTargetDate, scope.df);
                 }
                 this.formData1.locale = scope.optlang.code;
                 this.formData1.dateFormat = scope.df;
@@ -288,8 +290,6 @@
                         z++;
                         if(z===applicationCount)
                         {
-                            console.log("z is"+z);
-                            console.log("val of z"+applicationCount);
                             scope.formData1.lastApplication=true; //
                         }
                         var temp={};

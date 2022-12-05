@@ -142,6 +142,9 @@
                     case "unhold":
                         location.path('/savingaccount/'+accountId+ '/hold');
                         break;
+                    case "unlock":
+                        location.path('/savingaccount/'+accountId+ '/unlock');
+                        break;
 
                 }
             };
@@ -336,6 +339,13 @@
                             taskPermissionName:"CREATE_ACCOUNTTRANSFER"
                         });
                     }
+                    if (data.accountType == "GSIM") {
+                        scope.buttons.options.push({
+                            name: "button.unlock",
+                            taskPermissionName:"UNLOCK_SAVINGSACCOUNT"
+                        });
+
+                    }
                     if (data.charges) {
                         for (var i in scope.charges) {
                             if (scope.charges[i].name == "Annual fee - INR") {
@@ -367,7 +377,6 @@
                                 name: "button.unhold",
                                 icon: "icon-arrow-stop",
                                 taskPermissionName: "UNHOLD_SAVINGSACCOUNT"
-
                             }
                             ]
                     };

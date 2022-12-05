@@ -420,6 +420,13 @@
                        scope.holdAmount= true;
                        scope.taskPermissionName = 'HOLDAMOUNT_SAVINGSACCOUNT';
                    break;
+                case "unlock":
+                       scope.title = 'label.heading.unlocksavingsaccount';
+                       scope.labelName = 'label.input.unlockdate';
+                       scope.modelName = 'unlockdate';
+                       scope.showDateField = true;
+                       scope.taskPermissionName = 'UNLOCK_SAVINGSACCOUNT';
+                   break;
             }
 
             scope.cancel = function () {
@@ -432,7 +439,7 @@
                     this.formData.locale = scope.optlang.code;
                     this.formData.dateFormat = scope.df;
                 }
-                if (scope.action == "deposit" || scope.action == "withdrawal" || scope.action == "holdAmount" || scope.action == "modifytransaction" || scope.action=="postInterestAsOn" || scope.action=="postAccrualInterestAsOn") {
+                if (scope.action == "deposit" || scope.action == "withdrawal" || scope.action == "holdAmount" || scope.action == "modifytransaction" || scope.action=="postInterestAsOn" || scope.action=="postAccrualInterestAsOn" || scope.action == "unlock") {
                     if (scope.action == "withdrawal") {
                         if (this.formData.transactionDate) {
                             this.formData.transactionDate = dateFilter(this.formData.transactionDate, scope.df);
@@ -465,6 +472,11 @@
                         this.formData.remarks = this.formData.note;
                         if (this.formData.transactionDate) {
                             this.formData.transactionDate = dateFilter(this.formData.transactionDate, scope.df);
+                        }
+                    }
+                    if(scope.action == "unlock"){
+                        if (this.formData.unlockdate) {
+                           this.formData.unlockdate = dateFilter(this.formData.unlockdate, scope.df);
                         }
                     }
                     params.savingsId = scope.accountId;
