@@ -263,10 +263,10 @@
 
                         </tr>
                         <tr >
-                            <td>
+                            <td  class="width14">
                                 <label class="control-label">{{ 'label.input.maturity.instruction' | translate }}</label>
                             </td>
-                            <td>
+                            <td class="width23 paddedbottom10">
                                 <select id="depositRollover" ng-model="formData.maturityInstructionId" ng-options="depositRollover.id as depositRollover.value for depositRollover in depositRolloverOptions"
                                         class="form-control width170px" value="{{depositRollover.id}}" ng-change="changeMaturityInstruction()">
                                 </select>
@@ -277,14 +277,35 @@
                                 <label class="control-label">{{ 'label.input.transfer.to.account' | translate }}&nbsp;
                                 </label>
                             </td>
-                            <td >
+                            <td class="paddedbottom10" >
                                 <select id="depositRollover" ng-model="formData.transferToSavingsId" ng-options="savingsAccount.id as savingsAccount.accountNo for savingsAccount in savingsAccounts"
                                 class="form-control width170px" value="{{savingsAccount.id}}" ng-change="changeMaturityInstruction()">
                                 <option value="">{{'label.menu.selectone' | translate}}</option>
                             </select>
                             </td>
                         </tr>
-    
+                        
+                        <tr>
+                            <td class="paddedbottom10">
+                                <label class="control-label">{{ 'label.input.liquidation.allow'  | translate }}</label>
+                                <input type="checkbox"
+                                       ng-model="formData.allowPartialLiquidation" ng-true-value="true"
+                                       ng-false-value="false">
+                               
+                            </td>
+
+                        </tr>
+                        <tr ng-show="formData.allowPartialLiquidation">
+                            <td >
+                                <label>{{ 'label.input.liquidation.maximum'  | translate }}</label>
+                            </td>
+                            <td >
+                               
+                                <input id="totalLiquidationAllowed" type="text" class="form-control"  ng-model="formData.totalLiquidationAllowed" >
+                             
+                           </td>
+                        </tr>
+                   
                         <tr ng-show="data.taxGroup">
                             <td colspan="2" class="paddedbottom10">
                                 <input type="checkbox" ng-model="formData.withHoldTax"> &nbsp;<span
@@ -517,6 +538,16 @@
                             <td>{{ 'label.input.linksavings' | translate }}</td>
                             <td colspan="6">{{fixedDetails.linkAccountName}}</td>
                         </tr>
+                        <tr>
+                            <td>{{ 'label.input.liquidation.allow' | translate }}</td>
+                            <td colspan="6">{{formData.allowParitalLiquidation}}
+                            </td>
+                        <tr>
+                        <tr>
+                            <td>{{ 'label.input.liquidation.maximum' | translate }}</td>
+                            <td colspan="6">{{formData.totalLiquidationAllowed}}
+                            </td>
+                        <tr>
                         <tr ng-if="maturityDetails.maturityInstructionId ">
                             <td class="active fontnormal">{{'label.input.maturity.instruction' | translate}}
                             </td>

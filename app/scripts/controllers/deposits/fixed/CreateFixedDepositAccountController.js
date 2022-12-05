@@ -71,6 +71,8 @@
                     scope.formData.minRequiredOpeningBalance = data.minRequiredOpeningBalance;
                     scope.formData.lockinPeriodFrequency = data.lockinPeriodFrequency;
                     scope.formData.withHoldTax = data.withHoldTax;
+                    scope.formData.allowPartialLiquidation = data.allowPartialLiquidation;
+                    scope.formData.totalLiquidationAllowed = data.totalLiquidationAllowed;
 
                     if (data.interestCompoundingPeriodType) scope.formData.interestCompoundingPeriodType = data.interestCompoundingPeriodType.id;
                     if (data.interestPostingPeriodType) scope.formData.interestPostingPeriodType = data.interestPostingPeriodType.id;

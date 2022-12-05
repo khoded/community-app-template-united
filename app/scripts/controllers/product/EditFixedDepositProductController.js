@@ -61,7 +61,9 @@
                     inMultiplesOfDepositTerm: data.inMultiplesOfDepositTerm,
                     inMultiplesOfDepositTermTypeId: inMultiplesOfDepositTermTypeId,
                     withHoldTax: data.withHoldTax == true ? 'true' : 'false',
-                    isUSDProduct: data.isUSDProduct
+                    isUSDProduct: data.isUSDProduct,
+                    totalLiquidationAllowed: data.totalLiquidationAllowed,
+                    allowPartialLiquidation: data.allowPartialLiquidation
                 }
 
                 if(data.withHoldTax){
