@@ -3,6 +3,7 @@
         ViewChargeController: function (scope, routeParams, resourceFactory, location, $uibModal) {
             scope.charge = [];
             scope.choice = 0;
+            scope.varyAmounts = true;
             resourceFactory.chargeResource.get({chargeId: routeParams.id}, function (data) {
                 scope.charge = data;
 
