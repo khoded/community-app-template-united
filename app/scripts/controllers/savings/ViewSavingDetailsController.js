@@ -19,11 +19,13 @@
                     || savingsTransactionType.overdraftInterest == true || savingsTransactionType.withholdTax == true || savingsTransactionType.amountHold == true;
             };
 
-            scope.routeTo = function (savingsAccountId, transactionId, accountTransfer, transferId) {
+            scope.routeTo = function (savingsAccountId, transactionId, accountTransfer, transferId,transactionType) {
+                if(transactionType != 'Revoked Interest'){
                 if (accountTransfer) {
                     location.path('/viewaccounttransfers/' + transferId);
                 } else {
                     location.path('/viewsavingtrxn/' + savingsAccountId + '/trxnId/' + transactionId);
+                }
                 }
             };
 
