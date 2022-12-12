@@ -16,7 +16,8 @@
 
             scope.isDebit = function (savingsTransactionType) {
                 return savingsTransactionType.withdrawal == true || savingsTransactionType.feeDeduction == true
-                    || savingsTransactionType.overdraftInterest == true || savingsTransactionType.withholdTax == true || savingsTransactionType.amountHold == true;
+                    || savingsTransactionType.overdraftInterest == true || savingsTransactionType.withholdTax == true || savingsTransactionType.amountHold == true
+                    || savingsTransactionType.revokedInterest == true;
             };
 
             scope.routeTo = function (savingsAccountId, transactionId, accountTransfer, transferId,transactionType) {
