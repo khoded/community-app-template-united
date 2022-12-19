@@ -57,6 +57,7 @@
                     inMultiplesOfDepositTermTypeId: inMultiplesOfDepositTermTypeId,
                     isMandatoryDeposit:data.isMandatoryDeposit,
                     allowWithdrawal:data.allowWithdrawal,
+                    allowFreeWithdrawal:data.allowFreeWithdrawal,
                     adjustAdvanceTowardsFuturePayments:data.adjustAdvanceTowardsFuturePayments,
                     minBalanceForInterestCalculation:data.minBalanceForInterestCalculation,
                     withHoldTax: data.withHoldTax == true ? 'true' : 'false'
