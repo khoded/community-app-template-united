@@ -11,6 +11,9 @@
 	          scope.loanChargeCalculationType = false;
             scope.loanChargeTimeChange = false;
             scope.paymentTypeOptions = [];
+            scope.varyAmounts = false;
+            scope.showAmountRangeSelector = false;
+            scope.chart = {};
 
             resourceFactory.chargeResource.getCharge({chargeId: routeParams.id, template: true}, function (data) {
                 scope.template = data;
@@ -21,6 +24,11 @@
                 scope.expenseAccountOptions = data.expenseAccountOptions;
                 scope.accountMappingForChargeConfig = data.accountMappingForChargeConfig;
                 scope.accountMappingForCharge= [];
+                scope.varyAmounts = data.varyAmounts;
+
+                if(data.varyAmounts){
+                    scope.chart.chartSlabs = data.charges;
+                }
                 
                 var accountMappingForChargeConfigVar = scope.accountMappingForChargeConfig.toLowerCase();
 
@@ -58,6 +66,7 @@
                         scope.paymentTypeOptions = data;
                     });
 
+                    scope.liquidationFee = data.chargeTimeType.id === "chargeTimeType.fdaPartialLiquidationFee" ? true : false;
                     if(data.freeWithdrawal === true) {
                         scope.showenablefreewithdrawal = true;
                         scope.showpaymenttype = true;
@@ -173,14 +182,12 @@
             //to display 'Due date' field, if chargeTimeType is
             // 'annual fee' or 'monthly fee'
             scope.chargeTimeChange = function (chargeTimeType) {
-		if ((chargeTimeType === 12) && (scope.template.chargeAppliesTo.value === "Loan"))
-		{
-			scope.showFrequencyOptions = false;
-		}
-		else
-		{
-			scope.showFrequencyOptions = true;
-		}
+                if ((chargeTimeType === 12) && (scope.template.chargeAppliesTo.value === "Loan") || chargeTimeType == 19 ) {
+                    scope.showFrequencyOptions = false;
+                }
+                else {
+                    scope.showFrequencyOptions = true;
+                }
                 if (scope.formData.chargeAppliesTo === 2) {
                     for (var i in scope.template.chargeTimeTypeOptions) {
                         if (chargeTimeType === scope.template.chargeTimeTypeOptions[i].id) {
@@ -198,12 +205,19 @@
                         }
                     }
                 }
-                 if(chargeTimeType == 2){
-                                scope.loanChargeTimeChange = false;
-                                }else{
-                                scope.loanChargeTimeChange = true;
-                                }
-                                console.log(chargeTimeType+" Charge Time type  "+scope.loanChargeTimeChange);
+                if (chargeTimeType == 2) {
+                    scope.loanChargeTimeChange = false;
+                } else {
+                    scope.loanChargeTimeChange = true;
+                }
+
+                if (chargeTimeType == 19) {
+                    scope.showAmountRangeSelector = true;
+                    scope.showenablefreewithdrawal = false;
+                } else {
+                    scope.showAmountRangeSelector = false;
+                    scope.showenablefreewithdrawal = true;
+                }
             }
             scope.chargeCalculationTypeChange = function (chargeCalculationType) {
                                 scope.loanChargeCalculationType = false;
@@ -256,6 +270,64 @@
                 }
             };
 
+            scope.addNewRow = function () {
+                var fromPeriod = '';
+                var toPeriod = '';
+                var amountRangeTo = '';
+                if (_.isNull(scope.chart.chartSlabs) || _.isUndefined(scope.chart.chartSlabs)) {
+                    scope.chart.chartSlabs = [];
+                } else {
+                    var lastChartSlab = {};
+                    if (scope.chart.chartSlabs.length > 0) {
+                        lastChartSlab = angular.copy(scope.chart.chartSlabs[scope.chart.chartSlabs.length - 1]);
+                    } else {
+                        lastChartSlab = null;
+                    }
+                    if (!(_.isNull(lastChartSlab) || _.isUndefined(lastChartSlab))) {
+                        if (scope.isPrimaryGroupingByAmount) {
+                            if ((_.isNull(lastChartSlab.toPeriod) || _.isUndefined(lastChartSlab.toPeriod) || lastChartSlab.toPeriod.length == 0)) {
+                                amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseFloat(lastChartSlab.amountRangeTo) + 1;
+                                fromPeriod = (_.isNull(lastChartSlab.fromPeriod) || _.isUndefined(lastChartSlab.fromPeriod) || lastChartSlab.fromPeriod.length == 0) ? '' : 1;
+                            } else {
+                                amountRangeFrom = lastChartSlab.amountRangeFrom;
+                                amountRangeTo = lastChartSlab.amountRangeTo;
+                                fromPeriod = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.toPeriod) + 1;
+                            }
+                        } else {
+                            if ((_.isNull(lastChartSlab.amountRangeTo) || _.isUndefined(lastChartSlab.amountRangeTo) || lastChartSlab.amountRangeTo.length == 0)) {
+                                amountRangeFrom = (_.isNull(lastChartSlab.amountRangeFrom) || _.isUndefined(lastChartSlab.amountRangeFrom) || lastChartSlab.amountRangeFrom.length == 0) ? '' : 1;
+                                fromPeriod = _.isNull(lastChartSlab) ? '' : parseFloat(lastChartSlab.toPeriod) + 1;
+                            } else {
+                                fromPeriod = lastChartSlab.fromPeriod;
+                                toPeriod = lastChartSlab.toPeriod;
+                                amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.amountRangeTo) + 1;
+                            }
+                        }
+                        periodType = angular.copy(lastChartSlab.periodType);
+                    }
+                }
+
+
+                var chartSlab = {
+                    "fromPeriod": fromPeriod,
+                };
+                if (!_.isUndefined(toPeriod) && toPeriod.length > 0) {
+                    chartSlab.toPeriod = toPeriod;
+                }
+                if (!_.isUndefined(amountRangeTo) && amountRangeTo.length > 0) {
+                    chartSlab.amountRangeTo = amountRangeTo;
+                }
+                scope.chart.chartSlabs.push(chartSlab);
+            }
+
+            /**
+             * Remove chart details row
+             */
+            scope.removeRow = function (index) {
+                scope.chart.chartSlabs.splice(index, 1);
+            }
+
+
             scope.submit = function () {
                 if (scope.formData.chargeAppliesTo === 2) {
                     if (scope.showdatefield === true) {
@@ -267,6 +339,12 @@
                     scope.formData.feeFrequency = null;
                     scope.formData.feeInterval = null;
                 }
+
+                if(scope.varyAmounts){
+                    this.formData.chart = scope.chart
+                    delete this.formData.amount
+                }
+
                 this.formData.locale = scope.optlang.code;
                 this.formData.active = this.formData.active || false;
                 this.formData.enableFreeWithdrawalCharge = this.formData.enableFreeWithdrawalCharge || false;

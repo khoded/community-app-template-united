@@ -198,15 +198,82 @@
                     <form-validate valattributeform="editchargeform" valattribute="feeInterval"/>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-show="showAmountRangeSelector">
+                <label class="control-label col-sm-2" for="ispenalty">{{'label.input.varyamounts' | translate}}</label>
+
+                <div class="col-sm-3">
+                    <label class="checkbox">
+                        <input id="varyamounts" type="checkbox" ng-model="varyAmounts" ng-true-value="true"
+                               ng-false-value="false">
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="!varyAmounts">
                 <label class="control-label col-sm-2" for="amount">{{'label.input.amount' | translate}}<span
                         class="required">*</span></label>
 
                 <div class="col-sm-3">
-                    <input name="amount" type="text" id="amount" ng-model="formData.amount" class="form-control" number-format required late-Validate/>
+                    <input id="amount" name="amount" type="text" ng-model="formData.amount" class="form-control" number-format ng-required="!varyAmounts" late-Validate/>
                     <form-validate valattributeform="editchargeform" valattribute="amount"/>
                 </div>
             </div>
+
+            <div ng-show="varyAmounts">
+                <label>{{ 'label.heading.liquidationfeechart' | translate }}
+                    <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.liquidation.feechart' | translate}}"
+                        tooltip-append-to-body="true"></i>
+                </label>
+                <div class="form-group">
+
+                </div>
+
+                <div class="col-md-12">
+                    <table class="table table-bordered width100">
+                        <tr class="graybg">
+                        
+                            <td>{{'label.heading.liquidation.number' | translate}}</td>
+                            <td >{{'label.heading.liquidation.fee.amount' | translate}}</td>
+                            <td>
+                                <div ng-show="chart.chartSlabs.length < 1">
+                                    <a class="btn btn-primary" ng-click="addNewRow()"><i class="fa fa-plus"></i>&nbsp;&nbsp;{{'label.add.row'
+                                        | translate}}</a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr ng-repeat="chartSlab in chart.chartSlabs">
+                           
+                            <td class="width15">
+                                <table class="width100">
+                                    <tr>
+                                        <td><input id="fromPeriod" name="fromPeriod" type="text" class="form-control"
+                                                ng-model="chartSlab.fromPeriod" /></td>
+                                        <td>&nbsp;&nbsp;-&nbsp;&nbsp;</td>
+                                        <td><input id="toPeriod" name="toPeriod" type="text" class="form-control"
+                                                ng-model="chartSlab.toPeriod" /></td>
+                                    </tr>
+                                </table>
+                            </td>
+                           
+                            <td class="width15">
+                                <input id="feeAmount" name="feeAmount" type="text" class="form-control"
+                                    ng-model="chartSlab.value"  required late-validate/>
+                            </td>
+                            <td class="width10">
+                                <a ng-click="removeRow($index)"><i class="fa fa-times-circle fa-2x"></i></a>
+
+                                <div ng-show="$last">
+                                    <br />
+                                    <a ng-click="addNewRow()" class="btn btn-primary"><i class="fa fa-plus "></i>&nbsp;&nbsp;{{'label.add.row'
+                                        | translate}}</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+
             <div class="form-group" ng-show="(showMinAndMaxAmountSettings && formData.chargeCalculationType == 2 && formData.chargeTimeType == 5) || (formData.chargeAppliesTo == 1 && loanChargeCalculationType && loanChargeTimeChange)">
                 <label class="control-label col-sm-2" for="minAmount">{{'label.input.minAmount' | translate}}</label>
 

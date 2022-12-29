@@ -4,6 +4,7 @@
             scope.offices = [];
             scope.cancelRoute = routeParams.id;
             scope.date = {};
+            scope.varyAmounts = false;
 
             resourceFactory.savingsChargeResource.get({accountId: routeParams.id, resourceType: 'template'}, function (data) {
                 scope.chargeOptions = data.chargeOptions;
@@ -16,9 +17,16 @@
                     scope.chargeDetails = data;
                     scope.formData.amount = data.amount;
                     scope.withDrawCharge = data.chargeTimeType.value === "Withdrawal Fee" ? true : false;
+                    scope.liquidationFee = data.chargeTimeType.code === "chargeTimeType.fdaPartialLiquidationFee" ? true : false;
                     scope.formData.feeInterval = data.feeInterval;
+                    scope.varyAmounts = data.varyAmounts;
+                    
                     if (data.chargeTimeType.value === "Annual Fee" || data.chargeTimeType.value === "Monthly Fee") {
                         scope.chargeTimeTypeAnnualOrMonth = true;
+                    }
+
+                    if(scope.varyAmounts){
+                        scope.chargeSlabs = data.charges;
                     }
                 });
             };
@@ -42,6 +50,12 @@
                         }
                     }
                 }
+
+                if(scope.liquidationFee){
+                    delete this.formData.dueDate
+                    delete this.formData.amount
+                }
+
                 resourceFactory.savingsChargeResource.save({accountId: routeParams.id}, this.formData, function (data) {
                     location.path('/viewfixeddepositaccount/' + routeParams.id);
                 });
