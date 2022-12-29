@@ -1,34 +1,34 @@
 (function (module) {
-  mifosX.controllers = _.extend(module, {
+    mifosX.controllers = _.extend(module, {
         FixedDepositAccountPartialLiquidationController: function (scope, resourceFactory, location, routeParams, dateFilter) {
 
             scope.data = {};
             scope.accountId = routeParams.id;
-      scope.savingAccountId = routeParams.id;
-      scope.formData = { liquidationAmount: 0, depositPeriodFrequencyId: 0 };
-      scope.restrictDate = new Date();
+            scope.savingAccountId = routeParams.id;
+            scope.formData = { liquidationAmount: 0, depositPeriodFrequencyId: 0 };
+            scope.restrictDate = new Date();
             scope.changeTenure = false;
-      scope.date = { submittedOnDate: new Date() };
+            scope.date = { submittedOnDate: new Date() };
 
             resourceFactory.fixedDepositAccountResource.get({
                 accountId: scope.accountId,
                 template: 'true'
             }, function (data) {
                 scope.data = data;
-          scope.chart = data.accountChart;
-          scope.chartSlabs = scope.chart.chartSlabs;
-          scope.fetchMaturityAmount();
+                scope.chart = data.accountChart;
+                scope.chartSlabs = scope.chart.chartSlabs;
+                scope.fetchMaturityAmount();
             });
 
-      scope.fetchMaturityAmount = () => {
+            scope.fetchMaturityAmount = () => {
                 let formData = {
-          locale: scope.optlang.code,
-          dateFormat: scope.df,
+                    locale: scope.optlang.code,
+                    dateFormat: scope.df,
                     closedOnDate: dateFilter(scope.date.submittedOnDate, scope.df)
-        };
-                resourceFactory.fixedDepositAccountResource.save({accountId: routeParams.id, command: 'calculatePrematureAmount'}, formData, function (data) {
-            scope.data.maturityAmount = data.maturityAmount;
-            scope.calculateOutstanding();
+                };
+                resourceFactory.fixedDepositAccountResource.save({ accountId: routeParams.id, command: 'calculatePrematureAmount' }, formData, function (data) {
+                    scope.data.maturityAmount = data.maturityAmount;
+                    scope.calculateOutstanding();
                 });
             };
 
@@ -39,16 +39,16 @@
                     scope.formData.depositPeriod = Math.floor((maturityDate - today) / (1000 * 60 * 60 * 24));
                 }
                 scope.calculateInterestRate();
-        scope.calculateInterest();
+                scope.calculateInterest();
             };
 
-      scope.calculateOutstanding = () => {
+            scope.calculateOutstanding = () => {
                 scope.balanceAfterLqdn = scope.data.maturityAmount - scope.formData.liquidationAmount;
                 scope.calculateRemainingTenure();
             };
 
-      scope.calculateInterestRate = () => {
-        let amount = parseFloat(scope.balanceAfterLqdn);
+            scope.calculateInterestRate = () => {
+                let amount = parseFloat(scope.balanceAfterLqdn);
                 let depositPeriod = parseFloat(scope.formData.depositPeriod);
                 let periodFrequency = scope.formData.depositPeriodFrequencyId;
                 let filteredSlabs = scope.chartSlabs.filter(function (x) {
@@ -73,7 +73,7 @@
             };
 
             scope.submit = function () {
-                const params = {command: "partialLiquidation", accountId: scope.accountId};
+                const params = { command: "partialLiquidation", accountId: scope.accountId };
                 if (scope.date) {
                     this.formData.submittedOnDate = dateFilter(scope.date.submittedOnDate, scope.df);
                 }

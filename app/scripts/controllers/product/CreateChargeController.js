@@ -165,8 +165,6 @@
     */
             scope.addNewRow = function () {
                 var fromPeriod = '';
-                var amountRangeFrom = '';
-                var periodType = {};
                 var toPeriod = '';
                 var amountRangeTo = '';
                 if (_.isNull(scope.chart.chartSlabs) || _.isUndefined(scope.chart.chartSlabs)) {
@@ -300,7 +298,7 @@
                 if (!scope.showChargePaymentByField) {
                     delete this.formData.chargePaymentMode;
                 }
-                console.log(this.formData);
+              
                 if(scope.varyAmounts){
                     this.formData.chart = scope.chart
                     this.formData.amount = 0
@@ -311,7 +309,6 @@
                 this.formData.locale = scope.optlang.code;
                 this.formData.monthDayFormat = 'dd MMM';
 
-                console.log(this.formData);
                 resourceFactory.chargeResource.save(this.formData, function (data) {
                     location.path('/viewcharge/' + data.resourceId);
                 });

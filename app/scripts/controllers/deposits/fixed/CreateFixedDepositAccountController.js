@@ -192,6 +192,11 @@
                         if (scope.charges[i].chargeTimeType.value == 'Monthly Fee' || scope.charges[i].chargeTimeType.code=='chargeTimeType.weeklyFee') {
                             chargeData.feeInterval = scope.charges[i].feeInterval;
                         }
+
+                        if(scope.charges[i].chargeTimeType.code = 'chargeTimeType.fdaPartialLiquidationFee'){
+                            delete chargeData.amount
+                        }
+
                         this.formData.charges.push(chargeData);
                     }
                 }
