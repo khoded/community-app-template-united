@@ -153,7 +153,7 @@
                                     <select id="depositPeriodFrequencyId" ng-model="formData.depositPeriodFrequencyId"
                                             class="form-control width170px"
                                             ng-options="type.id as type.value for type in data.periodFrequencyTypeOptions"
-                                            ng-change="recurringDetails.depositPeriodFrequencyIdValue = formValue(data.depositPeriodFrequencyIdOptions,formData.depositPeriodFrequencyId)"
+                                            ng-change="fixedDetails.depositPeriodFrequencyIdValue = formValue(data.periodFrequencyTypeOptions,formData.depositPeriodFrequencyId)"
                                             value="{{type.id}}">
                                         <option value="">{{'label.selectone' | translate}}</option>
                                     </select>
@@ -483,29 +483,28 @@
                         </tr>
                         <tr>
                             <td>{{'label.input.interestcompoundingperiod' | translate}}</td>
-                            <td colspan="6">{{recurringDetails.interestCompoundingPeriodTypeValue}}</td>
+                            <td colspan="6">{{fixedDetails.interestCompoundingPeriodTypeValue}}</td>
                         </tr>
                          <tr>
                             <td>{{'label.input.interestpostingperiod' | translate}}</td>
-                            <td colspan="6">{{recurringDetails.interestPostingPeriodTypeValue}}</td>
+                            <td colspan="6">{{fixedDetails.interestPostingPeriodTypeValue}}</td>
                         </tr>
                         <tr>
                             <td>{{'label.input.interestcalculatedusing' | translate}}</td>
-                            <td colspan="6">{{recurringDetails.interestCalculationTypeValue}}</td>
+                            <td colspan="6">{{fixedDetails.interestCalculationTypeValue}}</td>
                         </tr>
                         <tr>
                             <td>{{ 'label.input.daysinyears' | translate }}</td>
-                            <td colspan="6">{{recurringDetails.interestCalculationDaysInYearTypeValue}}</td>
+                            <td colspan="6">{{fixedDetails.interestCalculationDaysInYearTypeValue}}</td>
                         </tr>
                         <tr>
                             <td>{{ 'label.input.lockinPeriodFrequency' | translate }}</td>
                             <td colspan="6">{{formData.lockinPeriodFrequency}}
-                                {{recurringDetails.lockinPeriodFrequencyTypeValue}}
+                                {{fixedDetails.lockinPeriodFrequencyTypeValue}}
                             </td>
                         <tr>
                             <td>{{ 'label.input.depositperiod' | translate }}</td>
-                            <td colspan="6">{{formData.depositPeriodFrequencyId}}
-                                {{recurringDetails.depositPeriodTypeValue}}
+                            <td colspan="6">{{formData.depositPeriod}} {{fixedDetails.depositPeriodFrequencyIdValue}}
                             </td>
                         <tr>
                         <tr>

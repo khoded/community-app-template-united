@@ -186,7 +186,7 @@
                                     <select id="depositPeriodFrequencyId" ng-model="formData.depositPeriodFrequencyId"
                                             class="form-control width170px"
                                             ng-options="type.id as type.value for type in data.periodFrequencyTypeOptions"
-                                            ng-change="recurringDetails.depositPeriodTypeValue = formValue(data.depositPeriodTypeOptions,formData.depositPeriodType)"
+                                            ng-change="recurringDetails.depositPeriodTypeValue = formValue(data.periodFrequencyTypeOptions,formData.depositPeriodFrequencyId)"
                                             value="{{type.id}}">
                                         <option value="">{{'label.selectone' | translate}}</option>
                                     </select></div>
@@ -220,6 +220,7 @@
                                     <select id="recurringFrequencyType" ng-model="formData.recurringFrequencyType"
                                             class="form-control width170px"
                                             ng-options="type.id as type.value for type in data.periodFrequencyTypeOptions"
+                                            ng-change="recurringDetails.recurringFrequencyTypeValue = formValue(data.periodFrequencyTypeOptions,formData.recurringFrequencyType)"
                                             value="{{type.id}}">
                                         <option value="">{{'label.selectone' | translate}}</option>
                                     </select>
@@ -510,7 +511,7 @@
                         </tr>
                         <tr>
                             <td>{{ 'label.input.depositperiod' | translate }}</td>
-                            <td colspan="6">{{formData.depositPeriodFrequencyId}}
+                            <td colspan="6">{{formData.depositPeriod}}
                                 {{recurringDetails.depositPeriodTypeValue}}
                             </td>
                         <tr>
@@ -524,7 +525,7 @@
                         </tr>
                         <tr>
                             <td>{{ 'label.input.recurring.frequency' | translate }}</td>
-                            <td colspan="6">{{formData.recurringFrequencyType}}
+                            <td colspan="6">{{formData.recurringFrequency}}
                                 {{recurringDetails.recurringFrequencyTypeValue}}
                             </td>
                         <tr>
