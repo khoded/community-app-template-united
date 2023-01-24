@@ -117,7 +117,8 @@
                     }),
                     groupGSIMAccountResource: defineResource(apiVer + "/groups/:groupId/gsimaccounts", {groupId: '@groupId',parentGSIMAccountNo: '@parentGSIMAccountNo',
                         parentGSIMId:'@parentGSIMId'}, {
-                        get: {method: 'GET', params: {},isArray:true}
+                        get: {method: 'GET', params: {},isArray:true},
+                        getAllGSimAccountMembersWithOutSavingsAccount: {method: 'GET', params: {}}
                     }),
                     groupGLIMAccountResource: defineResource(apiVer + "/groups/:groupId/glimaccounts", {groupId: '@groupId',parentLoanAccountNo:'@parentLoanAccountNo'}, {
                         get: {method: 'GET', params: {},isArray: true}

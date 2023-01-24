@@ -136,7 +136,7 @@
                         location.path('/gsimaccount/'+parentGSIMId +'/'+gsimChildAccountId+ '/reject/'+scope.groupId+'/'+scope.gsimAccountNumber);
                         break;
                     case "addmember":
-                        location.path('/savingsaccounts/addmember/'+parentGSIMId);
+                        location.path('/savingsaccounts/'+parentGSIMId +'/'+gsimChildAccountId+ '/addmember/'+scope.groupId+'/'+scope.gsimAccountNumber);
                         break;
                     case "withdrawnbyclient":
                         location.path('/savingaccount/' + accountId + '/withdrawnByApplicant');
