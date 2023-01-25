@@ -174,7 +174,7 @@
             }
 
             scope.viewCollaterals=function() {
-                location.path('/clients/'+ routeParams.id +'/viewallclientcollaterals');
+                location.path('/viewclient/'+ routeParams.id +'/viewallclientcollaterals');
             }
 
             scope.editFamilyMember=function(clientFamilyMemberId)
