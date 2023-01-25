@@ -1,7 +1,7 @@
 <div class="content-container" data-ng-controller="AddMemberToGSimAccountController">
     <ul class="breadcrumb">
         <li><a href="#/groups">{{'label.anchor.groups' | translate}}</a></li>
-        <li><a href="#/viewgsimaccount/{{group.id}}/{{gsimAccountNumber}}">{{'label.anchor.viewGSimAccount' | translate}}</a></li>
+        <li><a href="#/viewgsimaccount/{{groupId}}/{{gsimAccountNumber}}">{{'label.anchor.viewGSimAccount' | translate}}</a></li>
         <li class="active">{{'label.anchor.addMemberToGSimAccount' | translate}}</li>
     </ul>
 
@@ -65,21 +65,16 @@
                          <div class="col-md-5">
                              <legend>{{'label.heading.gsimAccountMember' | translate}}</legend>
                              <div class="form-group" ng-repeat="members in allMembers">
-                                 <div class="col-sm-6 col-md-6">
-                                     <input disabled="" class="form-control input-xxlarge" placeholder="{{members.displayName}} (Id: {{members.id}})"
+                                 <div class="col-sm-12 col-md-12">
+                                     <input disabled="" class="form-control input-xxlarge" placeholder="{{members.accountNo}} : {{members.displayName}} : (Id: {{members.id}})"
                                             type="text"/>
-                                 </div>
-                                 <div class="col-sm-2 col-md-2">
-                                     <button type="button" class="btn angled-btn btn-primary " data-ng-click="remove($index,members.id)">
-                                             <i class="fa fa-times"></i>
-                                     </button>
                                  </div>
                              </div>
                          </div>
                      </div>
                      <div class="col-sm-3 col-md-offset-5">
                          <br>
-                         <a id="cancel" href="#/viewgroup/{{group.id}}" class="btn btn-default"><i class="fa fa-double-angle-left"></i> {{ 'label.button.back' | translate }}</a>
+                         <a id="cancel" href="#/viewgsimaccount/{{groupId}}/{{gsimAccountNumber}}" class="btn btn-default"><i class="fa fa-double-angle-left"></i> {{ 'label.button.back' | translate }}</a>
                      </div>
                  </fieldset>
             </form> 
