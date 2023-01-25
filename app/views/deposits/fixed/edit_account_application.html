@@ -131,6 +131,16 @@
             </tr>
             <tr>
                 <td class="width14">
+                    <label class="control-label col-sm-2">{{ 'label.input.nominalannualinterestrate' | translate }}&nbsp;
+                        <span class="required">*</span>
+                    </label>
+                </td>
+                <td class="width36 paddedbottom20">
+                    <input id="nominalAnnualInterestRate" type="text" name="nominalannualinterestrate" ng-model="formData.nominalAnnualInterestRate"
+                           class="form-control" ng-change="setInterestRate()" number-format required late-Validate/>
+                    <form-validate valattributeform="Terms" valattribute="nominalannualinterestrate" />
+                </td>
+                <td class="width14">
                     <label class="control-label">{{ 'label.input.lockinPeriodFrequency' | translate }}</label>
                 </td>
                 <td class="width36 paddedbottom10">
