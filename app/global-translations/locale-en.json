@@ -4536,5 +4536,7 @@
   "error.msg.deposit.period.is.please.select.charge.which.have.no.free.withdrawal": "Deposit Period select `{{params[0].value}}` So please select charge with  no of free withdrawals allowed for that",
   "label.button.generatexls" : "Generate Excel",
   "label.totalinteresttobeearned": "Interest to be Earned",
+  "label.input.allowManuallyEnterInterestRate": "Allow Manually Enter Interest Rate",
+  "label.tooltip.allowManuallyEnterInterestRate": "An boolean flag for allow user to enter manual interest rate on account creation",
   "----End---": "--End of file--- "
 }

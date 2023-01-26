@@ -86,6 +86,9 @@
                     scope.disabled = false;
                     scope.fixedDetails = angular.copy(scope.formData);
                     scope.fixedDetails.productName = scope.formValue(scope.products,scope.formData.productId,'id','name');
+                    scope.allowManuallyEnterInterestRate = scope.formValue(scope.products,scope.formData.productId,'id','allowManuallyEnterInterestRate');
+                    console.log(scope.allowManuallyEnterInterestRate);
+
                     scope.chart = data.accountChart;
                     scope.chartSlabs = scope.chart.chartSlabs;
                     //format chart date values
@@ -123,10 +126,14 @@
                 });
             };
 
+
+            scope.isUserDefinedInterestRate = false;
             scope.setInterestRate = function() {
             		scope.isUserDefinedInterestRate = true;
             };
             scope.calculateInterestRate = function() {
+            console.log(scope.chartSlabs, scope.isUserDefinedInterestRate, scope.formData.depositAmount, scope.formData.depositPeriod,
+            scope.formData.depositPeriodFrequencyId);
 				if (!scope.isUserDefinedInterestRate &&
 					(scope.formData.depositAmount && scope.formData.depositPeriod && scope.formData.depositPeriodFrequencyId > -1)) {
 					var amount = parseFloat(scope.formData.depositAmount);
@@ -134,10 +141,17 @@
 					var periodFrequency = scope.formData.depositPeriodFrequencyId;
 					var filteredSlabs = scope.chartSlabs.filter(function (x) { return amount >= x.amountRangeFrom &&  (amount <= x.amountRangeTo || !x.amountRangeTo) });
 					filteredSlabs.map(function(x) {
+
 						var period = scope.computePeriod(depositPeriod, periodFrequency, x.periodType.id);
-						if (period && x.fromPeriod <= period && x.toPeriod >= period) {
-							scope.formData.nominalAnnualInterestRate = x.annualInterestRate;
+						console.log("x", period);
+						if(x.toPeriod && x.fromPeriod){
+						    if (period && x.fromPeriod <= period && x.toPeriod >= period) {
+                        		 scope.formData.nominalAnnualInterestRate = x.annualInterestRate;
+						}}else
+						if (period && x.fromPeriod <= period){
+                                 scope.formData.nominalAnnualInterestRate = x.annualInterestRate;
 						}
+
 					});
 				}
 			};

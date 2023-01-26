@@ -62,7 +62,7 @@
                 scope.formData.depositPeriod = data.depositPeriod;
                 scope.formData.lockinPeriodFrequency = data.lockinPeriodFrequency;
                 scope.formData.withHoldTax = data.withHoldTax;
-                scope.formData.maturityInstructionId = data.onAccountClosure.id;
+                scope.formData.maturityInstructionId = data.onAccountClosure != null ? data.onAccountClosure.id : "";
                 scope.formData.transferToSavingsId = data.transferToSavingsId;
                 /* FIX-ME: uncomment annualFeeAmount when datepicker avialable, because it depends on the date field 'annualFeeOnMonthDay'*/
                 //scope.formData.annualFeeAmount = data.annualFeeAmount;
