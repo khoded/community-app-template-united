@@ -5,6 +5,30 @@
                 scope.gsimAccountNumber=routeParams.gsimAccountNumber;
                 scope.parentGSIMId=routeParams.parentGSIMId;
                 scope.allMembers = [];
+                scope.formData = {};
+                scope.lockinPeriodFrequencyTypeStandBy;
+                scope.lockinPeriodFrequencyStandBy;
+
+             resourceFactory.savingsResource.get({accountId: scope.parentGSIMId, template: 'true', associations: 'charges',staffInSelectedOfficeOnly:'true'}, function (data) {
+                 scope.data = data;
+                 if (data.groupId) {
+                     scope.formData.groupId = data.groupId;
+                     scope.groupName = data.groupName;
+                 }
+                 scope.formData.nominalAnnualInterestRate = data.nominalAnnualInterestRate;
+                 scope.formData.productId = data.savingsProductId;
+                 scope.products = data.productOptions;
+                 scope.formData.lockinPeriodFrequency = data.lockinPeriodFrequency;
+                 scope.lockinPeriodFrequencyStandBy = data.lockinPeriodFrequency;
+                 scope.formData.locale = "en";
+                 scope.formData.isGSIM = true;
+                 if (data.lockinPeriodFrequencyType){
+                 scope.formData.lockinPeriodFrequencyType = data.lockinPeriodFrequencyType.id;
+                 scope.lockinPeriodFrequencyTypeStandBy = data.lockinPeriodFrequencyType.id;
+                 }
+
+             });
+
 
                  scope.viewClient = function (item) {
                  scope.client = item;
@@ -22,9 +46,20 @@
                  scope.allMembers = data[0].childGSIMAccounts;
                 });
 
-                scope.add = function () {
-                console.log("Add Member !!");
+                scope.submit = function () {
+                this.formData.clientId = scope.client.id;
+
+                resourceFactory.addMemberToGsimResource.addmember({'parentAccountId':  scope.parentGSIMId}, this.formData, function (data) {
+                                    location.path('/viewgsimaccount/' + scope.groupId+"/"+scope.gsimAccountNumber);
+                                });
                 };
+
+                scope.cancel = function(){
+                scope.available = "";
+                this.formData.vaultTargetAmount = null;
+                this.formData.lockinPeriodFrequency = scope.lockinPeriodFrequencyStandBy;
+                this.formData.lockinPeriodFrequencyType = scope.lockinPeriodFrequencyTypeStandBy;
+                }
         }
     });
     mifosX.ng.application.controller('AddMemberToGSimAccountController', ['$q','$scope', '$routeParams', '$route', '$location', 'ResourceFactory', '$uibModal', mifosX.controllers.AddMemberToGSimAccountController]).run(function ($log) {

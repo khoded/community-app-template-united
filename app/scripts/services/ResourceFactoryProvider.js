@@ -381,6 +381,9 @@
                         post: {method: 'POST', params: {}},
                         update: {method: 'PUT'}
                     }),
+                    addMemberToGsimResource: defineResource(apiVer + "/savingsaccounts/addmember/:parentAccountId", {parentAccountId:'@parentAccountId'}, {
+                        addmember: {method: 'POST', params: {}}
+                    }),
                     gsimCommandsResource: defineResource(apiVer + "/savingsaccounts/gsimcommands/:parentAccountId", {parentAccountId:'@parentAccountId',command:'@command'}, {
                         post: {method: 'POST', params: {}}
                     }),
