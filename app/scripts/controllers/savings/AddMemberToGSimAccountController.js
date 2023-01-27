@@ -4,12 +4,13 @@
                 scope.groupId=routeParams.groupId;
                 scope.gsimAccountNumber=routeParams.gsimAccountNumber;
                 scope.parentGSIMId=routeParams.parentGSIMId;
+                scope.gsimChildAccountId=routeParams.gsimChildAccountId;
                 scope.allMembers = [];
                 scope.formData = {};
                 scope.lockinPeriodFrequencyTypeStandBy;
                 scope.lockinPeriodFrequencyStandBy;
 
-             resourceFactory.savingsResource.get({accountId: scope.parentGSIMId, template: 'true', associations: 'charges',staffInSelectedOfficeOnly:'true'}, function (data) {
+             resourceFactory.savingsResource.get({accountId: scope.gsimChildAccountId, template: 'true', associations: 'charges',staffInSelectedOfficeOnly:'true'}, function (data) {
                  scope.data = data;
                  if (data.groupId) {
                      scope.formData.groupId = data.groupId;
@@ -26,7 +27,7 @@
                  scope.formData.lockinPeriodFrequencyType = data.lockinPeriodFrequencyType.id;
                  scope.lockinPeriodFrequencyTypeStandBy = data.lockinPeriodFrequencyType.id;
                  }
-
+                 console.log(scope.data);
              });
 
 

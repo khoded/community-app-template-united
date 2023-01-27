@@ -88,6 +88,11 @@
                                 name: "button.activate",
                                 icon: "fa fa-check",
                                 taskPermissionName:"ACTIVATE_SAVINGSACCOUNT"
+                            },
+                            {
+                                name: "button.addmember",
+                                icon: "fa fa-plus",
+                                taskPermissionName:"ADDMEMBER_GSIMACCOUNT"
                             }
                         ]
                         };
@@ -105,6 +110,11 @@
                                 name: "button.close",
                                 icon :"fa fa-ban-circle",
                                 taskPermissionName:"CLOSE_SAVINGSACCOUNT"
+                            },
+                            {
+                                name: "button.addmember",
+                                icon: "fa fa-plus",
+                                taskPermissionName:"ADDMEMBER_GSIMACCOUNT"
                             }
                         ]
                         };
