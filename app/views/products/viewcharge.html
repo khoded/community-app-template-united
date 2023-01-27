@@ -44,6 +44,10 @@
 	                    <td>{{'label.heading.amount' | translate}}</td>
 	                    <td>{{charge.amount|number}}</td>
 	                </tr>
+					<tr ng-show="!charge.varyAmounts">
+						<td>{{'label.heading.maxoccurrence' | translate}}</td>
+						<td>{{charge.maxOccurrence|number}}</td>
+					</tr>
 					<tr ng-show="charge.varyAmounts">
 						<td>{{'label.heading.amount' | translate}}</td>
 						<td>

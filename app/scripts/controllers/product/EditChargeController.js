@@ -50,6 +50,7 @@
                     scope.template.chargeCalculationTypeOptions = scope.template.loanChargeCalculationTypeOptions;
                     scope.flag = false;
                     scope.showFrequencyOptions = true;
+                    scope.showMaxOccurrence = true;
                     scope.showMinAndMaxAmountSettings = false;
                     if(typeof scope.paymentTypes !== 'undefined' || scope.paymentTypes != null){
                     scope.template.chargeCalculationTypeOptions = scope.paymentTypes.loanChargeCalculationTypeOptions;
@@ -121,7 +122,8 @@
                     chargeCalculationType: data.chargeCalculationType.id,
                     amount: data.amount,
                     minAmount: data.minAmount,
-                    maxAmount: data.maxAmount
+                    maxAmount: data.maxAmount,
+                    maxOccurrence: data.maxOccurrence
                 };
                 
                 if(typeof scope.paymentTypeOptions !== 'undefined' || scope.paymentTypeOptions != null){
@@ -186,6 +188,7 @@
                     scope.showFrequencyOptions = false;
                 }
                 else {
+                    scope.showMaxOccurrence = true;
                     scope.showFrequencyOptions = true;
                 }
                 if (scope.formData.chargeAppliesTo === 2) {
