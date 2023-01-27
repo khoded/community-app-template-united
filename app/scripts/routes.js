@@ -157,6 +157,9 @@
             .when('/viewgsimaccount/:groupId/:gsimAccountNumber', {
                 templateUrl: 'views/savings/viewgsimaccount.html'
             })
+            .when('/savingsaccounts/:parentGSIMId/:gsimChildAccountId/addmember/:groupId/:gsimAccountNumber', {
+                templateUrl: 'views/savings/addMemberToGSimAccount.html'
+            })
             .when('/adjustrepaymentschedule/:accountId', {
                 templateUrl: 'views/loans/AdjustRepaymentSchdule.html'
             })

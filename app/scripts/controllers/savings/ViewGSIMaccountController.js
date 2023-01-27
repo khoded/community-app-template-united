@@ -67,6 +67,11 @@
                                 name: "button.reject",
                                 icon: "fa fa-remove-circle",
                                 taskPermissionName:"REJECT_SAVINGSACCOUNT"
+                            },
+                            {
+                                name: "button.addmember",
+                                icon: "fa fa-plus",
+                                taskPermissionName:"ADDMEMBER_GSIMACCOUNT"
                             }
                         ]
                         };
@@ -83,6 +88,11 @@
                                 name: "button.activate",
                                 icon: "fa fa-check",
                                 taskPermissionName:"ACTIVATE_SAVINGSACCOUNT"
+                            },
+                            {
+                                name: "button.addmember",
+                                icon: "fa fa-plus",
+                                taskPermissionName:"ADDMEMBER_GSIMACCOUNT"
                             }
                         ]
                         };
@@ -100,6 +110,11 @@
                                 name: "button.close",
                                 icon :"fa fa-ban-circle",
                                 taskPermissionName:"CLOSE_SAVINGSACCOUNT"
+                            },
+                            {
+                                name: "button.addmember",
+                                icon: "fa fa-plus",
+                                taskPermissionName:"ADDMEMBER_GSIMACCOUNT"
                             }
                         ]
                         };
@@ -129,6 +144,9 @@
                         break;
                     case "reject":
                         location.path('/gsimaccount/'+parentGSIMId +'/'+gsimChildAccountId+ '/reject/'+scope.groupId+'/'+scope.gsimAccountNumber);
+                        break;
+                    case "addmember":
+                        location.path('/savingsaccounts/'+parentGSIMId +'/'+gsimChildAccountId+ '/addmember/'+scope.groupId+'/'+scope.gsimAccountNumber);
                         break;
                     case "withdrawnbyclient":
                         location.path('/savingaccount/' + accountId + '/withdrawnByApplicant');

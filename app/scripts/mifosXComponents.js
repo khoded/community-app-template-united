@@ -359,6 +359,7 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'savings/GSIMAccountActionsController',
             'savings/EditGSIMAccountController',
             'savings/AddNewMemberToGSIMController',
+            'savings/AddMemberToGSimAccountController',
             'client/AddBusinessOwnersController',
             'client/EditBusinessOwnersController',
             'client/AddEmploymentInfoController',
