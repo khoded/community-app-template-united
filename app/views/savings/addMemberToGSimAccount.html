@@ -52,7 +52,9 @@
                                                             }}&nbsp;<span class="required">*</span></label></td>
                                                     <td class="width36 paddedbottom10">
                                                         <input id="vaultTargetAmount" type="text" class="form-control"
-                                                               number-format ng-model="formData.vaultTargetAmount">
+                                                               number-format ng-model="formData.vaultTargetAmount"  required late-Validate/>
+                                                        <form-validate valattributeform="newsavingccountform"
+                                                                       valattribute="lockinPeriodFrequency"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -81,7 +83,9 @@
                                                         <div class="form-inline">
                                                             <input id="lockinPeriodFrequency" type="text"
                                                                    class="form-control"
-                                                                   ng-model="formData.lockinPeriodFrequency">&nbsp;
+                                                                   ng-model="formData.lockinPeriodFrequency" required late-Validate/>&nbsp;
+                                                            <form-validate valattributeform="newsavingccountform"
+                                                                           valattribute="lockinPeriodFrequency"/>
                                                             <select id="lockinPeriodFrequencyType"
                                                                     ng-model="formData.lockinPeriodFrequencyType"
                                                                     class="form-control width170px"
@@ -96,7 +100,6 @@
                                             </table>
 
                                             <div class="col-md-10 col-md-offset-7">
-<!--                                                <a id="cancel" ng-href="{{cancel}}" class="btn btn-default">{{'label.button.cancel'|translate}}</a>-->
                                                 <button id="cancel2" type="cancel" class="btn btn-primary"  ng-hide="blockUI"  has-permission='ADDMEMBER_GSIMACCOUNT' ng-click="cancel()">
                                                     {{'label.button.cancel' | translate}}
                                                 </button>
