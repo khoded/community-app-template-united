@@ -149,11 +149,12 @@
                             </td>
                             <td class="width36 paddedbottom10">
                                 <div class="form-inline">
-                                    <input id="depositPeriod" class="form-control" type="text" name="depositPeriod" ng-model="formData.depositPeriod" required late-validate>
+                                    <input id="depositPeriod" class="form-control" type="text" name="depositPeriod" ng-model="formData.depositPeriod"
+                                           required late- ng-change="calculateInterestRate()">
                                     <select id="depositPeriodFrequencyId" ng-model="formData.depositPeriodFrequencyId"
                                             class="form-control width170px"
                                             ng-options="type.id as type.value for type in data.periodFrequencyTypeOptions"
-                                            ng-change="fixedDetails.depositPeriodFrequencyIdValue = formValue(data.periodFrequencyTypeOptions,formData.depositPeriodFrequencyId)"
+                                            ng-change="fixedDetails.depositPeriodFrequencyIdValue = formValue(data.periodFrequencyTypeOptions,formData.depositPeriodFrequencyId);calculateInterestRate();"
                                             value="{{type.id}}">
                                         <option value="">{{'label.selectone' | translate}}</option>
                                     </select>
@@ -169,7 +170,7 @@
                             </td>
                             <td class="width36 paddedbottom20">
                                 <input id="nominalAnnualInterestRate" type="text" name="nominalannualinterestrate" ng-model="formData.nominalAnnualInterestRate"
-                                       class="form-control" ng-change="setInterestRate()" number-format required late-Validate/>
+                                       class="form-control" ng-change="setInterestRate()" number-format required late-Validate ng-disabled="!allowManuallyEnterInterestRate"/>
                                 <form-validate valattributeform="Terms" valattribute="nominalannualinterestrate" />
                             </td>
                             <td class="width14">

@@ -63,7 +63,8 @@
                     withHoldTax: data.withHoldTax == true ? 'true' : 'false',
                     isUSDProduct: data.isUSDProduct,
                     totalLiquidationAllowed: data.totalLiquidationAllowed,
-                    allowPartialLiquidation: data.allowPartialLiquidation
+                    allowPartialLiquidation: data.allowPartialLiquidation,
+                    allowManuallyEnterInterestRate: data.allowManuallyEnterInterestRate
                 }
 
                 if(data.withHoldTax){
