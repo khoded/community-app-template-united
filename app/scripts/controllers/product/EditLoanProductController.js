@@ -247,6 +247,7 @@
                 scope.formData.minimumGap = scope.product.minimumGap;
                 scope.formData.maximumGap = scope.product.maximumGap;
                 scope.formData.canUseForTopup = scope.product.canUseForTopup;
+                scope.formData.loanTermIncludesToppedUpLoanTerm = scope.product.loanTermIncludesToppedUpLoanTerm;
 
                 //Rate Module
                 scope.formData.rates = scope.product.rates;
