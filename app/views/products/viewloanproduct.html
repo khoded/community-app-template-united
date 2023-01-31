@@ -260,6 +260,10 @@
     <td>{{'label.input.canUseForTopup' | translate}}</td>
     <td colspan="3">{{loanproduct.canUseForTopup | YesOrNo}}</td>
 </tr>
+<tr ng-show="loanproduct.maxNumberOfLoanExtensionsAllowed">
+    <td>{{'label.input.maxNumberOfLoanExtensionsAllowed' | translate}}</td>
+    <td colspan="3">{{loanproduct.maxNumberOfLoanExtensionsAllowed}}</td>
+</tr>
 
 <tr>
 <td colspan="4"><br/></td>
@@ -410,6 +414,7 @@
         <td>{{'label.input.no.of.overdue.days.to.move.loan.into.arrears' | translate}}</td>
         <td colspan="3">{{graceOnArrearsAging}}</td>
     </tr>
+
 <tr class="bottomborder">
     <td colspan="4"><strong>{{'label.heading.charges' | translate}}</strong></td>
 </tr>
