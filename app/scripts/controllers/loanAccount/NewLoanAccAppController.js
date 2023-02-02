@@ -443,7 +443,6 @@
                 var reqThirdDate = dateFilter(scope.date.third, scope.df);
                 var reqFourthDate = dateFilter(scope.date.fourth, scope.df);
                 var reqFifthDate = dateFilter(scope.date.fifth, scope.df);
-                var carryForward = scope.calculateTopUpCarryForwardSchedules();
 
                 if (scope.charges.length > 0) {
                     scope.formData.charges = [];
@@ -467,14 +466,11 @@
                 if (this.formData.syncRepaymentsWithMeeting) {
                     this.formData.calendarId = scope.loanaccountinfo.calendarOptions[0].id;
                 }
-                console.log("carryForward::>"+carryForward);
 
-                if(carryForward > 0){
-                this.formData.loanTermFrequency = scope.formData.loanTermFrequency + carryForward;
-                this.formData.numberOfRepayments = scope.formData.numberOfRepayments + carryForward;
 
-                console.log(this.formData.loanTermFrequency);
-                console.log(this.formData.numberOfRepayments);
+                if(scope.carryForwardLoanTerm > 0){
+                this.formData.loanTermFrequency = scope.formData.loanTermFrequency + scope.carryForwardLoanTerm;
+                this.formData.numberOfRepayments = scope.formData.numberOfRepayments + scope.carryForwardLoanTerm;
                 }
                 delete this.formData.syncRepaymentsWithMeeting;
                 this.formData.interestChargedFromDate = reqThirdDate;
@@ -520,24 +516,24 @@
                     delete scope.formData.datatables;
                 }
                 resourceFactory.loanResource.save(this.formData, function (data) {
+                    scope.carryForwardLoanTerm = 0;
                     location.path('/viewloanaccount/' + data.loanId);
                 });
             };
+
             scope.calculateTopUpCarryForwardSchedules = function () {
+                scope.carryForwardLoanTerm = 0;
                 scope.topUpCarryForward.loanIdToClose = this.formData.loanIdToClose;
                 scope.topUpCarryForward.isTopup = this.formData.isTopup;
                 scope.topUpCarryForward.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
 
-                var carryForward = 0;
+                if(scope.topUpCarryForward.loanIdToClose != null && scope.topUpCarryForward.isTopup != null){
                 resourceFactory.loanResource.save({command: 'calculateTopUpCarryForwardSchedules'}, scope.topUpCarryForward, function (data) {
-
                     scope.carryForwardLoanTerm = data.carryForwardLoanTerm;
-                    console.log(scope.carryForwardLoanTerm);
-                    carryForward = scope.carryForwardLoanTerm;
-                    console.log(carryForward);
-                                });
-                                return carryForward;
+                });
+                  }
                         }
+
             scope.cancel = function () {
                 if (scope.groupId) {
                     location.path('/viewgroup/' + scope.groupId);
