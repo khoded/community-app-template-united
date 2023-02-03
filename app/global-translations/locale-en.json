@@ -4548,5 +4548,7 @@
   "label.totalinteresttobeearned": "Interest to be Earned",
   "label.input.allowManuallyEnterInterestRate": "Allow Manually Enter Interest Rate",
   "label.tooltip.allowManuallyEnterInterestRate": "An boolean flag for allow user to enter manual interest rate on account creation",
+  "label.input.maxNumberOfLoanExtensionsAllowed": "Max Number Of Loan Extensions Allowed",
+  "maximum.number.of.loan.extensions.exceeded": "Maximum Number Of Loan Extensions Exceeded",
   "----End---": "--End of file--- "
 }

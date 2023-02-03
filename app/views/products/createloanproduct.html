@@ -781,6 +781,7 @@
                         <input type="checkbox" ng-model="formData.canDefineInstallmentAmount"/>
                     </label>
                 </div>
+
             </div>
 
             <div class="form-group">
@@ -838,6 +839,14 @@
                  <div class="col-sm-2">
                     <form-validate valattributeform="Settings" valattribute="principalThresholdForLastInstallment"/>
                 </div>
+
+            </div>
+            <div class="form-group">
+                    <label class="control-label col-sm-4">{{ 'label.input.maxNumberOfLoanExtensionsAllowed' | translate }}</label>
+                    <div class="col-sm-2">
+                        <input id="maxNumberOfLoanExtensionsAllowedId" class="form-control"
+                               type="text" ng-model="formData.maxNumberOfLoanExtensionsAllowed" late-validate number=true >
+                    </div>
             </div>
 
             <div class="form-group">
