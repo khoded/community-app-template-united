@@ -6,6 +6,8 @@
             scope.groupId = routeParams.groupId;
             scope.restrictDate = new Date();
             scope.formData = {};
+            scope.topUpCarryForward = {};
+            scope.carryForwardLoanTerm = 0;
             scope.loandetails = {};
             scope.chargeFormData = {}; //For charges
             scope.collateralFormData = {}; //For collaterals
@@ -349,6 +351,7 @@
             };
 
             scope.previewRepayments = function () {
+                scope.calculateTopUpCarryForwardSchedules();
                 // Make sure charges and collaterals are empty before initializing.
                 delete scope.formData.charges;
                 delete scope.formData.collateral;
@@ -394,6 +397,9 @@
                 this.formData.loanType = scope.inparams.templateType;
                 this.formData.expectedDisbursementDate = reqSecondDate;
                 this.formData.submittedOnDate = reqFirstDate;
+                if(scope.carryForwardLoanTerm > 0){
+                this.formData.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
+                }
                 if(this.formData.interestCalculationPeriodType == 0){
                     this.formData.allowPartialPeriodInterestCalcualtion = false;
                 }
@@ -404,6 +410,7 @@
                 });
 
             }
+
 
             uiConfigService.appendConfigToScope(scope);
 
@@ -462,6 +469,11 @@
                 if (this.formData.syncRepaymentsWithMeeting) {
                     this.formData.calendarId = scope.loanaccountinfo.calendarOptions[0].id;
                 }
+
+
+                if(scope.carryForwardLoanTerm > 0){
+                this.formData.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
+                }
                 delete this.formData.syncRepaymentsWithMeeting;
                 this.formData.interestChargedFromDate = reqThirdDate;
                 this.formData.repaymentsStartingFromDate = reqFourthDate;
@@ -506,9 +518,25 @@
                     delete scope.formData.datatables;
                 }
                 resourceFactory.loanResource.save(this.formData, function (data) {
+                    scope.carryForwardLoanTerm = 0;
                     location.path('/viewloanaccount/' + data.loanId);
                 });
             };
+
+            scope.calculateTopUpCarryForwardSchedules = function () {
+                scope.carryForwardLoanTerm = 0;
+                scope.topUpCarryForward.loanIdToClose = this.formData.loanIdToClose;
+                scope.topUpCarryForward.isTopup = this.formData.isTopup;
+                scope.topUpCarryForward.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
+
+                if(scope.topUpCarryForward.loanIdToClose != null && scope.topUpCarryForward.isTopup != null && scope.topUpCarryForward.loanTermIncludesToppedUpLoanTerm){
+                resourceFactory.loanResource.save({command: 'calculateTopUpCarryForwardSchedules'}, scope.topUpCarryForward, function (data) {
+                    scope.carryForwardLoanTerm = data.carryForwardLoanTerm;
+                    scope.formData.numberOfRepaymentsToCarryForward = scope.carryForwardLoanTerm;
+                    scope.formData.loanTermToTopUp = scope.carryForwardLoanTerm;
+                });
+                  }
+                        }
 
             scope.cancel = function () {
                 if (scope.groupId) {

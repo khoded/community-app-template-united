@@ -423,18 +423,35 @@
                                 <label>{{ 'label.heading.isTopup' | translate }}</label>
                             </td>
                             <td class="paddedbottom20">
-                                <input type="checkbox" name="isTopup" ng-model="formData.isTopup" />
+                                <input type="checkbox" name="isTopup" ng-model="formData.isTopup" ng-change="calculateTopUpCarryForwardSchedules()"/>
                             </td>
+                            <hr>
                             <td ng-show="formData.isTopup == true">
                                 <label>{{ 'label.input.loanIdToClose' | translate }}
                                 </label>
                             </td>
                             <td class="width36 paddedbottom20" ng-show="formData.isTopup == true">
-                                <select id="loanIdToClose" ng-model="formData.loanIdToClose" ng-change="loandetails.loanAccountToClose= formValue(loanaccountinfo.clientActiveLoanOptions,formData.loanIdToClose,'id','accountNo')"
+                                <select id="loanIdToClose" ng-model="formData.loanIdToClose" ng-change="loandetails.loanAccountToClose= formValue(loanaccountinfo.clientActiveLoanOptions,formData.loanIdToClose,'id','accountNo');calculateTopUpCarryForwardSchedules()"
                                     ng-options="loanSummary.id as loanSummary.accountNo for loanSummary in loanaccountinfo.clientActiveLoanOptions"
                                     class="form-control width170px" value="{{loanSummary.id}}"></select>
                             </td>
                         </tr>
+                        <tr ng-show="formData.isTopup == true">
+                            <td ng-show="carryForwardLoanTerm > 0">
+                                <label>{{ 'label.input.numberOfRepaymentsToCarryForward' | translate }}</label>
+                            </td>
+                            <td class="paddedbottom20" ng-show="carryForwardLoanTerm  > 0">
+                                <input id="numberOfRepaymentsToCarryForward" type="text" ng-disabled = "true"
+                                       ng-model="formData.numberOfRepaymentsToCarryForward" class="form-control" name ="numberOfRepaymentsToCarryForward"/>&nbsp;
+                            </td>
+                            <td ng-show="carryForwardLoanTerm > 0">
+                                <label>{{ 'label.input.loanTermToTopUp' | translate }}</label>
+                            </td>
+                            <td class="paddedbottom20" ng-show="carryForwardLoanTerm > 0">
+                                <input id="loanTermToTopUp" type="text" ng-model="formData.loanTermToTopUp" name ="loanTermToTopUp" class="form-control" ng-disabled = "true"/>
+                            </td>
+                        </tr>
+                        <hr>
                         <tr>
                             <td colspan="4" ng-hide="response.uiDisplayConfigurations.loanAccount.isHiddenSection.interestRecalculationSection == true">
                                 <hr>
