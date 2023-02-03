@@ -397,6 +397,9 @@
                 this.formData.loanType = scope.inparams.templateType;
                 this.formData.expectedDisbursementDate = reqSecondDate;
                 this.formData.submittedOnDate = reqFirstDate;
+                if(scope.carryForwardLoanTerm > 0){
+                this.formData.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
+                }
                 if(this.formData.interestCalculationPeriodType == 0){
                     this.formData.allowPartialPeriodInterestCalcualtion = false;
                 }
