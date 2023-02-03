@@ -3222,6 +3222,8 @@
   "label.input.interestcalculationperiod": "Interest calculation period",
   "label.input.allowpartialperiodinterestcalcualtion": "Calculate interest for exact days in partial period",
   "label.input.arearstolerance": "Arrears tolerance",
+  "label.input.numberOfRepaymentsToCarryForward": "Number of repayments to TopUp",
+  "label.input.loanTermToTopUp": "Loan Term To TopUp",
   "label.input.repaymentstrategy": "Repayment strategy",
   "label.input.grace": "Moratorium",
   "label.input.onprincipalpayment": "On principal payment",

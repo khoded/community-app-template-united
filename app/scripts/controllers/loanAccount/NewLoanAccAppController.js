@@ -469,8 +469,7 @@
 
 
                 if(scope.carryForwardLoanTerm > 0){
-                this.formData.loanTermFrequency = scope.formData.loanTermFrequency + scope.carryForwardLoanTerm;
-                this.formData.numberOfRepayments = scope.formData.numberOfRepayments + scope.carryForwardLoanTerm;
+                this.formData.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
                 }
                 delete this.formData.syncRepaymentsWithMeeting;
                 this.formData.interestChargedFromDate = reqThirdDate;
@@ -527,9 +526,11 @@
                 scope.topUpCarryForward.isTopup = this.formData.isTopup;
                 scope.topUpCarryForward.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
 
-                if(scope.topUpCarryForward.loanIdToClose != null && scope.topUpCarryForward.isTopup != null){
+                if(scope.topUpCarryForward.loanIdToClose != null && scope.topUpCarryForward.isTopup != null && scope.topUpCarryForward.loanTermIncludesToppedUpLoanTerm){
                 resourceFactory.loanResource.save({command: 'calculateTopUpCarryForwardSchedules'}, scope.topUpCarryForward, function (data) {
                     scope.carryForwardLoanTerm = data.carryForwardLoanTerm;
+                    scope.formData.numberOfRepaymentsToCarryForward = scope.carryForwardLoanTerm;
+                    scope.formData.loanTermToTopUp = scope.carryForwardLoanTerm;
                 });
                   }
                         }
