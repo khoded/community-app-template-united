@@ -101,6 +101,7 @@
                     canDefineInstallmentAmount : scope.product.canDefineInstallmentAmount,
                     isEqualAmortization : scope.product.isEqualAmortization,
                     maxNumberOfLoanExtensionsAllowed : scope.product.maxNumberOfLoanExtensionsAllowed,
+                    isAccountLevelArrearsToleranceEnable : scope.product.isAccountLevelArrearsToleranceEnable,
                 };
 
                 if (scope.product.isInterestRecalculationEnabled) {

@@ -4552,5 +4552,7 @@
   "label.tooltip.allowManuallyEnterInterestRate": "An boolean flag for allow user to enter manual interest rate on account creation",
   "label.input.maxNumberOfLoanExtensionsAllowed": "Max Number Of Loan Extensions Allowed",
   "maximum.number.of.loan.extensions.exceeded": "Maximum Number Of Loan Extensions Exceeded",
+  "label.input.isAccountLevelArrearsToleranceEnable":"Account Level Arrears Tolerance Enable",
+  "label.tooltip.loanproduct.isAccountLevelArrearsToleranceEnable": "An boolean flag for allow user to set arrears tolerance value on specific loan account",
   "----End---": "--End of file--- "
 }

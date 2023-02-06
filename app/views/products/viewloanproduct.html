@@ -268,7 +268,10 @@
     <td>{{'label.input.maxNumberOfLoanExtensionsAllowed' | translate}}</td>
     <td colspan="3">{{loanproduct.maxNumberOfLoanExtensionsAllowed}}</td>
 </tr>
-
+    <tr ng-show="loanproduct.isAccountLevelArrearsToleranceEnable">
+        <td>{{'label.input.isAccountLevelArrearsToleranceEnable' | translate}}</td>
+        <td colspan="3">{{loanproduct.isAccountLevelArrearsToleranceEnable}}</td>
+    </tr>
 <tr>
 <td colspan="4"><br/></td>
 </tr>
