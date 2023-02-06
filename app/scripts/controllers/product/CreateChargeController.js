@@ -19,6 +19,7 @@
             scope.loanChargeTimeChange = false;
             scope.varyAmounts = false;
             scope.showAmountRangeSelector = false;
+            scope.showMaxOccurrence = false;
             scope.chart = {};
 
             resourceFactory.chargeTemplateResource.get(function (data) {
@@ -106,9 +107,11 @@
             //'annual fee' or 'monthly fee'
             scope.chargeTimeChange = function (chargeTimeType) {
                 scope.showFrequencyOptions = false;
+                scope.showMaxOccurrence = false;
                 scope.loanChargeTimeChange = false;
                 if (chargeTimeType == 9) {
                     scope.showFrequencyOptions = true;
+                    scope.showMaxOccurrence = true;
                 }
                 if (chargeTimeType == 2) {
                     scope.loanChargeTimeChange = false;

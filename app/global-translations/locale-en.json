@@ -3248,6 +3248,8 @@
   "label.input.loseswrittenoff": "Losses written off",
   "label.input.overpaymentliability": "Over payment liability",
   "label.input.chargesappliesto": "Charges applies to",
+  "label.input.maxoccurrence": "Max Occurrence",
+  "label.heading.maxoccurrence": "Max Occurrence",
   "label.input.ispenalty": "Is penalty?",
   "label.input.multiplesof": "Multiples of",
   "label.input.savingreference": "Saving reference",
