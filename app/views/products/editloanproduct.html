@@ -648,7 +648,15 @@
 					   type="text" ng-model="formData.maxNumberOfLoanExtensionsAllowed" late-validate number=true >
 			</div>
 		</div>
-
+		<div class="form-group">
+			<div class="col-sm-3">
+				<input type="checkbox" name="isAccountLevelArrearsToleranceEnable" ng-model="formData.isAccountLevelArrearsToleranceEnable"/>
+				{{'label.input.isAccountLevelArrearsToleranceEnable' | translate}}
+				<i class="fa fa-question-circle"
+				   uib-tooltip="{{'label.tooltip.loanproduct.isAccountLevelArrearsToleranceEnable' | translate}}"
+				   tooltip-append-to-body="true"></i>
+			</div>
+		</div>
 
 		<div class="form-group">
         <div class="col-sm-3">
