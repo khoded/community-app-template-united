@@ -4554,5 +4554,6 @@
   "maximum.number.of.loan.extensions.exceeded": "Maximum Number Of Loan Extensions Exceeded",
   "label.input.isAccountLevelArrearsToleranceEnable":"Account Level Arrears Tolerance Enable",
   "label.tooltip.loanproduct.isAccountLevelArrearsToleranceEnable": "An boolean flag for allow user to set arrears tolerance value on specific loan account",
+  "validation.msg.rescheduleloan.totalExtensions.maximum.number.of.loan.extensions.exceeded": "Maximum number of loan extensions exceeded",
   "----End---": "--End of file--- "
 }
