@@ -4554,5 +4554,7 @@
   "maximum.number.of.loan.extensions.exceeded": "Maximum Number Of Loan Extensions Exceeded",
   "label.input.isAccountLevelArrearsToleranceEnable":"Account Level Arrears Tolerance Enable",
   "label.tooltip.loanproduct.isAccountLevelArrearsToleranceEnable": "An boolean flag for allow user to set arrears tolerance value on specific loan account",
+  "label.tooltip.interestforexactdaysinperiod":"When enabled and payments adjustment type is Reduce EMI amount, the interest calculated when there is an advance payment will only be for the days that have actually had interest accrue",
+  "label.input.interestforexactdaysinperiod": "Calculate interest for exact days in period",
   "----End---": "--End of file--- "
 }

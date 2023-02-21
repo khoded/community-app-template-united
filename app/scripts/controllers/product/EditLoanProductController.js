@@ -135,6 +135,10 @@
                         }
                     }
 
+                    if( scope.product.interestRecalculationData.rescheduleStrategyType.id == 3){
+                        scope.formData.advancePaymentInterestForExactDaysInPeriod = scope.product.interestRecalculationData.advancePaymentInterestForExactDaysInPeriod;
+                    }
+
                 }
                 if(scope.product.allowAttributeOverrides != null){
                     console.log('scope.product.allowAttributeOverrides : ',scope.product.allowAttributeOverrides);
