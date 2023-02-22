@@ -944,6 +944,21 @@
                             value="{{type.id}}"></select>
                 </div>
             </div>
+            <div class="form-group" data-ng-show="formData.isInterestRecalculationEnabled">
+                <div class="form-group" data-ng-show="formData.isInterestRecalculationEnabled && formData.rescheduleStrategyMethod == 3">
+                    <label class="control-label col-sm-2">{{'label.input.interestforexactdaysinperiod'| translate }}<span class="required">*</span>
+                        <i class="fa fa-question-circle "
+                        uib-tooltip="{{'label.tooltip.interestforexactdaysinperiod' | translate}}"
+                        tooltip-append-to-body="true"></i>
+                    </label>
+
+                    <div class="col-sm-2 checkbox">
+                        <label>
+                            <input id="advancePaymentInterestForExactDaysInPeriod" type="checkbox"
+                                   ng-model="formData.advancePaymentInterestForExactDaysInPeriod">
+                        </label>
+                </div>
+            </div>
 
             <div class="form-group" data-ng-show="formData.isInterestRecalculationEnabled">
                 <label class="control-label col-sm-2">{{'label.input.interest.recalculation.compounding.method'
