@@ -10,6 +10,10 @@
             scope.opensavingsproduct = 'false';
             scope.showNonPersonOptions = false;
             scope.clientPersonId = 1;
+
+            resourceFactory.validationLimitTemplateResource.get(function (data) {
+                            scope.template = data;
+                        });
             resourceFactory.clientResource.get({clientId: routeParams.id, template:'true', staffInSelectedOfficeOnly:true}, function (data) {
                 scope.offices = data.officeOptions;
                 scope.staffs = data.staffOptions;
@@ -34,12 +38,15 @@
                     savingsProductId: data.savingsProductId,
                     genderId: data.gender.id,
                     fullname: data.fullname,
+                    dailyWithdrawLimit : data.dailyWithdrawLimit,
+                    singleWithdrawLimit: data.singleWithdrawLimit,
                     clientNonPersonDetails : {
                         incorpNumber: data.clientNonPersonDetails.incorpNumber,
                         remarks: data.clientNonPersonDetails.remarks
                     }
                 };
 
+console.log(data.dailyWithdrawLimit,data.singleWithdrawLimit)
                 if(data.gender){
                     scope.formData.genderId = data.gender.id;
                 }
@@ -56,6 +63,9 @@
                     scope.displayPersonOrNonPersonOptions(data.legalForm.id);
                     scope.formData.legalFormId = data.legalForm.id;
                 }
+                if(data.clientLevel){
+                     scope.formData.clientLevelId = data.clientLevel.id;
+                  }
 
                 if(data.clientNonPersonDetails.constitution){
                     scope.formData.clientNonPersonDetails.constitutionId = data.clientNonPersonDetails.constitution.id;
@@ -117,6 +127,11 @@
                     this.formData.dateOfBirth = dateFilter(scope.date.dateOfBirth,  scope.df);
                 }
 
+                if(scope.clientLevelId){
+                  this.formData.clientLevelId = scope.clientLevelId
+
+                 }
+
                 if(scope.date.submittedOnDate){
                     this.formData.submittedOnDate = dateFilter(scope.date.submittedOnDate,  scope.df);
                 }
@@ -135,6 +150,7 @@
                     delete this.formData.lastname;
                 }
 
+                console.log(this.formData);
                 resourceFactory.clientResource.update({'clientId': routeParams.id}, this.formData, function (data) {
                     location.path('/viewclient/' + routeParams.id);
                 });

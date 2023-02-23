@@ -864,6 +864,15 @@
                         getAllConfigs: {method: 'GET', params: {}},
                         put: {method: 'PUT', params: {}}
                     }),
+                       validationLimitResource: defineResource(apiVer + "/validationlimit/:validationLimitId", { validationLimitId: '@validationLimitId' }, {
+                                            getAllValidationLimit: { method: 'GET', params: {}, isArray: true },
+                                            getValidationLimit: { method: 'GET', params: {} },
+                                            update: { method: 'PUT', params: {} }
+                                        }),
+                                        validationLimitTemplateResource: defineResource(apiVer + "/validationlimit/template", {
+                                            get: { method: 'GET', params: {}, isArray: true }
+
+                                        }),
                     rateResource: defineResource(apiVer + "/rates/:rateId", {rateId: '@rateId'}, {
                         getAllRates: {method: 'GET', params: {}, isArray: true},
                         getRate: {method: 'GET', params: {}},

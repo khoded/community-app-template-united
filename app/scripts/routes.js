@@ -16,6 +16,18 @@
             .when('/products', {
                 templateUrl: 'views/products/products.html'
             })
+             .when('/validationlimit', {
+                             templateUrl: 'views/products/validationsLimit.html'
+                         })
+                           .when('/createvalidationlimit', {
+                                         templateUrl: 'views/products/createvalidationlimit.html'
+                                     })
+                                     .when('/editvalidationlimit/:id', {
+                                          templateUrl: 'views/products/editvalidationlimit.html'
+                                     })
+                                     .when('/viewvalidationlimit/:id', {
+                                          templateUrl: 'views/products/viewvalidationlimit.html'
+                                     })
             .when('/templates', {
                 templateUrl: 'views/templates/templates.html'
             })

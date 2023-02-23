@@ -365,6 +365,10 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'client/AddEmploymentInfoController',
             'client/EditEmploymentInfoController',
             'client/BusinessOwnerDocumentController',
+            'product/ValidationLimitController',
+            'product/CreateValidationLimitController',
+            'product/EditValidationLimitController',
+            'product/ViewValidationLimitController',
             'deposits/fixed/FixedDepositAccountPartialLiquidationController'
         ],
         filters: [

@@ -47,6 +47,10 @@
             if (routeParams.officeId) {
                 requestParams.officeId = routeParams.officeId;
             }
+
+             resourceFactory.validationLimitTemplateResource.get(function (data) {
+                                        scope.template = data;
+                                    });
             resourceFactory.clientTemplateResource.get(requestParams, function (data) {
                 scope.offices = data.officeOptions;
                 scope.staffs = data.staffOptions;
@@ -58,6 +62,7 @@
                 scope.clientNonPersonConstitutionOptions = data.clientNonPersonConstitutionOptions;
                 scope.clientNonPersonMainBusinessLineOptions = data.clientNonPersonMainBusinessLineOptions;
                 scope.clientLegalFormOptions = data.clientLegalFormOptions;
+                scope.clientLevelOptions = data.clientLevelOptions;
                 scope.datatables = data.datatables;
                 if (!_.isUndefined(scope.datatables) && scope.datatables.length > 0) {
                     scope.noOfTabs = scope.datatables.length + 1;
