@@ -614,12 +614,12 @@
             /**
                          * Add a new row with default values for entering chart details
                          */
-                        scope.addNewRow = function () {
+                         scope.addNewRow = function () {
                             var fromPeriod = '';
                             var amountRangeFrom = '';
-                            var periodType = '';
                             var toPeriod = '';
                             var amountRangeTo = '';
+                            var periodType = {};
                             if (_.isNull(scope.chart.chartSlabs) || _.isUndefined(scope.chart.chartSlabs)) {
                                 scope.chart.chartSlabs = [];
                             } else {
@@ -649,13 +649,13 @@
                                             amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.amountRangeTo) + 1;
                                         }
                                     }
-                                    periodType = angular.copy(lastChartSlab.periodType);
                                 }
                             }
 
 
                             var chartSlab = {
                                 "fromPeriod": fromPeriod,
+                                "periodType": periodType,
                             };
                             if(!_.isUndefined(toPeriod) && toPeriod.length > 0){
                                 chartSlab.toPeriod = toPeriod;
@@ -663,21 +663,14 @@
                             scope.chart.chartSlabs.push(chartSlab);
                         }
 
-
                         /**
                          *  create new chart data object
                          */
-
-                        copyChartData = function () {
+                       copyChartData = function () {
                             var newChartData = {
-                                id: scope.chart.id,
-                                name: scope.chart.name,
-                                description: scope.chart.description,
-                                fromDate: dateFilter(new Date(), scope.df),
-                                endDate: dateFilter(new Date(), scope.df),
-                                isPrimaryGroupingByAmount:scope.isPrimaryGroupingByAmount,
                                 dateFormat: scope.df,
                                 locale: scope.optlang.code,
+                                fromDate: dateFilter(new Date(), scope.df),
                                 chartSlabs: angular.copy(copyChartSlabs(scope.chart.chartSlabs))
                             }
 
@@ -689,6 +682,7 @@
 
                             return newChartData;
                         }
+
 
                         /**
                          *  copy all chart details to a new Array
@@ -718,7 +712,9 @@
                                 annualInterestRate: chartSlab.annualInterestRate,
                                 locale: scope.optlang.code,
                             }
-
+                        if(chartSlab.periodType != undefined) {
+                              newChartSlabData.periodType = 2;
+                         }
                             //remove empty values
                             _.each(newChartSlabData, function (v, k) {
                                 if (!v && v != 0)
