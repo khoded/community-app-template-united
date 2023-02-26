@@ -179,7 +179,7 @@
                     if (!(_.isNull(lastFloatingInterestRate) || _.isUndefined(lastFloatingInterestRate))) {
                         fromDateSelected = dateFilter(lastFloatingInterestRate.fromDate, scope.df);
                         endDateSelected = dateFilter(lastFloatingInterestRate.endDate, scope.df);
-                        floatingInterestRateValue = lastFloatingInterestRate.floatingInterestRate;
+                        floatingInterestRateValue = lastFloatingInterestRate.floatingInterestRateValue;
 
                         /*var savingProductFloatingInterestRate = {
                             "fromDate": fromDateSelected,
@@ -194,7 +194,7 @@
                  var savingProductFloatingInterestRate = {
                     "fromDate": fromDateSelected,
                     "endDate": endDateSelected,
-                    "floatingInterestRate": floatingInterestRateValue,
+                    "floatingInterestRateValue": floatingInterestRateValue,
                     "dateFormat": scope.df,
                     "locale": scope.optlang.code,
                 };
