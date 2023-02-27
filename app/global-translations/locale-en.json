@@ -4581,6 +4581,7 @@
   "label.tooltip.interestforexactdaysinperiod":"When enabled and payments adjustment type is Reduce EMI amount, the interest calculated when there is an advance payment will only be for the days that have actually had interest accrue",
   "label.input.interestforexactdaysinperiod": "Calculate interest for exact days in period",
   "label.input.usefloatinginterestrate": "Use floating Interest Rate",
+  "label.heading.floatinginterestrate": "Floating Interest Rate",
   "label.heading.floatinginterestrate.valid.fromDate": "From Date",
   "label.heading.floatinginterestrate.valid.endDate": "End Date",
   "label.heading.floatinginterestrate.floatingInterestRate": "Floating Interest Rate",
