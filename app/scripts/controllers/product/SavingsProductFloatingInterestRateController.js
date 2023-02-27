@@ -9,18 +9,18 @@
             scope.productId = routeParams.productId;
             scope.floatingInterestRateId = routeParams.floatingInterestrateId;
 
-            scope.deleteGLAccount = function () {
+            scope.deletefloatingInterestRate = function () {
                 $uibModal.open({
-                    templateUrl: 'deleteglacc.html',
-                    controller: GlAccDeleteCtrl
+                    templateUrl: 'deleteglfir.html',
+                    controller: FloatingInterestDeleteCtrl
                 });
             };
 
-            var GlAccDeleteCtrl = function ($scope, $uibModalInstance) {
+            var FloatingInterestDeleteCtrl = function ($scope, $uibModalInstance) {
                 $scope.delete = function () {
-                    resourceFactory.accountCoaResource.delete({glAccountId: routeParams.id}, {}, function (data) {
+                    resourceFactory.savingProductsFloatingInterestRateResource.delete({savingProductId: routeParams.productId, floatingInterestRateId: routeParams.floatingInterestrateId}, {}, function (data) {
                         $uibModalInstance.close('delete');
-                        location.path('/accounting_coa');
+                        location.path('/viewsavingproduct/'+ scope.productId +'/floatinginterestrate');
                     });
                 };
                 $scope.cancel = function () {
