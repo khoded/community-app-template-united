@@ -497,6 +497,8 @@
 
                             var chartSlab = {
                                 "fromPeriod": fromPeriod,
+                                "periodType": periodType,
+
                             };
                             if(!_.isUndefined(toPeriod) && toPeriod.length > 0){
                                 chartSlab.toPeriod = toPeriod;
@@ -560,6 +562,9 @@
                                 annualInterestRate: chartSlab.annualInterestRate,
                                 locale: scope.optlang.code,
                             }
+                            if(chartSlab.periodType != undefined) {
+                                                newChartSlabData.periodType = 2;
+                                            }
                             //alert("Period type id" + chartSlab.periodType.id);
                             //remove empty values
                             _.each(newChartSlabData, function (v, k) {
