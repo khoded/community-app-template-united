@@ -4585,5 +4585,6 @@
   "label.heading.floatinginterestrate.valid.fromDate": "From Date",
   "label.heading.floatinginterestrate.valid.endDate": "End Date",
   "label.heading.floatinginterestrate.floatingInterestRate": "Floating Interest Rate",
+  "label.anchor.floatinginterestratevieweditdelete": "Add/Update/Edit Floating Interest Reate",
   "----End---": "--End of file--- "
 }

@@ -287,6 +287,9 @@
             .when('/viewsavingproduct/:id', {
                 templateUrl: 'views/products/viewsavingproduct.html'
             })
+            .when('/viewsavingproduct/:id/floatinginterestrate', {
+                templateUrl: 'views/products/viewsavingproductfloatinginterestrates.html'
+            })
             .when('/fixeddepositproducts', {
                 templateUrl: 'views/products/fixeddepositproducts.html'
             })
