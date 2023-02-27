@@ -603,8 +603,10 @@
                     delete this.formData.recalculationRestFrequencyNthDayType;
                 }
 
-                this.formData.charts = [];//declare charts array
-                this.formData.charts.push(copyChartData(scope.chart));//add chart details
+                if(scope.chart){
+                    this.formData.charts = [];//declare charts array
+                    this.formData.charts.push(copyChartData(scope.chart));
+                }
 
                 resourceFactory.loanProductResource.put({loanProductId: routeParams.id}, this.formData, function (data) {
                     location.path('/viewloanproduct/' + data.resourceId);
@@ -649,6 +651,7 @@
                                             amountRangeFrom = _.isNull(lastChartSlab) ? '' : parseInt(lastChartSlab.amountRangeTo) + 1;
                                         }
                                     }
+                                    periodType = 2
                                 }
                             }
 
@@ -711,10 +714,8 @@
                                 toPeriod: chartSlab.toPeriod,
                                 annualInterestRate: chartSlab.annualInterestRate,
                                 locale: scope.optlang.code,
+                                periodType : 2
                             }
-                        if(chartSlab.periodType != undefined) {
-                              newChartSlabData.periodType = 2;
-                         }
                             //remove empty values
                             _.each(newChartSlabData, function (v, k) {
                                 if (!v && v != 0)
