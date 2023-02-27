@@ -198,6 +198,7 @@
                     savingProductsFloatingInterestRateResource: defineResource(apiVer + "/savingsproducts/:savingProductId/floatinginterestrates/:floatingInterestRateId", {savingProductId: '@savingProductId', floatingInterestRateId: '@floatingInterestRateId'}, {
                         getAllSavingProductFloatingInterestRates: {method: 'GET', params: {}, isArray: true},
                         get: {method: 'GET', params: {}},
+                        save: {method: 'POST', params: {}},
                         update: {method: 'PUT', params: {}},
                         delete: {method: 'DELETE'}
                     }),
