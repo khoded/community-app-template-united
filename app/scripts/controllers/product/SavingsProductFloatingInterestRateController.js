@@ -2,12 +2,12 @@
     mifosX.controllers = _.extend(module, {
         SavingsProductFloatingInterestRateController: function (scope, routeParams, location, resourceFactory, route, $uibModal) {
 
-            resourceFactory.savingProductsFloatingInterestRateResource.get({savingProductId: routeParams.productId, floatingInterestRateId: routeParams.floatinginterestrateId}, function (data) {
+            resourceFactory.savingProductsFloatingInterestRateResource.get({savingProductId: routeParams.productId, floatingInterestRateId: routeParams.floatingInterestrateId}, function (data) {
                 scope.savingProductsFloatingInterestRate = data;
             });
 
             scope.productId = routeParams.productId;
-            scope.floatingInterestRateId = routeParams.floatinginterestrateId;
+            scope.floatingInterestRateId = routeParams.floatingInterestrateId;
 
             scope.deleteGLAccount = function () {
                 $uibModal.open({

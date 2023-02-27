@@ -196,7 +196,7 @@
                     "endDate": endDateSelected,
                     "floatingInterestRateValue": floatingInterestRateValue,
                     "dateFormat": scope.df,
-                    "locale": scope.optlang.code,
+                    "locale": scope.optlang.code
                 };
                 scope.floatingInterestRates.push(savingProductFloatingInterestRate);
             };
