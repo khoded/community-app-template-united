@@ -195,6 +195,12 @@
                         getAllSavingProducts: {method: 'GET', params: {}, isArray: true},
                         update: {method: 'PUT', params: {}}
                     }),
+                    savingProductsFloatingInterestRateResource: defineResource(apiVer + "/savingsproducts/:savingProductId/floatinginterestrates/:floatingInterestRateId", {savingProductId: '@savingProductId', floatingInterestRateId: '@floatingInterestRateId'}, {
+                        getAllSavingProductFloatingInterestRates: {method: 'GET', params: {}, isArray: true},
+                        get: {method: 'GET', params: {}},
+                        update: {method: 'PUT', params: {}},
+                        delete: {method: 'DELETE'}
+                    }),
                     fixedDepositProductResource: defineResource(apiVer + "/fixeddepositproducts/:productId/:resourceType", {productId: '@productId', resourceType: '@resourceType'}, {
                         getAllFixedDepositProducts: {method: 'GET', params: {}, isArray: true},
                         update: {method: 'PUT', params: {}}

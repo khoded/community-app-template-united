@@ -86,6 +86,7 @@ define(['Q', 'underscore', 'mifosX'], function (Q) {
             'product/SavingProductController',
             'product/ViewSavingProductController',
             'product/ViewSavingsProductFloatingInterestRatesController',
+            'product/SavingsProductFloatingInterestRateController',
             'product/ShareProductController',
             'product/ViewShareProductController',
             'product/CreateShareProductController',

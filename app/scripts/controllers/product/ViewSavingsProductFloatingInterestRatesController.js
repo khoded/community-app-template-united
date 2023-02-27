@@ -7,10 +7,8 @@
 
             scope.productId = routeParams.id;
 
-            scope.scrollto = function (link) {
-                location.hash(link);
-                anchorScroll();
-
+            scope.routeTo = function (id) {
+                location.path('/viewsavingproduct/'+ scope.productId +'/floatinginterestrate/' + id);
             };
         }
     });

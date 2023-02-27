@@ -19,9 +19,9 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="floatingInterestRate in savingproduct.floatingInterestRates">
-                        <td>{{floatingInterestRate.fromDate | DateFormat}}</td>
-                        <td>{{floatingInterestRate.endDate | DateFormat}}</td>
-                        <td>{{floatingInterestRate.floatingInterestRate}}</td>
+                        <td class="pointer" data-ng-click="routeTo(floatingInterestRate.id)">{{floatingInterestRate.fromDate | DateFormat}}</td>
+                        <td class="pointer" data-ng-click="routeTo(floatingInterestRate.id)">{{floatingInterestRate.endDate | DateFormat}}</td>
+                        <td class="pointer" data-ng-click="routeTo(floatingInterestRate.id)">{{floatingInterestRate.floatingInterestRate}}</td>
                     </tr>
                     </tbody>
                 </table>
