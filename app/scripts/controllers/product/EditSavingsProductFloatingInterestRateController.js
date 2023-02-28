@@ -3,6 +3,15 @@
         EditSavingsProductFloatingInterestRateController: function (scope, routeParams, resourceFactory, location, dateFilter) {
             resourceFactory.savingProductsFloatingInterestRateResource.get({savingProductId: routeParams.productId, floatingInterestRateId: routeParams.floatingInterestrateId}, function (data) {
                 scope.savingProductsFloatingInterestRate = data;
+                if (scope.savingProductsFloatingInterestRate.fromDate) {
+                    var fromDate = dateFilter(scope.savingProductsFloatingInterestRate.fromDate, scope.df);
+                    scope.savingProductsFloatingInterestRate.fromDate = new Date(fromDate);
+                }
+
+                if (scope.savingProductsFloatingInterestRate.endDate) {
+                    var endDate = dateFilter(scope.savingProductsFloatingInterestRate.endDate, scope.df);
+                    scope.savingProductsFloatingInterestRate.endDate = new Date(endDate);
+                }
             });
             scope.productId = routeParams.productId;
             scope.floatingInterestRateId = routeParams.floatingInterestrateId;
