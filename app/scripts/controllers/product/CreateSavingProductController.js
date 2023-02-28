@@ -260,6 +260,7 @@
                 for (var i in scope.floatingInterestRates) {
                     scope.floatingInterestRates[i].fromDate = dateFilter(scope.floatingInterestRates[i].fromDate, scope.df);
                     scope.floatingInterestRates[i].endDate = dateFilter(scope.floatingInterestRates[i].endDate, scope.df);
+                    this.formData.nominalAnnualInterestRate = scope.floatingInterestRates[i].floatingInterestRateValue;//as nominal interest rate is required just populating it from any of floating rate
                 }
                 this.formData.floatingInterestRates = scope.floatingInterestRates;
 
