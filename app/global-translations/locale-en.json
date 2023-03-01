@@ -4580,5 +4580,12 @@
   "validation.msg.rescheduleloan.totalExtensions.maximum.number.of.loan.extensions.exceeded": "Maximum number of loan extensions exceeded",
   "label.tooltip.interestforexactdaysinperiod":"When enabled and payments adjustment type is Reduce EMI amount, the interest calculated when there is an advance payment will only be for the days that have actually had interest accrue",
   "label.input.interestforexactdaysinperiod": "Calculate interest for exact days in period",
+  "label.input.usefloatinginterestrate": "Use floating Interest Rate",
+  "label.heading.floatinginterestrate": "Floating Interest Rate",
+  "label.heading.floatinginterestrate.valid.fromDate": "From Date",
+  "label.heading.floatinginterestrate.valid.endDate": "End Date",
+  "label.heading.floatinginterestrate.floatingInterestRate": "Floating Interest Rate",
+  "label.anchor.floatinginterestratevieweditdelete": "Add/Update/Edit Floating Interest Reate",
+  "label.label.addfloatinginterestrate": "Add Floating Interest Rate",
   "----End---": "--End of file--- "
 }

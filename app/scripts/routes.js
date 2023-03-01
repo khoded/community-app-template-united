@@ -287,6 +287,18 @@
             .when('/viewsavingproduct/:id', {
                 templateUrl: 'views/products/viewsavingproduct.html'
             })
+            .when('/viewsavingproduct/:id/floatinginterestrate', {
+                templateUrl: 'views/products/viewsavingproductfloatinginterestrates.html'
+            })
+            .when('/viewsavingproduct/:productId/floatinginterestrate/:floatingInterestrateId', {
+                templateUrl: 'views/products/viewsavingproductfloatinginterestrate.html'
+            })
+            .when('/editsavingproduct/:productId/floatinginterestrate/:floatingInterestrateId', {
+                templateUrl: 'views/products/editsavingproductfloatinginterestrate.html'
+            })
+            .when('/viewsavingproduct/:productId/addfloatinginterestrate', {
+                templateUrl: 'views/products/addsavingproductfloatinginterestrate.html'
+            })
             .when('/fixeddepositproducts', {
                 templateUrl: 'views/products/fixeddepositproducts.html'
             })
