@@ -99,7 +99,7 @@
                             <b>{{data.currency.decimalPlaces}}</b>
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-show="!formData.useFloatingInterestRate">
                         <label class="control-label col-sm-2">{{ 'label.input.nominalannualinterestrate' | translate }}&nbsp;
                             <span class="required">*</span>
                         </label>
@@ -113,9 +113,6 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2">{{ 'label.input.usefloatinginterestrate' | translate }}
-                            <i class="fa fa-question-circle"
-                               uib-tooltip="{{'label.input.usefloatinginterestrate' | translate}}"
-                               tooltip-append-to-body="true"></i>
                         </label>
                         <div class="checkbox col-sm-2">
                             <label>
@@ -129,7 +126,7 @@
                                 <tr class="graybg">
                                     <th>{{'label.heading.floatinginterestrate.valid.fromDate' | translate}}</th>
                                     <th>{{'label.heading.floatinginterestrate.valid.endDate' | translate}}</th>
-                                    <th>{{'label.heading.floatinginterestrate.floatingInterestRate' | translate}</th>
+                                    <th>{{'label.heading.floatinginterestrate.floatingInterestRate' | translate}}</th>
                                 </tr>
                                 <tr ng-repeat="floatingInterestRate in formData.floatingInterestRates">
                                     <td class="width20"> {{ floatingInterestRate.fromDate | DateFormat}}</td>

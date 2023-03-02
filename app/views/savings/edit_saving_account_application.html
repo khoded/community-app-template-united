@@ -72,6 +72,10 @@
                         <label><b>{{data.currency.decimalPlaces}}</b></label>
                     </td>
                 </tr>
+            </table>
+        </div>
+        <div ng-show="!formData.useFloatingInterestRate">
+            <table class="width100">
                 <tr>
                     <td class="width14">
                         <label class="control-label">{{ 'label.input.nominalannualinterestrate' | translate
@@ -101,18 +105,21 @@
                     </label>
                 </td>
             </tr>
+        </div>
+        <br>
+        <div ng-show="formData.useFloatingInterestRate">
             <tr>
                 <td>
-                    <table>
+                    <table class="witdh100">
                         <tr class="graybg">
                             <th>{{'label.heading.floatinginterestrate.valid.fromDate' | translate}}</th>
                             <th>{{'label.heading.floatinginterestrate.valid.endDate' | translate}}</th>
-                            <th>{{'label.heading.floatinginterestrate.floatingInterestRate' | translate}</th>
+                            <th>{{'label.heading.floatinginterestrate.floatingInterestRate' | translate}}</th>
                         </tr>
                         <tr ng-repeat="floatingInterestRate in formData.floatingInterestRates">
-                            <td class="width20"> {{ floatingInterestRate.fromDate | DateFormat}}</td>
-                            <td class="width20"> {{ floatingInterestRate.endDate | DateFormat}}</td>
-                            <td class="width15"> {{ floatingInterestRate.floatingInterestRate }}</td>
+                            <td class="width40"> {{ floatingInterestRate.fromDate | DateFormat}}</td>
+                            <td class="width40"> {{ floatingInterestRate.endDate | DateFormat}}</td>
+                            <td class="width20" align="center"> {{ floatingInterestRate.floatingInterestRate }}</td>
                         </tr>
                     </table>
                 </td>
