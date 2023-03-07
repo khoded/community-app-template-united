@@ -10,6 +10,7 @@
             scope.opensavingsproduct = 'false';
             scope.showNonPersonOptions = false;
             scope.clientPersonId = 1;
+            scope.businessRegisteredOptions = [{id: true, name: 'Yes'}, {id: false, name: 'No'}];
 
             resourceFactory.validationLimitTemplateResource.get(function (data) {
                             scope.template = data;
@@ -24,6 +25,8 @@
                 scope.clientNonPersonConstitutionOptions = data.clientNonPersonConstitutionOptions;
                 scope.clientNonPersonMainBusinessLineOptions = data.clientNonPersonMainBusinessLineOptions;
                 scope.clientLegalFormOptions = data.clientLegalFormOptions;
+                scope.maritalStatusIdOptions=data.familyMemberOptions.maritalStatusIdOptions;
+                scope.titleOptions = data.titleOptions;
                 scope.officeId = data.officeId;
                 scope.formData = {
                     firstname: data.firstname,
@@ -46,7 +49,30 @@
                     }
                 };
 
-console.log(data.dailyWithdrawLimit,data.singleWithdrawLimit)
+                if(data.clientAdditionalInfoData){
+                    ci=data.clientAdditionalInfoData;
+                    
+                    if(ci.title){
+                        scope.formData.titleId = ci.title.id;
+                    }
+
+                    if(ci.initials){
+                        scope.formData.initials = ci.initials;
+                    }
+                     
+                    if(ci.mnemonics){
+                        scope.formData.mnemonics = ci.mnemonics;
+                    }
+
+                    if(ci.altMobileNo){
+                        scope.formData.altMobileNo = ci.altMobileNo;
+                    }
+                
+                    if(ci.maritalStatus){
+                        scope.formData.maritalStatusId = ci.maritalStatus.id;
+                    }
+                }
+
                 if(data.gender){
                     scope.formData.genderId = data.gender.id;
                 }
