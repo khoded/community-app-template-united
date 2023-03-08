@@ -279,6 +279,11 @@
                 }
             });
 
+            scope.bnplValueChanged = () => {
+                scope.formData.requiresEquityContribution = scope.product.requiresEquityContribution;
+                scope.formData.equityContributionLoanPercentage = scope.product.equityContributionLoanPercentage;
+            };
+
             //Rate
             scope.rateSelected = function(currentRate){
 

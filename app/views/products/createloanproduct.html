@@ -851,7 +851,7 @@
                     <!-- bnpl product -->
             <div class="form-group">
                 <div class="col-sm-3">
-                    <input type="checkbox" name="isBnplProductCheckBox" ng-model="formData.isBnplLoanProduct"/>
+                    <input type="checkbox" name="isBnplProductCheckBox" ng-model="formData.isBnplLoanProduct" ng-change="bnplValueChanged()"/>
                     {{'label.input.isBnplLoanProduct' | translate}}
                     <i class="fa fa-question-circle "
                        uib-tooltip="{{'label.input.isBnplLoanProduct' | translate}}"

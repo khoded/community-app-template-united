@@ -275,6 +275,11 @@
                 return false;
             }
 
+            scope.bnplValueChanged = () => {
+                scope.formData.requiresEquityContribution = false;
+                scope.formData.equityContributionLoanPercentage = null;
+            };
+
             scope.isAccrualAccountingEnabled = function () {
                 if (scope.formData.accountingRule == 3 || scope.formData.accountingRule == 4) {
                     return true;
