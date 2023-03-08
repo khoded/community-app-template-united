@@ -103,6 +103,9 @@
                     isEqualAmortization : scope.product.isEqualAmortization,
                     maxNumberOfLoanExtensionsAllowed : scope.product.maxNumberOfLoanExtensionsAllowed,
                     isAccountLevelArrearsToleranceEnable : scope.product.isAccountLevelArrearsToleranceEnable,
+                    isBnplLoanProduct : scope.product.isBnplLoanProduct,
+                    requiresEquityContribution : scope.product.requiresEquityContribution,
+                    equityContributionLoanPercentage : scope.product.equityContributionLoanPercentage
                 };
 
                 if (scope.product.isInterestRecalculationEnabled) {
