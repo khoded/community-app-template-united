@@ -4602,5 +4602,12 @@
   "label.menu.title": "Select Title Option",
   "label.menu.maritalstatus": "Select Marital Status",
   "label.input.ageinbusiness": "Age in Business",
+  "label.input.pep": "Is PEP",
+  "label.menu.pep" : "Select PEP| Yes or No",
+  "label.heading.guarantee.gender": "Gender",
+  "label.heading.guarantee.email": "Email",
+  "label.heading.guarantee.bvn": "BVN",
+  "label.heading.guarantee.pep": "Politically Exposed Person",
+  "label.heading.middlename": "Middle Name",
   "----End---": "--End of file--- "
 }
