@@ -30,6 +30,9 @@
             scope.collateralAddedDataArray = [];
             scope.collateralsData = {};
             scope.addedCollateral = {};
+            scope.toVendorClients = []
+            scope.toVendorAccounts = [];
+            scope.vendorSavingsAccountOptions = [];
 
             scope.date.first = new Date();
 
@@ -55,6 +58,7 @@
             }
 
             scope.inparams.staffInSelectedOfficeOnly = true;
+            scope.inparams.vendorClientId = '';
             scope.currencyType;
 
             resourceFactory.loanResource.get(scope.inparams, function (data) {
@@ -208,6 +212,7 @@
                 scope.formData.isBnplLoan = scope.loanaccountinfo.isBnplLoan;
                 scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
                 scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+                scope.toVendorClients = scope.loanaccountinfo.vendorClientOptions;
             };
 
           //Rate
@@ -252,6 +257,18 @@
             scope.rateOptions.push(scope.formData.rates[index]);
             scope.formData.rates.splice(index,1);
             scope.calculateRates();
+          };
+
+          scope.bnplValueChanged = () => {
+              scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+              scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
+          };
+
+          scope.changeVendorClient = function (client) {
+              scope.inparams.vendorClientId = client.id;
+              resourceFactory.loanResource.get(scope.inparams, function (data) {
+                  scope.vendorSavingsAccountOptions = data.vendorSavingsAccountOptions;
+              });
           };
 
           scope.$watch('formData',function(newVal){
