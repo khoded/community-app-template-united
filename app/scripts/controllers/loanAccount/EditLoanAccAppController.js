@@ -175,6 +175,10 @@
                 scope.formData.isTopup = scope.loanaccountinfo.isTopup;
                 scope.formData.loanIdToClose = scope.loanaccountinfo.closureLoanId;
 
+                scope.formData.isBnplLoan = scope.loanaccountinfo.isBnplLoan;
+                scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
+                scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+
                 if (scope.loanaccountinfo.meeting) {
                     scope.formData.syncRepaymentsWithMeeting = true;
                 }
@@ -235,6 +239,11 @@
                     }
                 });
                 return exist;
+            };
+
+            scope.bnplValueChanged = () => {
+                scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+                scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
             };
 
             scope.calculateRates = function(){
