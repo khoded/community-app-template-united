@@ -105,6 +105,31 @@
                             <td></td>
                         </tr>
                     </table>
+                    <!-- bnpl -->
+                    <table class=" width100" ng-show="formData.productId">
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="isBnplProductCheckBox" ng-model="formData.isBnplLoan" ng-change="bnplValueChanged()"/>
+                                {{'label.input.isBnplLoanProduct' | translate}}
+                                <i class="fa fa-question-circle "
+                                   uib-tooltip="{{'label.input.isBnplLoanProduct' | translate}}"
+                                   tooltip-append-to-body="true"></i>
+                            </td>
+                            <td ng-show="formData.isBnplLoan">
+                                <input type="checkbox" name="requiresEquityContributionBox" ng-model="formData.requiresEquityContribution"/>
+                                {{'label.input.requiresEquityContribution' | translate}}
+                                <i class="fa fa-question-circle "
+                                   uib-tooltip="{{'label.input.requiresEquityContribution' | translate}}"
+                                   tooltip-append-to-body="true"></i>
+                            </td>
+                            <td ng-show="formData.isBnplLoan">
+                                <input id="equityContributionLoanPercentage" name="equityContributionLoanPercentage" class="form-control" type="text"
+                                       ng-model="formData.equityContributionLoanPercentage" number-format/>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- bnpl ends -->
+
                     <div ng-hide="loanaccountinfo.calendarOptions == undefined">
                         <hr ng-show="loanaccountinfo" />
                     </div>

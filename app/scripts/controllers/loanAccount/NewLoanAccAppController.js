@@ -205,6 +205,9 @@
                 if(scope.loanaccountinfo.jlgInterestChartRateSummaryData != null && scope.loanaccountinfo.jlgInterestChartRateSummaryData !== undefined){
                 scope.interestRateChart = scope.loanaccountinfo.jlgInterestChartRateSummaryData;
                 }
+                scope.formData.isBnplLoan = scope.loanaccountinfo.isBnplLoan;
+                scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
+                scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
             };
 
           //Rate
