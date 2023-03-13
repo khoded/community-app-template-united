@@ -2065,6 +2065,7 @@
   "label.input.interestpostingperiod": "Interest posting period",
   "label.input.interestcalculatedusing": "Interest calculated using",
   "label.input.daysinyears": "Days in year",
+  "label.savingsproduct.withdraw.frequency": "Withdraw Frequency",
   "label.input.daysinmonth": "Days in month",
   "label.input.minimumopeningbalance": "Minimum opening balance",
   "label.input.lockinPeriodFrequency": "Lock-in period",
