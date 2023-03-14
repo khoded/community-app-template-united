@@ -72,7 +72,7 @@ jobs:
       env:
         IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
-       cd helm-uc-dev
+       cd helm
        kubectl config set-context --current --namespace=application
        helm dependency update
        helm upgrade -i frontend --set fineract-ui.tag=$IMAGE_TAG .
