@@ -3119,6 +3119,7 @@
   "label.heading.interestcompoundingperiod": "Interest Compounding Period",
   "label.heading.interestpostingperiod": "Interest Posting Period",
   "label.heading.interestcalculatedusing": "Interest Calculated Using",
+  "label.heading.withdrawalFrequency": "Withdraw Frequency",
   "label.heading.daysinyears": "Days in Years",
   "label.heading.minimumopeningbalance": "Minimum Opening Balance",
   "label.heading.lockinPeriodFrequency": "Lock-in Period",

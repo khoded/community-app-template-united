@@ -246,10 +246,10 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <select id="withdrawalFrequencies" class="form-control"
+                            <select id="withdrawalFrequencyOptions" class="form-control"
                                     ng-model="formData.withdrawalFrequencyEnum"
-                                    ng-options="type.id as type.value for type in product.withdrawalFrequencies"
-                                    ng-change="savingproduct.withdrawalFrequencyEnum.value = formValue(product.withdrawalFrequencies,formData.withdrawalFrequencyEnum)"
+                                    ng-options="type.id as type.value for type in product.withdrawalFrequencyOptions"
+                                    ng-change="savingproduct.withdrawalFrequencyEnum.value = formValue(product.withdrawalFrequencyOptions,formData.withdrawalFrequencyEnum)"
                                     value="{{type.id}}"></select>
                         </div>
                     </div>
