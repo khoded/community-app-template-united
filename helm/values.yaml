@@ -13,7 +13,7 @@ fineract-ui:
        mountFileName: "default.conf.template"
 
   env:
-    FINERACT_DOMAIN: "ucdemo.fiter.io"
+    FINERACT_DOMAIN: "a029bcfc781d0435aa5266127589e5e3-993682035.us-east-2.elb.amazonaws.com"
     FINERACT_BASE_URL: "/fineract-provider/api/v1"
     FINERACT_PROXY_URL: "https://backend-fineract-rest:8443"
     DOLLAR: "$"
@@ -49,7 +49,7 @@ fineract-ui:
 
   ingress:
     enabled: true
-    host: "ucdemo.fiter.io"  
+    host: "a029bcfc781d0435aa5266127589e5e3-993682035.us-east-2.elb.amazonaws.com"  
     path: "/"
     annotations:
       # nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -58,7 +58,7 @@ fineract-ui:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     tls:
     - hosts:
-      - "ucdemo.fiter.io"  
+      - "a029bcfc781d0435aa5266127589e5e3-993682035.us-east-2.elb.amazonaws.com"  
       secretName: "mifos-tls-v3" 
 
   resources:
