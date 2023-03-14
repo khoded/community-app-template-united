@@ -86,6 +86,8 @@
                 scope.formData.isFloatingInterestRateCalculationAllowed = false ;
                 scope.formData.isLinkedToFloatingInterestRates = false ;
                 scope.formData.allowVariableInstallments = false ;
+                scope.formData.isBnplLoanProduct = false;
+                scope.formData.requiresEquityContribution = false;
                 scope.product.interestRecalculationNthDayTypeOptions.push({"code" : "onDay", "id" : -2, "value" : "on day"});
                 scope.loanproduct = angular.copy(scope.formData);
                 scope.isClicked = false;
@@ -272,6 +274,11 @@
                 }
                 return false;
             }
+
+            scope.bnplValueChanged = () => {
+                scope.formData.requiresEquityContribution = false;
+                scope.formData.equityContributionLoanPercentage = null;
+            };
 
             scope.isAccrualAccountingEnabled = function () {
                 if (scope.formData.accountingRule == 3 || scope.formData.accountingRule == 4) {

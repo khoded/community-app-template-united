@@ -648,6 +648,42 @@
 					   type="text" ng-model="formData.maxNumberOfLoanExtensionsAllowed" late-validate number=true >
 			</div>
 		</div>
+
+		<!-- bnpl product -->
+		<div class="form-group">
+			<div class="col-sm-3">
+				<input type="checkbox" name="isBnplProductCheckBox" ng-model="formData.isBnplLoanProduct" ng-change="bnplValueChanged()"/>
+				{{'label.input.isBnplLoanProduct' | translate}}
+				<i class="fa fa-question-circle "
+				   uib-tooltip="{{'label.input.isBnplLoanProduct' | translate}}"
+				   tooltip-append-to-body="true"></i>
+			</div>
+		</div>
+
+		<div class="form-group" ng-show="formData.isBnplLoanProduct">
+
+			<div class="col-sm-3">
+				<input type="checkbox" name="requiresEquityContributionBox" ng-model="formData.requiresEquityContribution"/>
+				{{'label.input.requiresEquityContribution' | translate}}
+				<i class="fa fa-question-circle "
+				   uib-tooltip="{{'label.input.requiresEquityContribution' | translate}}"
+				   tooltip-append-to-body="true"></i>
+			</div>
+
+			<label class="control-label col-sm-2">{{ 'label.input.equityContributionLoanPercentage' | translate }}
+			</label>
+
+			<div class="col-sm-2">
+				<input id="equityContributionLoanPercentage" name="equityContributionLoanPercentage" class="form-control" type="text"
+					   ng-model="formData.equityContributionLoanPercentage"
+					   placeholder="{{'label.input.equityContributionLoanPercentage' | translate}}" number-format/>
+			</div>
+		</div>
+
+		<!-- bnpl product - ends --->
+
+
+
 		<div class="form-group">
 			<div class="col-sm-3">
 				<input type="checkbox" name="isAccountLevelArrearsToleranceEnable" ng-model="formData.isAccountLevelArrearsToleranceEnable"/>
