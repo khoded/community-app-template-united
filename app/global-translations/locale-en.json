@@ -1571,6 +1571,8 @@
   "label.view.paymenttypes": "Payment types",
   "label.input.actions": "Actions",
   "label.input.linksavings": "Link savings",
+  "label.input.vendorForBnpl": "Vendor for BNPL",
+  "label.input.vendorSavingsaccount": "Vendor Savings Account",
   "label.input.groupSavingsAccountLinkage": "Link Group Savings",
   "label.input.installment": "Select Installment",
   "label.input.loan.disbursaldate": "Disbursement date",
