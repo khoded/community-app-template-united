@@ -3217,6 +3217,8 @@
   "label.input.startdate": "Start date",
   "label.input.enddate": "End date",
   "label.input.closedate": "Close date",
+  "label.input.productType": "Product Type",
+  "label.input.productCategory": "Product Category",
   "label.input.includeinborrowerloancounter": "Include in customer loan counter",
   "label.input.decimalplace": "Decimal places",
   "label.input.principal": "Principal",

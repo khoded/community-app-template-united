@@ -27,6 +27,8 @@
                 scope.product = data;
                 scope.chart = scope.product.activeChart;
                 scope.ratesEnabled = data.ratesEnabled;
+                scope.productCategories=data.productCategories;
+                scope.productTypes=data.productTypes;
                 scope.assetAccountOptions = scope.product.accountingMappingOptions.assetAccountOptions || [];
                 scope.incomeAccountOptions = scope.product.accountingMappingOptions.incomeAccountOptions || [];
                 scope.expenseAccountOptions = scope.product.accountingMappingOptions.expenseAccountOptions || [];
@@ -51,6 +53,8 @@
                 scope.product.interestRecalculationNthDayTypeOptions.push({"code" : "onDay", "id" : -2, "value" : "on day"});
                 scope.formData = {
                     name: scope.product.name,
+                    productCategoryId:scope.product.productCategoryId,
+                    productTypeId:scope.product.productTypeId,
                     shortName: scope.product.shortName,
                     description: scope.product.description,
                     fundId: scope.product.fundId,
