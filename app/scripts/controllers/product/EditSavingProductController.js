@@ -47,6 +47,8 @@
                     isInterestPostingConfigUpdate: data.isInterestPostingConfigUpdate,
                     numOfCreditTransaction: data.numOfCreditTransaction,
                     numOfDebitTransaction: data.numOfDebitTransaction,
+                    withdrawalFrequency: data.withdrawalFrequency,
+                    withdrawalFrequencyEnum: data.withdrawalFrequencyEnum.id,
                 }
                 scope.paymentOptions = [];
                 //
