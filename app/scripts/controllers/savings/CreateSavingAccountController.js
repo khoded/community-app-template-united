@@ -164,9 +164,6 @@
                     scope.savingdetails.interestPostingPeriodTypeValue = scope.formValue(data.interestPostingPeriodTypeOptions,scope.formData.interestPostingPeriodType);
                     scope.savingdetails.interestCalculationTypeValue = scope.formValue(data.interestCalculationTypeOptions,scope.formData.interestCalculationType);
                     scope.savingdetails.interestCalculationDaysInYearTypeValue = scope.formValue(data.interestCalculationDaysInYearTypeOptions,scope.formData.interestCalculationDaysInYearType);
-                    console.log("data.withdrawalFrequencyEnum >> "+data.withdrawalFrequencyEnum.id);
-                    console.log("data.withdrawalFrequencyEnum Valve>> "+data.withdrawalFrequencyEnum.valve);
-                    console.log("data.withdrawalFrequency >> "+data.withdrawalFrequency);
                 });
             };
 
