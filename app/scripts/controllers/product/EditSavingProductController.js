@@ -48,7 +48,7 @@
                     numOfCreditTransaction: data.numOfCreditTransaction,
                     numOfDebitTransaction: data.numOfDebitTransaction,
                     withdrawalFrequency: data.withdrawalFrequency,
-                    withdrawalFrequencyEnum: data.withdrawalFrequencyEnum.id,
+                    withdrawalFrequencyEnum: data.withdrawalFrequencyEnum == null ? null : data.withdrawalFrequencyEnum.id,
                 }
                 scope.paymentOptions = [];
                 //
