@@ -2061,6 +2061,7 @@
   "label.input.marketpriceperiods": "Market price periods",
   "label.input.requreddate": "Requested Date",
   "label.input.currencyinmultiplesof": "Currency in multiples of",
+  "label.input.withdrawalFrequency": "Withdraw Frequency",
   "label.input.interestcompoundingperiod": "Interest compounding period",
   "label.input.interestpostingperiod": "Interest posting period",
   "label.input.interestcalculatedusing": "Interest calculated using",

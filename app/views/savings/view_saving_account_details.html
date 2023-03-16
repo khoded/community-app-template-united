@@ -398,6 +398,14 @@
                                     </th>
                                     <td><span class="padded-td">{{savingaccountdetails.taxGroup.name}}</span></td>
                                 </tr>
+                                <tr data-ng-show="savingaccountdetails.withdrawalFrequencyEnum">
+                                    <th class="table-bold-acc fontnormal">
+                                        {{'label.heading.withdrawalFrequency' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.withdrawalFrequency | number}} {{savingaccountdetails.withdrawalFrequencyEnum.value}} </span>
+                                    </td>
+                                </tr>
                             </table>
 
                             <table class="table table-striped table-bordered" ng-show="savingaccountdetails.useFloatingInterestRate">
