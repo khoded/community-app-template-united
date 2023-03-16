@@ -52,6 +52,8 @@
                 scope.penaltyOptions = scope.product.penaltyOptions || [];
                 scope.chargeOptions = scope.product.chargeOptions || [];
                 scope.overduecharges = [];
+                scope.productCategories=data.productCategories;
+                scope.productTypes=data.productTypes;
                 for (var i in scope.penaltyOptions) {
                     if (scope.penaltyOptions[i].chargeTimeType.code == 'chargeTimeType.overdueInstallment') {
                         scope.overduecharges.push(scope.penaltyOptions[i]);
