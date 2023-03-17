@@ -126,9 +126,9 @@
                     maxOccurrence: data.maxOccurrence
                 };
                 
-                if(typeof scope.paymentTypeOptions !== 'undefined' || scope.paymentTypeOptions != null){
+                /*if(typeof scope.paymentTypeOptions != 'undefined' || scope.paymentTypeOptions != null){
                     scope.formData.paymentTypeId = data.paymentTypeOptions.id;
-                }
+                }*/
                 
                 if(data.incomeOrLiabilityAccount){
                     scope.formData.incomeAccountId = data.incomeOrLiabilityAccount.id;   
@@ -143,7 +143,7 @@
                 }
 
                 if(data.feeFrequency){
-                    scope.addfeefrequency = 'true';
+                    scope.addfeefrequency = true;
                     scope.formData.feeFrequency = data.feeFrequency.id;
                     scope.formData.feeInterval = data.feeInterval;
                 }
