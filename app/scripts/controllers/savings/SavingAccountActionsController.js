@@ -427,6 +427,13 @@
                        scope.showDateField = true;
                        scope.taskPermissionName = 'UNLOCK_SAVINGSACCOUNT';
                    break;
+                case "nextWithdrawalDate":
+                       scope.title = 'label.heading.nextWithdrawalDate';
+                       scope.labelName = 'label.input.nextWithdrawalDate';
+                       scope.modelName = 'nextWithdrawalDate';
+                       scope.showDateField = true;
+                       scope.taskPermissionName = 'NEXTWITHDRAWALDATE_SAVINGSACCOUNT';
+                   break;
             }
 
             scope.cancel = function () {
@@ -439,7 +446,7 @@
                     this.formData.locale = scope.optlang.code;
                     this.formData.dateFormat = scope.df;
                 }
-                if (scope.action == "deposit" || scope.action == "withdrawal" || scope.action == "holdAmount" || scope.action == "modifytransaction" || scope.action=="postInterestAsOn" || scope.action=="postAccrualInterestAsOn" || scope.action == "unlock") {
+                if (scope.action == "deposit" || scope.action == "withdrawal" || scope.action == "holdAmount" || scope.action == "modifytransaction" || scope.action=="postInterestAsOn" || scope.action=="postAccrualInterestAsOn" || scope.action == "unlock" || scope.action == "nextWithdrawalDate") {
                     if (scope.action == "withdrawal") {
                         if (this.formData.transactionDate) {
                             this.formData.transactionDate = dateFilter(this.formData.transactionDate, scope.df);
@@ -477,6 +484,11 @@
                     if(scope.action == "unlock"){
                         if (this.formData.unlockdate) {
                            this.formData.unlockdate = dateFilter(this.formData.unlockdate, scope.df);
+                        }
+                    }
+                    if(scope.action == "nextWithdrawalDate"){
+                        if (this.formData.nextWithdrawalDate) {
+                           this.formData.nextWithdrawalDate = dateFilter(this.formData.nextWithdrawalDate, scope.df);
                         }
                     }
                     params.savingsId = scope.accountId;
