@@ -33,8 +33,8 @@
                     name: data.name,
                     shortName: data.shortName,
                     description: data.description,
-                    productCategoryId:scope.product.productCategoryId,
-                    productTypeId:scope.product.productTypeId,
+                    productCategoryId: scope.product.productCategoryId,
+                    productTypeId: scope.product.productTypeId,
                     currencyCode: data.currency.code,
                     digitsAfterDecimal: data.currency.decimalPlaces,
                     inMultiplesOf: data.currency.inMultiplesOf,
@@ -69,8 +69,8 @@
                     allowManuallyEnterInterestRate: data.allowManuallyEnterInterestRate
                 }
 
-                scope.productCategories=data.productCategories;
-                scope.productTypes=data.productTypes;
+                scope.productCategories = data.productCategories;
+                scope.productTypes = data.productTypes;
                 if(data.withHoldTax){
                     scope.formData.taxGroupId = data.taxGroup.id;
                 }
