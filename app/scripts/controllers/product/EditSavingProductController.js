@@ -21,6 +21,8 @@
                     shortName: data.shortName,
                     description: data.description,
                     currencyCode: data.currency.code,
+                    productCategoryId:scope.product.productCategoryId,
+                    productTypeId:scope.product.productTypeId,
                     digitsAfterDecimal: data.currency.decimalPlaces,
                     inMultiplesOf: data.currency.inMultiplesOf,
                     nominalAnnualInterestRate: data.nominalAnnualInterestRate,
@@ -49,6 +51,9 @@
                     numOfDebitTransaction: data.numOfDebitTransaction,
                 }
                 scope.paymentOptions = [];
+
+                scope.productCategories=data.productCategories;
+                scope.productTypes=data.productTypes;
                 //
                 scope.accountMappingForPayment = scope.product.accountMappingForPayment.toLowerCase();
                 var accountMappingForPaymentVar = scope.accountMappingForPayment;

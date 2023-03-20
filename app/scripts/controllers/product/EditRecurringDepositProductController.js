@@ -33,6 +33,8 @@
                     shortName: data.shortName,
                     description: data.description,
                     currencyCode: data.currency.code,
+                    productCategoryId:scope.product.productCategoryId,
+                    productTypeId:scope.product.productTypeId,
                     digitsAfterDecimal: data.currency.decimalPlaces,
                     inMultiplesOf: data.currency.inMultiplesOf,
                     minDepositAmount: data.minDepositAmount,
@@ -62,6 +64,9 @@
                     minBalanceForInterestCalculation:data.minBalanceForInterestCalculation,
                     withHoldTax: data.withHoldTax == true ? 'true' : 'false'
                 }
+
+                scope.productCategories=data.productCategories;
+                scope.productTypes=data.productTypes;
 
                 if(data.withHoldTax){
                     scope.formData.taxGroupId = data.taxGroup.id;
