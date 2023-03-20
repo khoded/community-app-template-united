@@ -2212,6 +2212,8 @@
   "label.account.deposit.frequency": "Deposit Frequency",
   "label.account.closed.on.date": "Closed on Date",
   "label.heading.interest.calculation.date": "Interest Recalculation Date",
+  "label.heading.previousFlexWithdrawalDate": "Previous Withdrawal Date",
+  "label.heading.nextFlexWithdrawalDate": "Next Withdrawal Date",
   "#tool tip for saving products": "..",
   "label.tooltip.productname": "A unique identifier for the saving product",
   "label.tooltip.shortname": "A unique identifier for the saving product",
