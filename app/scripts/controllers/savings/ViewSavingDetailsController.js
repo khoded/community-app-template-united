@@ -309,7 +309,7 @@
                             },
                              {
                                  name: "button.nextWithdrawalDate",
-                                 taskPermissionName : ""
+                                 taskPermissionName : "NEXTWITHDRAWALDATE_SAVINGSACCOUNT"
                              }
                         ]
 

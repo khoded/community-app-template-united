@@ -432,6 +432,7 @@
                        scope.labelName = 'label.input.nextWithdrawalDate';
                        scope.modelName = 'nextWithdrawalDate';
                        scope.showDateField = true;
+                        scope.restrictDate = null;
                        scope.taskPermissionName = 'NEXTWITHDRAWALDATE_SAVINGSACCOUNT';
                    break;
             }
@@ -562,7 +563,6 @@
                 console.log(permission);
                 if(scope.action == "freeze"){
                      if (permission == "BLOCKDEBIT_SAVINGSACCOUNT") {
-                                console.log(permission, "1");
                                   this.formData = {
                                     narrationId: this.formData.narrationId,
                                     reasonForBlock : this.formData.reasonForBlock,
@@ -571,7 +571,6 @@
                                   scope.action = "blockDebit";
                        }
                      if (permission == "UNBLOCKDEBIT_SAVINGSACCOUNT"){
-                      console.log(permission, "2");
                                       this.formData = {
                                         narrationId: this.formData.narrationId,
                                         reasonForBlock : this.formData.reasonForBlock,
@@ -580,7 +579,6 @@
                                       scope.action = "unblockDebit";
                      }
                      if (permission == "BLOCKCREDIT_SAVINGSACCOUNT") {
-                      console.log(permission, "3");
                                        this.formData = {
                                           narrationId: this.formData.narrationId,
                                           reasonForBlock : this.formData.reasonForBlock,
@@ -589,7 +587,6 @@
                                         scope.action = "blockCredit";
                       }
                      if (permission == "UNBLOCKCREDIT_SAVINGSACCOUNT"){
-                      console.log(permission, "4");
                                          this.formData = {
                                             narrationId: this.formData.narrationId,
                                             reasonForBlock : this.formData.reasonForBlock,
