@@ -1032,7 +1032,7 @@
 					<td>{{'label.heading.interestratedetails.period.from.to' | translate}}</td>
 					<td>{{'label.heading.interestratedetails.interest' | translate}}</td>
 					<td>
-						<div ng-show="chart.chartSlabs.length < 1">
+						<div ng-hide="chart.chartSlabs.length < 1">
 							<a class="btn btn-primary" ng-click="addNewRow()"><i class="fa fa-plus"></i>&nbsp;&nbsp;{{'label.add.row'
 								| translate}}</a>
 						</div>
