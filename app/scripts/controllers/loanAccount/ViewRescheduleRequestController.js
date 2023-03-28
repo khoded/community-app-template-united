@@ -34,6 +34,11 @@
                         scope.extendRepaymentPeriod = true;
                     }
 
+                    if(scope.loanTermVariationsData[i].termType.value == "principalAmount") {
+                        scope.loanRescheduleDetails.extraTerms = scope.loanTermVariationsData[i].decimalValue;
+                        scope.principalAmountChange = true;
+                     }
+
                     if(scope.loanTermVariationsData[i].termType.value == "interestRateForInstallment") {
                         scope.loanRescheduleDetails.interestRate = scope.loanTermVariationsData[i].decimalValue;
                         scope.adjustinterestrates = true;
