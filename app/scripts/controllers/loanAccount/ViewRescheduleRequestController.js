@@ -13,6 +13,7 @@
                 scope.submittedOnDate = dateFilter(scope.submittedOnDate,"dd MMMM yyyy");
                 scope.loanRescheduleDetails.emichange = [];
                 for(var i in scope.loanTermVariationsData) {
+
                     if(scope.loanTermVariationsData[i].termType.value == "dueDate") {
                         scope.loanRescheduleDetails.adjustedDueDate = new Date(scope.loanTermVariationsData[i].dateValue);
                         scope.loanRescheduleDetails.adjustedDueDate = dateFilter(scope.loanTermVariationsData[i].dateValue,"dd MMMM yyyy");
@@ -62,7 +63,9 @@
             scope.reject = function(){
                 location.path('/loans/' + scope.loanId + '/rejectreschedulerequest/'+scope.requestId);
             };
+
             scope.approve = function(){
+
                 location.path('/loans/' + scope.loanId + '/approvereschedulerequest/'+scope.requestId);
             };
 
@@ -71,7 +74,7 @@
             };
 
             scope.submit = function () {
-                location.path('/loans/' + scope.loanId + '/previewloanrepaymentschedule/'+scope.requestId);
+                location.path('/loans/' + scope.loanId  + '/previewloanrepaymentschedule/'+scope.requestId);
             };
 
         }

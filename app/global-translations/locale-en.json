@@ -4458,7 +4458,8 @@
   "label.input.new.emi" : "New EMI",
   "label.input.emi.change.upto" : "EMI change End Date",
   "label.input.changeEMI" : "Change EMI",
-  "label.input.changePrincipalAmount" : "Change Principal Amount",
+  "label.input.changePrincipalAmount" : "Change Fixed Principal Amount",
+  "label.input.fixedPrincipalAmount" : "Fixed Principal Amount",
   "label.input.installment.date" : "Installment Date",
 
   "error.msg.user.self.service.user.already.exist" : "Self Service User ID is already created. Go to Admin -> Users to edit or delete the self-service user.",
