@@ -21,6 +21,8 @@
                     shortName: data.shortName,
                     description: data.description,
                     currencyCode: data.currency.code,
+                    productCategoryId: scope.product.productCategoryId,
+                    productTypeId: scope.product.productTypeId,
                     digitsAfterDecimal: data.currency.decimalPlaces,
                     inMultiplesOf: data.currency.inMultiplesOf,
                     nominalAnnualInterestRate: data.nominalAnnualInterestRate,
@@ -32,10 +34,11 @@
                     interestCalculationType: data.interestCalculationType.id,
                     interestCalculationDaysInYearType: data.interestCalculationDaysInYearType.id,
                     accountingRule: data.accountingRule.id,
-                    allowOverdraft: data.allowOverdraft == true ? 'true' : 'false',
+                    allowOverdraft: data.allowOverdraft,
                     overdraftLimit: data.overdraftLimit,
                     nominalAnnualInterestRateOverdraft: data.nominalAnnualInterestRateOverdraft,
                     minOverdraftForInterestCalculation: data.minOverdraftForInterestCalculation,
+                    postOverdraftInterestOnDeposit: data.postOverdraftInterestOnDeposit,
                     minBalanceForInterestCalculation: data.minBalanceForInterestCalculation,
                     enforceMinRequiredBalance: data.enforceMinRequiredBalance,
                     minRequiredBalance:data.minRequiredBalance,
@@ -47,8 +50,13 @@
                     isInterestPostingConfigUpdate: data.isInterestPostingConfigUpdate,
                     numOfCreditTransaction: data.numOfCreditTransaction,
                     numOfDebitTransaction: data.numOfDebitTransaction,
+                    withdrawalFrequency: data.withdrawalFrequency,
+                    withdrawalFrequencyEnum: data.withdrawalFrequencyEnum == null ? null : data.withdrawalFrequencyEnum.id,
                 }
                 scope.paymentOptions = [];
+
+                scope.productCategories = data.productCategories;
+                scope.productTypes = data.productTypes;
                 //
                 scope.accountMappingForPayment = scope.product.accountMappingForPayment.toLowerCase();
                 var accountMappingForPaymentVar = scope.accountMappingForPayment;

@@ -29,6 +29,15 @@
             <td>{{'label.heading.shortname' | translate}} :</td>
             <td colspan="3">{{savingproduct.shortName}}</td>
         </tr>
+
+        <tr ng-show="savingproduct.productCategory">
+            <td>{{'label.input.productCategory' | translate}}:</td>
+            <td colspan="3">{{savingproduct.productCategory}}</td>
+        </tr>
+        <tr ng-show="savingproduct.productType">
+            <td>{{'label.input.productType' | translate}}:</td>
+            <td colspan="3">{{savingproduct.productType}}</td>
+        <tr>
         <tr>
             <td colspan="4"><br/></td>
         </tr>
@@ -66,6 +75,10 @@
         <tr>
             <td>{{'label.heading.daysinyears' | translate}}</td>
             <td colspan="3">{{savingproduct.interestCalculationDaysInYearType.value}}</td>
+        </tr>
+        <tr>
+            <td>{{'label.heading.withdrawalFrequency' | translate}}</td>
+            <td colspan="3">{{savingproduct.withdrawalFrequency}} {{savingproduct.withdrawalFrequencyEnum.value}} </td>
         </tr>
         <tr>
             <td colspan="4"><br/></td>
@@ -127,6 +140,10 @@
         <tr ng-show="savingproduct.allowOverdraft">
             <td>{{'label.heading.minoverdraftforinterestcalculation' | translate}}</td>
             <td colspan="3">{{savingproduct.minOverdraftForInterestCalculation}}</td>
+        </tr>
+        <tr ng-show="savingproduct.allowOverdraft">
+            <td>{{'label.input.postoverdraftinterestondeposit' | translate}}</td>
+            <td colspan="3">{{savingproduct.postOverdraftInterestOnDeposit}}</td>
         </tr>
         <tr>
             <td>{{'label.heading.lienAllowed' | translate}}</td>

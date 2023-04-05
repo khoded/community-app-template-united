@@ -48,6 +48,14 @@
     <td>{{'label.heading.closedate' | translate}}:</td>
     <td colspan="3">{{loanproduct.closeDate | DateFormat}}</td>
 </tr>
+    <tr ng-show="loanproduct.productCategory">
+        <td>{{'label.input.productCategory' | translate}}:</td>
+        <td colspan="3">{{loanproduct.productCategory}}</td>
+    </tr>
+    <tr ng-show="loanproduct.productType">
+        <td>{{'label.input.productType' | translate}}:</td>
+        <td colspan="3">{{loanproduct.productType}}</td>
+    </tr>
 <tr>
     <td>{{'label.heading.includeborrowercycle' | translate}} :</td>
     <td colspan="3">{{loanproduct.includeInBorrowerCycle}}</td>

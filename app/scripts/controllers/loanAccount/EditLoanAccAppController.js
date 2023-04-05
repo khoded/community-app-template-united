@@ -12,6 +12,10 @@
             scope.rateFlag = false;
             scope.interestRateChart = {}
 
+            scope.toVendorClients = []
+            scope.toVendorAccounts = [];
+            scope.vendorSavingsAccountOptions = [];
+
             resourceFactory.loanResource.get({loanId: routeParams.id, template: true, associations: 'charges,collateral,meeting,multiDisburseDetails',staffInSelectedOfficeOnly:true}, function (data) {
                 scope.loanaccountinfo = data;
 
@@ -175,12 +179,30 @@
                 scope.formData.isTopup = scope.loanaccountinfo.isTopup;
                 scope.formData.loanIdToClose = scope.loanaccountinfo.closureLoanId;
 
+                scope.formData.isBnplLoan = scope.loanaccountinfo.isBnplLoan;
+                scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
+                scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+                scope.toVendorClients = scope.loanaccountinfo.vendorClientOptions;
+                scope.vendorSavingsAccountOptions = scope.loanaccountinfo.vendorSavingsAccountOptions;
+                if(scope.loanaccountinfo.vendorClientOptions != null && scope.loanaccountinfo.linkedVendorAccount != null){
+                    for (var i in scope.loanaccountinfo.vendorClientOptions) {
+                        var vendorClient = scope.loanaccountinfo.vendorClientOptions[i];
+                        if( vendorClient.id == scope.loanaccountinfo.linkedVendorAccount.clientId ){
+                            scope.toVendorClientData = vendorClient.id + ' ' + vendorClient.displayName;
+                            break;
+                        }
+                    }
+                }
+
                 if (scope.loanaccountinfo.meeting) {
                     scope.formData.syncRepaymentsWithMeeting = true;
                 }
 
                 if (scope.loanaccountinfo.linkedAccount) {
                     scope.formData.linkAccountId = scope.loanaccountinfo.linkedAccount.id;
+                }
+                if (scope.loanaccountinfo.linkedVendorAccount) {
+                    scope.formData.linkVendorAccountId = scope.loanaccountinfo.linkedVendorAccount.id;
                 }
                 if (scope.loanaccountinfo.groupSavingsAccountId) {
                    scope.formData.groupSavingsAccountId = scope.loanaccountinfo.groupSavingsAccountId;
@@ -237,6 +259,27 @@
                 return exist;
             };
 
+            scope.bnplValueChanged = () => {
+                scope.formData.requiresEquityContribution = scope.loanaccountinfo.requiresEquityContribution;
+                scope.formData.equityContributionLoanPercentage = scope.loanaccountinfo.equityContributionLoanPercentage;
+            };
+
+            scope.changeVendorClient = function (client) {
+                var inparams = { resourceType: 'template', productId: scope.formData.productId, templateType: scope.templateType };
+                if (scope.clientId) {
+                    inparams.clientId = scope.clientId;
+                }
+                if (scope.groupId) {
+                    inparams.groupId = scope.groupId;
+                }
+                inparams.staffInSelectedOfficeOnly = true;
+
+                inparams.vendorClientId = client.id;
+                resourceFactory.loanResource.get(inparams, function (data) {
+                    scope.vendorSavingsAccountOptions = data.vendorSavingsAccountOptions;
+                });
+            };
+
             scope.calculateRates = function(){
                 var total = 0;
                 scope.formData.rates.forEach(function(rate){
@@ -290,7 +333,7 @@
 
             scope.computeInterestRateForJlg = function() {
                    //Reset interest to default
-                  scope.formData.interestRatePerPeriod =  scope.loanaccountinfo.interestRatePerPeriod;
+                  scope.formData.interestRatePerPeriod =  scope.loanaccountinfo != null ? scope.loanaccountinfo.interestRatePerPeriod : '';
                   if(scope.formData.loanTermFrequency == 1 && scope.formData.loanTermFrequencyType == 1){
                    var disbursementDate = dateFilter(scope.formData.expectedDisbursementDate, scope.df);
                    var nextMeetingDate  = dateFilter(new Date(scope.loanaccountinfo.calendarOptions[0].nextTenRecurringDates[0]),scope.df);
