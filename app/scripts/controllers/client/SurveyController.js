@@ -55,7 +55,6 @@
                         tmp.questionId = scope.surveyData.questionDatas[i].id;
                         tmp.responseId = scope.surveyData.questionDatas[i].answer.id
                         tmp.value = scope.surveyData.questionDatas[i].answer.value
-                        tmp.createdOn = new Date().getTime();
                         this.formData.scorecardValues.push(tmp);
                     }
                 }
@@ -64,11 +63,13 @@
                 });
             };
             scope.isAnyResponse = function(){
+            if(!angular.equals(scope.surveyData, {})){
                 for(i=0; i < scope.surveyData.questionDatas.length; i++){
                     if(scope.surveyData.questionDatas[i].answer) {
                         return false;
                     }
                 }
+               }
                 return true;
             };
 
