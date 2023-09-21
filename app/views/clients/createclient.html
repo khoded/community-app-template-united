@@ -434,17 +434,17 @@
 
                      </div>
 
-                     <div ng-repeat="family in familyArray">
+                     <div ng-repeat="family in familyArray track by $index">
 
                         <div class="form-group">
                            <div class="control-label col-sm-2">
                               <label>{{ 'label.input.relationship' | translate }}<span class="required">*</span></label>
                            </div>
                            <div class="col-sm-3">
-                              <select chosen="relationshipIdOptions" id="relationshipIdOption"
+                              <select id="{{'relationshipIdOption-'+$index}}"
                                  ng-model="familyArray[$index].relationshipId" class="form-control"
                                  ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions track by relationshipIdOption.id"
-                                 value="formData.relationshipId"></select>
+                                 value="formData.relationshipId" required></select>
                            </div>
                            <div class="col-sm-2">
                               <form-validate valattributeform="createclientform" valattribute="addressType" />
@@ -523,7 +523,10 @@
 
                            <div class="col-sm-3">
                               <input type="text" id="age" name="age" ng-model="familyArray[$index].age"
-                                 class="form-control">
+                                 class="form-control" maxlength="3" late-validate number=true>
+                           </div>
+                           <div class="col-sm-2">
+                              <form-validate valattributeform="createclientform" valattribute="age"/>
                            </div>
 
                         </div>
@@ -585,6 +588,9 @@
                               <input id="dateofbirth" type="text" name="dateofbirth" datepicker-pop="dd MMMM yyyy"
                                  ng-model="familyArray[$index].dateOfBirth" is-open="opened1" min="minDate "
                                  max="restrictDate" class="form-control" />
+                           </div>
+                           <div class="col-sm-2" ng-show="familyArray[$index].dateOfBirthError">
+                              <span style="color:red; display:block; text-align:center;" > Must be above 18 Years </span>
                            </div>
                         </div>
                            <div class="form-group">

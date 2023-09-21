@@ -476,6 +476,7 @@
 
                 // family array
 
+                scope.formData.familyMembers=[];
                 for(var i=0;i<scope.familyArray.length;i++)
                 {
                     var temp=new Object();
@@ -525,6 +526,26 @@
                     }
                     if(scope.familyArray[i].dateOfBirth)
                     {
+                        for(var z=0;z<scope.relationshipIdOptions.length;z++) {
+                            if (scope.relationshipIdOptions[z].id == scope.familyArray[i].relationshipId) {
+                                var itemSelected = scope.relationshipIdOptions[z];
+                                var selectedValue = itemSelected.name;
+                                if (selectedValue != 'Guardian' && selectedValue != 'Parent') {
+                                    break;
+                                } else {
+                                    var newDate = new Date();
+                                    newDate.setFullYear(new Date().getFullYear() - 18);
+                                    var pickerDate = new Date(dateFilter(scope.familyArray[i].dateOfBirth, scope.df));
+                                    if (pickerDate > newDate) {
+                                        scope.familyArray[i].dateOfBirthError = true;
+                                        return;
+                                   } else {
+                                        scope.familyArray[i].dateOfBirthError = false;
+
+                                   }
+                                }
+                            }
+                        }
                         temp.dateOfBirth=dateFilter(scope.familyArray[i].dateOfBirth, scope.df);
                     }
                     if(scope.familyArray[i].email)

@@ -61,7 +61,10 @@
                 <label class="control-label col-sm-2" for="age">{{ 'label.input.age' | translate }}</label>
 
                 <div class="col-sm-3">
-                    <input type="text" id="age" name="age" ng-model="formData.age"  class="form-control">
+                    <input type="text" id="age" name="age" ng-model="formData.age"  class="form-control" maxlength="3" late-validate number=true>
+                </div>
+                <div class="col-sm-2">
+                    <form-validate valattributeform="familymemberInfo" valattribute="age"/>
                 </div>
 
             </div>
@@ -83,7 +86,7 @@
                 <div class="col-sm-3" >
                     <select chosen="relationshipIdOptions" id="relationshipIdOption" ng-model="formData.relationshipId"  class="form-control"
                             ng-options="relationshipIdOption.id as relationshipIdOption.name for relationshipIdOption in relationshipIdOptions track by relationshipIdOption.id"
-                            value="formData.relationshipId"></select>
+                            value="formData.relationshipId" required></select>
                 </div>
             </div>
             <div>
@@ -131,6 +134,9 @@
                 <div class="col-sm-3">
                     <input id="dateofbirth" type="text" name="dateofbirth" datepicker-pop="dd MMMM yyyy"
                            ng-model="date.dateOfBirth" is-open="opened1" min="minDate" max="restrictDate"  class="form-control"/>
+                </div>
+                <div class="col-sm-2" ng-show="date.dateOfBirth.dateOfBirthError">
+                    <span style="color:red; display:block; text-align:center;" > Must be above 18 Years </span>
                 </div>
 
             </div>
