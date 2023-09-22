@@ -42,6 +42,26 @@
                 this.formData.dateFormat = scope.df;
 
                 if(scope.date.dateOfBirth){
+                    for(var z=0;z<scope.relationshipIdOptions.length;z++) {
+                        if (scope.relationshipIdOptions[z].id == scope.formData.relationshipId) {
+                            var itemSelected = scope.relationshipIdOptions[z];
+                            var selectedValue = itemSelected.name;
+                            if (selectedValue != 'Guardian' && selectedValue != 'Parent') {
+                                break;
+                            } else {
+                                var newDate = new Date();
+                                newDate.setFullYear(new Date().getFullYear() - 18);
+                                var pickerDate = new Date(dateFilter(scope.date.dateOfBirth, scope.df));
+                                if (pickerDate > newDate) {
+                                    scope.date.dateOfBirth.dateOfBirthError = true;
+                                    return;
+                               } else {
+                                    scope.date.dateOfBirth.dateOfBirthError = false;
+
+                               }
+                            }
+                        }
+                    }
                     this.formData.dateOfBirth = dateFilter(scope.date.dateOfBirth,  scope.df);
                 }
                 resourceFactory.familyMembers.post({clientId:clientId},scope.formData,function(data)

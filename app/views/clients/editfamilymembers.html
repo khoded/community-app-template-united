@@ -62,7 +62,10 @@
                 <label class="control-label col-sm-2" for="age">{{ 'label.input.age' | translate }}</label>
 
                 <div class="col-sm-3">
-                    <input type="text" id="age" name="age" ng-model="formData.age"  class="form-control">
+                    <input type="text" id="age" name="age" ng-model="formData.age"  class="form-control" maxlength="3" late-validate number=true>
+                </div>
+                <div class="col-sm-2">
+                    <form-validate valattributeform="familymemberInfo" valattribute="age"/>
                 </div>
 
             </div>
@@ -133,7 +136,10 @@
 
                 <div class="col-sm-3">
                     <input id="dateofbirth" type="text" name="dateofbirth" datepicker-pop="dd MMMM yyyy"
-                           ng-model="date.dateOfBirth" is-open="opened1" max="restrictDate"  class="form-control"/>
+                           ng-model="date.dateOfBirth" is-open="opened1" max="restrictDate" min="minDate" class="form-control"/>
+                </div>
+                <div class="col-sm-2" ng-show="date.dateOfBirth.dateOfBirthError">
+                    <span style="color:red; display:block; text-align:center;" > Must be above 18 Years </span>
                 </div>
 
             </div>

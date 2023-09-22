@@ -4628,5 +4628,7 @@
   "label.heading.guarantee.pep": "Politically Exposed Person",
   "label.heading.middlename": "Middle Name",
   "label.heading.recurringDocuments": "Recurring Documents",
+  "validation.msg.FamilyMembers.firstName.cannot.be.blank": "Next Of Kin First Name can not be blank",
+  "validation.msg.FamilyMembers.relationshipId.cannot.be.blank": "Next Of Kin Relationship can not be blank",
   "----End---": "--End of file--- "
 }
