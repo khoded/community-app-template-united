@@ -53,13 +53,14 @@ jobs:
     
     - name: installing dependcies
       run: |
-       curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-       sudo apt-get install apt-transport-https ca-certificates curl --yes
-       sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-       echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-       echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-       sudo apt-get update -y
-       sudo apt-get install helm kubectl -y
+       archtype=$(dpkg --print-architecture)
+       curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+       chmod 700 get_helm.sh
+       ./get_helm.sh
+       curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$archtype/kubectl"
+       curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/$archtype/kubectl.sha256"
+       echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+       sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
        
     
     
