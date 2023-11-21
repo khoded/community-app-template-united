@@ -16,7 +16,7 @@
                 if (holdParam == 'savingsAccountBlock') {
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = true;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 35}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 36}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -24,7 +24,7 @@
                 else if(holdParam == 'savingsAccountUnBlock'){
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = false;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 35}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 36}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -32,7 +32,7 @@
                 else if (holdParam == 'debitTransactionFreeze' ) {
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = true;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 36}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 37}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -40,7 +40,7 @@
                 else if (holdParam == 'debitTransactionUnFreeze'){
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = false;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 36}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 37}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -48,7 +48,7 @@
                 else if (holdParam == 'creditTransactionFreeze') {
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = true;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 37}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 38}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -56,7 +56,7 @@
                 else if(holdParam == 'creditTransactionUnFreeze'){
                     scope.showHoldAccount = false;
                     scope.showHoldReasons = false;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 37}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 38}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
@@ -65,7 +65,7 @@
                 else if (holdParam == 'savingsTransactionFreeze') {
                     scope.showHoldAccount = true;
                     scope.showHoldReasons = true;
-                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 38}, function (data) {
+                    resourceFactory.codeValueResource.getAllCodeValues({codeId: 39}, function (data) {
                         scope.reasons = data;
                         route.reload();
                     });
