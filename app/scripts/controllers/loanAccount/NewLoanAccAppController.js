@@ -492,6 +492,10 @@
                     this.formData.calendarId = scope.loanaccountinfo.calendarOptions[0].id;
                 }
 
+                if (this.formData.interestType == 1) {
+                    this.formData.isEqualAmortization = false;
+                }
+
 
                 if(scope.carryForwardLoanTerm > 0){
                 this.formData.loanTermIncludesToppedUpLoanTerm = scope.loanaccountinfo.product.loanTermIncludesToppedUpLoanTerm;
