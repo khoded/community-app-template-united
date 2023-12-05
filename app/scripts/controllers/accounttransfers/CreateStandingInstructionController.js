@@ -58,11 +58,12 @@
                 }
             }
             scope.clientOptions = function(value){
+                var deferred = $q.defer();
                 resourceFactory.clientSearchSummaryResource.get({displayName: value, orderBy : 'displayName', officeId : scope.formData.toOfficeId,
                     sortOrder : 'ASC', limit : 100}, function (data) {
                     deferred.resolve(data.pageItems);
-                    return deferred.promise;
                 });
+                return deferred.promise;
             };
 
             scope.selectToClient = function($item, $model, $label) {
