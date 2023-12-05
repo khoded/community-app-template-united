@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateStandingInstructionController: function (scope, resourceFactory, location, routeParams, dateFilter) {
+        CreateStandingInstructionController: function (scope, resourceFactory, location, routeParams, dateFilter, $q) {
             scope.restrictDate = new Date();
             var params = {clientId: routeParams.clientId,officeId:routeParams.officeId};
             var accountType = routeParams.accountType || '';
@@ -23,6 +23,12 @@
                 scope.toAccountTypes = data.toAccountTypeOptions;
             });
 
+            scope.changeClient = function (client) {
+                            scope.formData.toClientId = client.id;
+                            scope.changeEvent();
+                        };
+
+
             scope.changeEvent = function () {
 
                 var params = scope.formData;
@@ -34,6 +40,7 @@
                     scope.toClients = data.toClientOptions;
                     scope.toAccounts = data.toAccountOptions;
                     scope.formData.transferAmount = data.transferAmount;
+                    console.log(data);
                 });
             };
 
@@ -49,6 +56,17 @@
                     scope.formData.toOfficeId = null;
                     scope.formData.toClientId = null;
                 }
+            }
+            scope.clientOptions = function(value){
+                resourceFactory.clientSearchSummaryResource.get({displayName: value, orderBy : 'displayName', officeId : scope.formData.toOfficeId,
+                    sortOrder : 'ASC', limit : 100}, function (data) {
+                    deferred.resolve(data.pageItems);
+                    return deferred.promise;
+                });
+            };
+
+            scope.selectToClient = function($item, $model, $label) {
+                scope.referralClient = $item;
             }
 
             scope.submit = function () {
@@ -69,7 +87,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('CreateStandingInstructionController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', mifosX.controllers.CreateStandingInstructionController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateStandingInstructionController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', '$q', mifosX.controllers.CreateStandingInstructionController]).run(function ($log) {
         $log.info("CreateStandingInstructionController initialized");
     });
 }(mifosX.controllers || {}));
