@@ -162,11 +162,12 @@
 
                             <div class="col-sm-3">
                                 <div ng-show="allowclientedit">
-                                    <select id="toClientId" ng-model="formData.toClientId" name="client"
-                                            ng-options="toClient.id as toClient.displayName for toClient in standinginstruction.toClientOptions"
-                                            ng-change="changeEvent()" value="{{toClient.id}}" class="form-control" required>
-                                        <option value="">{{'label.selectone' | translate}}</option>
-                                    </select>
+                                    <input id="toClientId" type="text" ng-model="toClientData" class="col-md-4 form-control"
+                                           autocomplete="off"
+                                           typeahead-min-length="3"
+                                           typeahead-editable="false"
+                                           uib-typeahead="client.displayName as client.displayName for client in clientOptions($viewValue)"
+                                           typeahead-on-select="changeClient($item)" required/>
                                 </div>
                                 <div data-ng-hide="allowclientedit">
                                     <label class="control-label">{{standinginstruction.toClient.displayName}}</label>
