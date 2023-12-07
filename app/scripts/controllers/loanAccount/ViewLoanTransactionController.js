@@ -6,6 +6,7 @@
             scope.rates = $rootScope.rates;
             //Obtain total rate percentage
             scope.totalRatePercentage = 0;
+            scope.isTopup = routeParams.topupval;
             if (scope.rates){
               scope.rates.forEach(function (rate) {
                 scope.totalRatePercentage += (rate.percentage/100);
@@ -172,7 +173,17 @@
               scope.details.push(chargeTotalDetail);
             }
           };
+
+          scope.validateTopup = function () {
+                      if (scope.isTopup === true && scope.transaction.type.id == 1) {
+                          return true;
+                      } else {
+                          return false;
+                      }
+                  }
         }
+
+
     });
     mifosX.ng.application.controller('ViewLoanTransactionController', ['$scope', 'ResourceFactory', '$location', '$routeParams', 'dateFilter', '$uibModal', '$rootScope', mifosX.controllers.ViewLoanTransactionController]).run(function ($log) {
         $log.info("ViewLoanTransactionController initialized");

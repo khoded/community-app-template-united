@@ -11,10 +11,10 @@
             scope.isHideAccrualsCheckboxChecked = true;
             scope.loandetails = [];
 
-            scope.routeTo = function (loanId, transactionId, transactionTypeId) {
+            scope.routeTo = function (loanId, transactionId, transactionTypeId, isTopup) {
                 if (transactionTypeId == 2 || transactionTypeId == 4 || transactionTypeId == 1) {
                     $rootScope.rates = scope.loandetails.rates;
-                    location.path('/viewloantrxn/' + loanId + '/trxnId/' + transactionId);
+                    location.path('/viewloantrxn/' + loanId + '/trxnId/' + transactionId + '/isTopup/' + isTopup);
                 };
             };
 

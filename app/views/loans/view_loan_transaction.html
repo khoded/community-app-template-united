@@ -33,7 +33,14 @@
                     </tr>
                     <tr>
                         <td>{{ 'label.heading.type' | translate}}</td>
-                        <td>{{transaction.type.value}}</td>
+                        <td ng-show="validateTopup() ">
+                            Existing loan balance paid off
+                        </td>
+                        <td ng-show="!validateTopup()">
+                            {{transaction.type.value}}
+                        </td>
+
+
                     </tr>
                     <tr>
                         <td>{{ 'label.heading.date' | translate}}</td>
