@@ -220,7 +220,7 @@
             .when('/addloandocument/:loanId', {
                 templateUrl: 'views/loans/addloandocument.html'
             })
-            .when('/viewloantrxn/:accountId/trxnId/:id', {
+            .when('/viewloantrxn/:accountId/trxnId/:id/isTopup/:topupval', {
                 templateUrl: 'views/loans/view_loan_transaction.html'
             })
             .when('/organization', {
