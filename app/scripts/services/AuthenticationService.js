@@ -54,21 +54,125 @@
 
             var setTimer = function(time){
                 timeout(getAccessToken, time * 1000);
+            }            
+
+            /*oauth implementation - start*/
+
+            var onLoginSuccess_oauth = function (response) {
+                var data = JSON.parse(response);
+                if(data.isTwoFactorAuthenticationRequired != null && data.isTwoFactorAuthenticationRequired == true) {
+                    if(hasValidTwoFactorToken(data.username)) {
+                        var token = getTokenFromStorage(data.username);
+                        onTwoFactorRememberMe(data, token);
+                    } else {
+                        userData = data;
+                        scope.$broadcast("UserAuthenticationTwoFactorRequired", data);
+                    }
+                } else {
+                    scope.$broadcast("UserAuthenticationSuccessEvent", data);
+                    localStorageService.addToLocalStorage('userData', data);
+                }
+            };    
+
+            var onLoginFailure_oauth = function (response) {
+                var data = JSON.parse(response);
+                var status = response.status;
+                scope.$broadcast("UserAuthenticationFailureEvent", data, status);
+            };            
+
+            var getUserDetails_oauth = function(response){
+                var data = JSON.parse(response);
+                localStorageService.addToLocalStorage('tokendetails', data);
+                setTimer(data.expires_in);
+                var myHeaders = new Headers();
+                myHeaders.append("Fineract-Platform-TenantId", "default");
+                myHeaders.append("Authorization", "Bearer " + data.access_token);
+
+                var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+                };
+
+                fetch("https://localhost:8443/fineract-provider/api/v1/userdetails", requestOptions)
+                .then(response => response.text())
+                .then(onLoginSuccess_oauth)
+                .catch(onLoginFailure_oauth);
+
             }
+
+            var updateAccessDetails_oauth = function(response){
+                var data = JSON.parse(response);
+                var sessionData = webStorage.get('sessionData');
+                sessionData.authenticationKey = data.access_token;
+                webStorage.add("sessionData",sessionData);
+                localStorageService.addToLocalStorage('tokendetails', data);
+                var userDate = localStorageService.getFromLocalStorage("userData");
+                userDate.accessToken =  data.access_token;
+                localStorageService.addToLocalStorage('userData', userDate);
+                httpService.setAuthorization(data.access_token);
+                setTimer(data.expires_in);
+            }
+            
+            /*oauth implementation - end*/
 
             var getAccessToken = function(){
                 var refreshToken = localStorageService.getFromLocalStorage("tokendetails").refresh_token;
                 httpService.cancelAuthorization();
-                httpService.post( "/fineract-provider/api/oauth/token?&client_id=community-app&grant_type=refresh_token&client_secret=123&refresh_token=" + refreshToken)
-                    .then(updateAccessDetails);
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+                var urlencoded = new URLSearchParams();
+                urlencoded.append("client_id", "mifos-staging");
+                urlencoded.append("grant_type", "refresh_token");
+                urlencoded.append("scope", "openid");
+                urlencoded.append("refresh_token", refreshToken);
+                urlencoded.append("client_secret", "rTuer2P0eV20EUus5kp2mowHb9DxRIja");
+
+                var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: urlencoded,
+                redirect: 'follow'
+                };
+
+                fetch("http://10.2.3.21:8083/auth/realms/master/protocol/openid-connect/token", requestOptions)
+                .then(response => response.text())
+                .then(updateAccessDetails_oauth);
+
+                /*httpService.post( "/fineract-provider/api/oauth/token?&client_id=mifos-staging&grant_type=refresh_token&client_secret=rTuer2P0eV20EUus5kp2mowHb9DxRIja&refresh_token=" + refreshToken)
+                .then(updateAccessDetails);*/
             }
 
             this.authenticateWithUsernamePassword = function (credentials) {
                 scope.$broadcast("UserAuthenticationStartEvent");
         		if(SECURITY === 'oauth'){
-	                httpService.post( "/fineract-provider/api/oauth/token?username=" + credentials.username + "&password=" + credentials.password +"&client_id=community-app&grant_type=password&client_secret=123")
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+                    var urlencoded = new URLSearchParams();
+                    urlencoded.append("client_id", "mifos-staging");
+                    urlencoded.append("grant_type", "password");
+                    urlencoded.append("scope", "openid");
+                    urlencoded.append("username", credentials.username);
+                    urlencoded.append("password", credentials.password);
+                    urlencoded.append("client_secret", "rTuer2P0eV20EUus5kp2mowHb9DxRIja");
+
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: urlencoded,
+                    redirect: 'follow'
+                    };
+
+                    fetch("http://10.2.3.21:8083/auth/realms/master/protocol/openid-connect/token", requestOptions)
+                    .then(response => response.text())
+                    .then(getUserDetails_oauth)
+                    .catch(onLoginFailure_oauth);
+                    
+                    /*httpService.post( "/fineract-provider/api/oauth/token?username=" + credentials.username + "&password=" + credentials.password +"&client_id=mifos-staging&grant_type=password&client_secret=rTuer2P0eV20EUus5kp2mowHb9DxRIja")
                     .then(getUserDetails)
-                    .catch(onLoginFailure);
+                    .catch(onLoginFailure);*/
         		} else {
                     httpService.post(apiVer + "/authentication", { "username": credentials.username, "password": credentials.password})
                     .then(onLoginSuccess)
