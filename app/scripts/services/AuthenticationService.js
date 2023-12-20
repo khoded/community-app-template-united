@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.services = _.extend(module, {
-        AuthenticationService: function (scope, httpService, SECURITY, localStorageService,timeout, webStorage) {
+        AuthenticationService: function (scope, httpService, SECURITY, OAUTH_JWT_SERVER_URL, OAUTH_JWT_CLIENT_ID, FINERACT_BASE_URL, OAUTH_JWT_CLIENT_SECRET, localStorageService,timeout, webStorage) {
             var userData = null;
             var twoFactorIsRememberMeRequest = false;
             var twoFactorAccessToken = null;
@@ -34,9 +34,8 @@
                 localStorageService.addToLocalStorage('tokendetails', data);
                 setTimer(data.expires_in);
                 httpService.get( apiVer + "/userdetails?access_token=" + data.access_token)
-                    .then(onLoginSuccess)
-                    .catch(onLoginFailure);
-
+                .then(onLoginSuccess)
+                .catch(onLoginFailure);
             }
 
             var updateAccessDetails = function(response){
@@ -85,7 +84,15 @@
                 localStorageService.addToLocalStorage('tokendetails', data);
                 setTimer(data.expires_in);
                 var myHeaders = new Headers();
-                myHeaders.append("Fineract-Platform-TenantId", "default");
+                
+                if (QueryParameters["tenantIdentifier"]) {
+                    myHeaders.append("Fineract-Platform-TenantId", QueryParameters["tenantIdentifier"]);
+                }
+                else
+                {
+                    myHeaders.append("Fineract-Platform-TenantId", "default");
+                }
+                
                 myHeaders.append("Authorization", "Bearer " + data.access_token);
 
                 var requestOptions = {
@@ -93,12 +100,29 @@
                 headers: myHeaders,
                 redirect: 'follow'
                 };
+                
+                var mainLink = getLocation(window.location.href);
+                var baseApiUrlEnv = FINERACT_BASE_URL;
 
-                fetch("https://localhost:8443/fineract-provider/api/v1/userdetails", requestOptions)
+                if (mainLink.hostname != "") {
+                    baseApiUrl = "https://" + mainLink.hostname + (mainLink.port ? ':' + mainLink.port : '');
+                }
+    
+                if (QueryParameters["baseApiUrl"]) {
+                    baseApiUrl = QueryParameters["baseApiUrl"];
+                }
+    
+                if (baseApiUrlEnv !== '$FINERACT_BASE_URL') {
+                    baseApiUrl = baseApiUrlEnv;
+                }
+    
+                var queryLink = getLocation(baseApiUrl);
+                var host = "https://" + queryLink.hostname + (queryLink.port ? ':' + queryLink.port : '');
+
+                fetch(host + apiVer + "/userdetails", requestOptions)
                 .then(response => response.text())
                 .then(onLoginSuccess_oauth)
                 .catch(onLoginFailure_oauth);
-
             }
 
             var updateAccessDetails_oauth = function(response){
@@ -119,15 +143,15 @@
             var getAccessToken = function(){
                 var refreshToken = localStorageService.getFromLocalStorage("tokendetails").refresh_token;
                 httpService.cancelAuthorization();
+
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
                 var urlencoded = new URLSearchParams();
-                urlencoded.append("client_id", "mifos-staging");
+                urlencoded.append("client_id", OAUTH_JWT_CLIENT_ID);
                 urlencoded.append("grant_type", "refresh_token");
-                urlencoded.append("scope", "openid");
                 urlencoded.append("refresh_token", refreshToken);
-                urlencoded.append("client_secret", "rTuer2P0eV20EUus5kp2mowHb9DxRIja");
+                urlencoded.append("client_secret", OAUTH_JWT_CLIENT_SECRET);
 
                 var requestOptions = {
                 method: 'POST',
@@ -136,7 +160,7 @@
                 redirect: 'follow'
                 };
 
-                fetch("http://10.2.3.21:8083/auth/realms/master/protocol/openid-connect/token", requestOptions)
+                fetch(OAUTH_JWT_SERVER_URL + "/realms/master/protocol/openid-connect/token", requestOptions)
                 .then(response => response.text())
                 .then(updateAccessDetails_oauth);
 
@@ -151,12 +175,12 @@
                     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
                     var urlencoded = new URLSearchParams();
-                    urlencoded.append("client_id", "mifos-staging");
+                    urlencoded.append("client_id", OAUTH_JWT_CLIENT_ID);
                     urlencoded.append("grant_type", "password");
                     urlencoded.append("scope", "openid");
                     urlencoded.append("username", credentials.username);
                     urlencoded.append("password", credentials.password);
-                    urlencoded.append("client_secret", "rTuer2P0eV20EUus5kp2mowHb9DxRIja");
+                    urlencoded.append("client_secret", OAUTH_JWT_CLIENT_SECRET);
 
                     var requestOptions = {
                     method: 'POST',
@@ -165,7 +189,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch("http://10.2.3.21:8083/auth/realms/master/protocol/openid-connect/token", requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/realms/master/protocol/openid-connect/token", requestOptions)
                     .then(response => response.text())
                     .then(getUserDetails_oauth)
                     .catch(onLoginFailure_oauth);
@@ -260,7 +284,7 @@
             });
         }
     });
-    mifosX.ng.services.service('AuthenticationService', ['$rootScope', 'HttpService', 'SECURITY', 'localStorageService','$timeout','webStorage', mifosX.services.AuthenticationService]).run(function ($log) {
+    mifosX.ng.services.service('AuthenticationService', ['$rootScope', 'HttpService', 'SECURITY', 'OAUTH_JWT_SERVER_URL', 'OAUTH_JWT_CLIENT_ID', 'FINERACT_BASE_URL', 'OAUTH_JWT_CLIENT_SECRET', 'localStorageService','$timeout','webStorage', mifosX.services.AuthenticationService]).run(function ($log) {
         $log.info("AuthenticationService initialized");
     });
 }(mifosX.services || {}));

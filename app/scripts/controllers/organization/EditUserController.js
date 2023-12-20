@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        EditUserController: function (scope, routeParams, resourceFactory, location) {
+        EditUserController: function (scope, OAUTH_JWT_SERVER_URL, routeParams, resourceFactory, localStorageService, location) {
 
             scope.formData = {};
             scope.offices = [];
@@ -82,17 +82,90 @@
                 }
             };
 
+            var handleError = function (error){
+                var data = JSON.parse(error);
+                var status = data.error ? data.error : data.errormessage;
+                scope.$broadcast("UserEditFailureEvent", data, status);
+            }
+
+            var bearerToken = localStorageService.getFromLocalStorage("userData").accessToken;              
+            var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Authorization", "Bearer " + bearerToken);
+
+                var savetodatabase = function (){
+                    if (scope.formData.password) scope.formData.password = "**********";
+                    resourceFactory.userListResource.update({'userId': scope.userId}, scope.formData, function (data) {
+                        location.path('/viewuser/' + data.resourceId);                    
+                    });
+                }
+
+                var save_to_keycloak = function (response) {
+                    var data = JSON.parse(response);
+                    var keycloakid = data[0].id;
+
+                    if (keycloakid === ""){
+                        scope.$broadcast("UserEditFailureEvent", scope.formData.email, "User not on Keycloak");
+                    }
+                    else{                   
+                        //update the user in keycloak
+                        var payload = {
+                            "enabled": scope.formData.disableuser ? false : true,
+                            "firstName": scope.formData.firstname,
+                            "lastName": scope.formData.lastname,
+                            "emailVerified": true
+                        };
+
+                        if (scope.formData.password)
+                        {
+                            payload.credentials = [
+                                {
+                                "type": "password",
+                                "temporary": false,
+                                "value": scope.formData.password
+                                }];
+                        }
+                        
+                        function findrole(roles) {
+                            return roles == "Super user";
+                        }
+
+                        if (scope.selectedRoles.find(findrole) !== "undefined") payload.groups = ["user-management"];
+
+                        var requestOptions = {
+                        method: 'PUT',
+                        headers: myHeaders,
+                        body: JSON.stringify(payload),
+                        redirect: 'follow'
+                        };
+
+                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users/" + keycloakid, requestOptions)
+                        .then(savetodatabase)
+                        .catch(handleError);                        
+                    }
+                };  
+
             scope.submit = function () {
                 for (var i in scope.selectedRoles) {
                     scope.formData.roles.push(scope.selectedRoles[i].id) ;
                 }
-                resourceFactory.userListResource.update({'userId': scope.userId}, this.formData, function (data) {
-                    location.path('/viewuser/' + data.resourceId);
-                });
+
+                    //do search for the user in keycloak
+                    var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                    };
+
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.formData.email, requestOptions)
+                    .then(response => response.text())
+                    .then(save_to_keycloak)
+                    .catch(handleError);                   
+                
             };
         }
     });
-    mifosX.ng.application.controller('EditUserController', ['$scope', '$routeParams', 'ResourceFactory', '$location', mifosX.controllers.EditUserController]).run(function ($log) {
+    mifosX.ng.application.controller('EditUserController', ['$scope', 'OAUTH_JWT_SERVER_URL','$routeParams', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.EditUserController]).run(function ($log) {
         $log.info("EditUserController initialized");
     });
 }(mifosX.controllers || {}));

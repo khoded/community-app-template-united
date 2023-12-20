@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateUserController: function (scope, resourceFactory, location) {
+        CreateUserController: function (scope, OAUTH_JWT_SERVER_URL, resourceFactory, localStorageService, location) {
             scope.offices = [];
             scope.available = [];
             scope.selected = [];
@@ -66,17 +66,91 @@
                 });
             };
 
+            var bearerToken = localStorageService.getFromLocalStorage("userData").accessToken;
+
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization", "Bearer " + bearerToken);
+
+            var handleError = function (error){
+                var data = JSON.parse(error);
+                var status = data.error ? data.error : data.errormessage;
+                scope.$broadcast("UserCreationFailureEvent", data, status);
+            }
+
+            var savetodatabase = function (){
+                if (scope.formData.password) scope.formData.password = "**********";  
+                if(scope.formData.repeatPassword) scope.formData.repeatPassword = "**********";  
+                if (scope.formData.sendPasswordToEmail) scope.formData.sendPasswordToEmail=false;     
+                resourceFactory.userListResource.save(scope.formData, function (data) {
+                    location.path('/viewuser/' + data.resourceId);
+                });
+            }
+
+            var save_to_keycloak = function(response){
+                var data = JSON.parse(response);
+                var keycloakid = "";
+                if (data.length > 0) data[0].id;
+
+                if (keycloakid !== ""){
+                    savetodatabase();
+                }
+                else{
+                    var payload = {
+                        "username": scope.formData.username,
+                        "enabled": true,
+                        "firstName": scope.formData.firstname,
+                        "lastName": scope.formData.lastname,
+                        "email": scope.formData.email,
+                        "emailVerified": true,
+                        "credentials": [
+                            {
+                            "type": "password",
+                            "temporary": true,
+                            "value": scope.formData.password
+                            }
+                        ]
+                    };
+                    
+                    function findrole(roles) {
+                        return roles == "Super user";
+                    }
+
+                    if (scope.selectedRoles.find(findrole) !== "undefined") payload.groups = ["user-management"];
+
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: JSON.stringify(payload),
+                    redirect: 'follow'
+                    };
+
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users", requestOptions)
+                    .then(savetodatabase)
+                    .catch(handleError);   
+                }      
+            }
+
             scope.submit = function () {
                 for (var i in scope.selectedRoles) {
                     scope.formData.roles.push(scope.selectedRoles[i].id) ;
                 }
-                resourceFactory.userListResource.save(this.formData, function (data) {
-                    location.path('/viewuser/' + data.resourceId);
-                });
+
+                //check if exists on keycloak
+                var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
+    
+                fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.formData.email, requestOptions)
+                .then(response => response.text())
+                .then(save_to_keycloak)
+                .catch(handleError);                                    
             };
         }
     });
-    mifosX.ng.application.controller('CreateUserController', ['$scope', 'ResourceFactory', '$location', mifosX.controllers.CreateUserController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.CreateUserController]).run(function ($log) {
         $log.info("CreateUserController initialized");
     });
 }(mifosX.controllers || {}));
