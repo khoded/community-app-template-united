@@ -75,54 +75,60 @@
 
             var onLoginFailure_oauth = function (response) {
                 var data = JSON.parse(response);
-                var status = response.status;
+                var status = data.status ? data.status : 401;
                 scope.$broadcast("UserAuthenticationFailureEvent", data, status);
             };            
 
             var getUserDetails_oauth = function(response){
                 var data = JSON.parse(response);
-                localStorageService.addToLocalStorage('tokendetails', data);
-                setTimer(data.expires_in);
-                var myHeaders = new Headers();
-                
-                if (QueryParameters["tenantIdentifier"]) {
-                    myHeaders.append("Fineract-Platform-TenantId", QueryParameters["tenantIdentifier"]);
-                }
-                else
+                if (data.error)
                 {
-                    myHeaders.append("Fineract-Platform-TenantId", "default");
+                    onLoginFailure_oauth(response);
                 }
-                
-                myHeaders.append("Authorization", "Bearer " + data.access_token);
-
-                var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                redirect: 'follow'
-                };
-                
-                var mainLink = getLocation(window.location.href);
-                var baseApiUrlEnv = FINERACT_BASE_URL;
-
-                if (mainLink.hostname != "") {
-                    baseApiUrl = "https://" + mainLink.hostname + (mainLink.port ? ':' + mainLink.port : '');
-                }
+                else {
+                    localStorageService.addToLocalStorage('tokendetails', data);
+                    setTimer(data.expires_in);
+                    var myHeaders = new Headers();
+                    
+                    if (QueryParameters["tenantIdentifier"]) {
+                        myHeaders.append("Fineract-Platform-TenantId", QueryParameters["tenantIdentifier"]);
+                    }
+                    else
+                    {
+                        myHeaders.append("Fineract-Platform-TenantId", "default");
+                    }
+                    
+                    myHeaders.append("Authorization", "Bearer " + data.access_token);
     
-                if (QueryParameters["baseApiUrl"]) {
-                    baseApiUrl = QueryParameters["baseApiUrl"];
-                }
+                    var requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                    };
+                    
+                    var mainLink = getLocation(window.location.href);
+                    var baseApiUrlEnv = FINERACT_BASE_URL;
     
-                if (baseApiUrlEnv !== '$FINERACT_BASE_URL') {
-                    baseApiUrl = baseApiUrlEnv;
-                }
+                    if (mainLink.hostname != "") {
+                        baseApiUrl = "https://" + mainLink.hostname + (mainLink.port ? ':' + mainLink.port : '');
+                    }
+        
+                    if (QueryParameters["baseApiUrl"]) {
+                        baseApiUrl = QueryParameters["baseApiUrl"];
+                    }
+        
+                    if (baseApiUrlEnv !== '$FINERACT_BASE_URL') {
+                        baseApiUrl = baseApiUrlEnv;
+                    }
+        
+                    var queryLink = getLocation(baseApiUrl);
+                    var host = "https://" + queryLink.hostname + (queryLink.port ? ':' + queryLink.port : '');
     
-                var queryLink = getLocation(baseApiUrl);
-                var host = "https://" + queryLink.hostname + (queryLink.port ? ':' + queryLink.port : '');
-
-                fetch(host + apiVer + "/userdetails", requestOptions)
-                .then(response => response.text())
-                .then(onLoginSuccess_oauth)
-                .catch(onLoginFailure_oauth);
+                    fetch(host + apiVer + "/userdetails", requestOptions)
+                    .then(response => response.text())
+                    .then(onLoginSuccess_oauth)
+                    .catch(onLoginFailure_oauth);
+                }                
             }
 
             var updateAccessDetails_oauth = function(response){
@@ -138,7 +144,7 @@
                 setTimer(data.expires_in);
             }
             
-            /*oauth implementation - end*/
+            
 
             var getAccessToken = function(){
                 var refreshToken = localStorageService.getFromLocalStorage("tokendetails").refresh_token;
@@ -203,6 +209,8 @@
                     .catch(onLoginFailure);
         		}
             };
+
+            /*oauth implementation - end*/
 
             var onTwoFactorRememberMe = function (userData, tokenData) {
                 var accessToken = tokenData.token;
