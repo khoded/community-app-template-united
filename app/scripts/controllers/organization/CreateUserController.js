@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        CreateUserController: function (scope, OAUTH_JWT_SERVER_URL, resourceFactory, localStorageService, location) {
+        CreateUserController: function (scope, OAUTH_JWT_SERVER_URL, OAUTH_REALM, resourceFactory, localStorageService, location) {
             scope.offices = [];
             scope.available = [];
             scope.selected = [];
@@ -98,7 +98,7 @@
                 else{
                     var payload = {
                         "username": scope.formData.username,
-                        "enabled": true,
+                        "enabled": false,
                         "firstName": scope.formData.firstname,
                         "lastName": scope.formData.lastname,
                         "email": scope.formData.email,
@@ -125,7 +125,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users", requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users", requestOptions)
                     .then(savetodatabase)
                     .catch(handleError);   
                 }      
@@ -143,14 +143,14 @@
                     redirect: 'follow'
                 };
     
-                fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.formData.email, requestOptions)
+                fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users?search=" + scope.formData.email, requestOptions)
                 .then(response => response.text())
                 .then(save_to_keycloak)
                 .catch(handleError);                                    
             };
         }
     });
-    mifosX.ng.application.controller('CreateUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.CreateUserController]).run(function ($log) {
+    mifosX.ng.application.controller('CreateUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'OAUTH_REALM', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.CreateUserController]).run(function ($log) {
         $log.info("CreateUserController initialized");
     });
 }(mifosX.controllers || {}));

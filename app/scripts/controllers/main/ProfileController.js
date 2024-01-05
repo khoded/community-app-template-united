@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ProfileController: function (scope, OAUTH_JWT_SERVER_URL, localStorageService, resourceFactory, $uibModal) {
+        ProfileController: function (scope, OAUTH_JWT_SERVER_URL, OAUTH_REALM, localStorageService, resourceFactory, $uibModal) {
             scope.formData = {};
             scope.userDetails = localStorageService.getFromLocalStorage('userData');
             resourceFactory.userListResource.get({userId: scope.userDetails.userId}, function (data) {
@@ -68,7 +68,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users/" + keycloakid, requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users/" + keycloakid, requestOptions)
                     .then(savepasswordtodatabase)
                     .catch(handleError);                        
                 }
@@ -85,7 +85,7 @@
                         redirect: 'follow'
                         };
     
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.userDetails.username, requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users?search=" + scope.userDetails.username, requestOptions)
                     .then(response => response.text())
                     .then(save_password_to_keycloak)
                     .catch(handleError);                      
@@ -96,7 +96,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('ProfileController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'localStorageService', 'ResourceFactory', '$uibModal', mifosX.controllers.ProfileController]).run(function ($log) {
+    mifosX.ng.application.controller('ProfileController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'OAUTH_REALM', 'localStorageService', 'ResourceFactory', '$uibModal', mifosX.controllers.ProfileController]).run(function ($log) {
         $log.info("ProfileController initialized");
     });
 }(mifosX.controllers || {}));

@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        ViewUserController: function (scope, OAUTH_JWT_SERVER_URL, routeParams, route, location, resourceFactory, localStorageService, $uibModal) {
+        ViewUserController: function (scope, OAUTH_JWT_SERVER_URL, OAUTH_REALM, routeParams, route, location, resourceFactory, localStorageService, $uibModal) {
             scope.user = [];
             scope.formData = {};
             resourceFactory.userListResource.get({userId: routeParams.id}, function (data) {
@@ -67,7 +67,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users/" + keycloakid, requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users/" + keycloakid, requestOptions)
                     .then(savepasswordtodatabase)
                     .catch(handleError);                        
                 }
@@ -85,7 +85,7 @@
                         redirect: 'follow'
                         };
     
-                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.user.email, requestOptions)
+                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users?search=" + scope.user.email, requestOptions)
                         .then(response => response.text())
                         .then(save_password_to_keycloak)
                         .catch(handleError);  
@@ -121,7 +121,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users/" + keycloakid, requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users/" + keycloakid, requestOptions)
                     .then(savedeletetodatabase)
                     .catch(handleError);                        
                 }
@@ -137,7 +137,7 @@
                         redirect: 'follow'
                         };
     
-                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.user.email, requestOptions)
+                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users?search=" + scope.user.email, requestOptions)
                         .then(response => response.text())
                         .then(save_delete_to_keycloak)
                         .catch(handleError);
@@ -150,7 +150,7 @@
 
         }
     });
-    mifosX.ng.application.controller('ViewUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', '$routeParams', '$route', '$location', 'ResourceFactory', 'localStorageService', '$uibModal', mifosX.controllers.ViewUserController]).run(function ($log) {
+    mifosX.ng.application.controller('ViewUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'OAUTH_REALM', '$routeParams', '$route', '$location', 'ResourceFactory', 'localStorageService', '$uibModal', mifosX.controllers.ViewUserController]).run(function ($log) {
         $log.info("ViewUserController initialized");
     });
 }(mifosX.controllers || {}));

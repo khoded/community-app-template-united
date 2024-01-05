@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.controllers = _.extend(module, {
-        EditUserController: function (scope, OAUTH_JWT_SERVER_URL, routeParams, resourceFactory, localStorageService, location) {
+        EditUserController: function (scope, OAUTH_JWT_SERVER_URL, OAUTH_REALM, routeParams, resourceFactory, localStorageService, location) {
 
             scope.formData = {};
             scope.offices = [];
@@ -121,7 +121,7 @@
                             payload.credentials = [
                                 {
                                 "type": "password",
-                                "temporary": false,
+                                "temporary": true,
                                 "value": scope.formData.password
                                 }];
                         }
@@ -139,7 +139,7 @@
                         redirect: 'follow'
                         };
 
-                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users/" + keycloakid, requestOptions)
+                        fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users/" + keycloakid, requestOptions)
                         .then(savetodatabase)
                         .catch(handleError);                        
                     }
@@ -157,7 +157,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/master/users?search=" + scope.formData.email, requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/admin/realms/" + OAUTH_REALM + "/users?search=" + scope.formData.email, requestOptions)
                     .then(response => response.text())
                     .then(save_to_keycloak)
                     .catch(handleError);                   
@@ -165,7 +165,7 @@
             };
         }
     });
-    mifosX.ng.application.controller('EditUserController', ['$scope', 'OAUTH_JWT_SERVER_URL','$routeParams', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.EditUserController]).run(function ($log) {
+    mifosX.ng.application.controller('EditUserController', ['$scope', 'OAUTH_JWT_SERVER_URL', 'OAUTH_REALM','$routeParams', 'ResourceFactory', 'localStorageService', '$location', mifosX.controllers.EditUserController]).run(function ($log) {
         $log.info("EditUserController initialized");
     });
 }(mifosX.controllers || {}));

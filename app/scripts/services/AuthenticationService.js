@@ -1,6 +1,6 @@
 (function (module) {
     mifosX.services = _.extend(module, {
-        AuthenticationService: function (scope, httpService, SECURITY, OAUTH_JWT_SERVER_URL, OAUTH_JWT_CLIENT_ID, FINERACT_BASE_URL, OAUTH_JWT_CLIENT_SECRET, localStorageService,timeout, webStorage) {
+        AuthenticationService: function (scope, httpService, SECURITY, OAUTH_REALM, OAUTH_JWT_SERVER_URL, OAUTH_JWT_CLIENT_ID, FINERACT_BASE_URL, OAUTH_JWT_CLIENT_SECRET, localStorageService,timeout, webStorage) {
             var userData = null;
             var twoFactorIsRememberMeRequest = false;
             var twoFactorAccessToken = null;
@@ -166,7 +166,7 @@
                 redirect: 'follow'
                 };
 
-                fetch(OAUTH_JWT_SERVER_URL + "/realms/master/protocol/openid-connect/token", requestOptions)
+                fetch(OAUTH_JWT_SERVER_URL + "/realms/" + OAUTH_REALM + "/protocol/openid-connect/token", requestOptions)
                 .then(response => response.text())
                 .then(updateAccessDetails_oauth);
 
@@ -195,7 +195,7 @@
                     redirect: 'follow'
                     };
 
-                    fetch(OAUTH_JWT_SERVER_URL + "/realms/master/protocol/openid-connect/token", requestOptions)
+                    fetch(OAUTH_JWT_SERVER_URL + "/realms/" + OAUTH_REALM + "/protocol/openid-connect/token", requestOptions)
                     .then(response => response.text())
                     .then(getUserDetails_oauth)
                     .catch(onLoginFailure_oauth);
@@ -292,7 +292,7 @@
             });
         }
     });
-    mifosX.ng.services.service('AuthenticationService', ['$rootScope', 'HttpService', 'SECURITY', 'OAUTH_JWT_SERVER_URL', 'OAUTH_JWT_CLIENT_ID', 'FINERACT_BASE_URL', 'OAUTH_JWT_CLIENT_SECRET', 'localStorageService','$timeout','webStorage', mifosX.services.AuthenticationService]).run(function ($log) {
+    mifosX.ng.services.service('AuthenticationService', ['$rootScope', 'HttpService', 'SECURITY', 'OAUTH_REALM', 'OAUTH_JWT_SERVER_URL', 'OAUTH_JWT_CLIENT_ID', 'FINERACT_BASE_URL', 'OAUTH_JWT_CLIENT_SECRET', 'localStorageService','$timeout','webStorage', mifosX.services.AuthenticationService]).run(function ($log) {
         $log.info("AuthenticationService initialized");
     });
 }(mifosX.services || {}));
