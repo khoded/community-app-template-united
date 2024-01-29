@@ -6,7 +6,7 @@ angular.module('configurations', [])
     .constant('KEEPALIVE_INTERVAL', 15 * 60)
     .constant('OAUTH_JWT_CLIENT_ID', 'fineract-production')
     .constant('OAUTH_JWT_CLIENT_SECRET', '6NemAHBihX81IpMC5SmAsFrIatFk43k9')
-    .constant('OAUTH_JWT_SERVER_URL', 'https://10.2.3.21:8083/auth')
+    .constant('OAUTH_JWT_SERVER_URL', 'https://keycloak.uceemfb.com/auth')
     .constant('OAUTH_REALM', 'corebanking')
     .constant('SECURITY', 'oauth');
 // Use SECURITY constant as 'oauth' to enable Oauth2 on community app
