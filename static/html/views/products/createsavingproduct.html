@@ -508,10 +508,10 @@
                             <div class="col-sm-3">
                                 <select id="transfersInSuspenseAccountId"
                                         ng-model="formData.transfersInSuspenseAccountId"
-                                        chosen="liabilityAccountOptions"
-                                        ng-options="liabilityAccount.id as liabilityAccount.name for liabilityAccount in liabilityAccountOptions"
-                                        ng-change="savingproduct.accountingMappings.transfersInSuspenseAccount.name = formValue(liabilityAccountOptions,formData.transfersInSuspenseAccountId,'id','name')"
-                                        value="{{liabilityAccount.id}}">
+                                        chosen="assetAccountOptions"
+                                        ng-options="assetAccount.id as assetAccount.name for assetAccount in assetAccountOptions"
+                                        ng-change="savingproduct.accountingMappings.transfersInSuspenseAccount.name = formValue(assetAccountOptions,formData.transfersInSuspenseAccountId,'id','name')"
+                                        value="{{assetAccount.id}}">
                                 </select>
                             </div>
                         </div>
