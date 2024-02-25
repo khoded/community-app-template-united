@@ -670,7 +670,7 @@
                                         chosen="assetAccountOptions"
                                         ng-options="assetAccount.id as assetAccount.name for assetAccount in assetAccountOptions"
                                         ng-change="savingproduct.accountingMappings.transfersInSuspenseAccount.name = formValue(assetAccountOptions,formData.transfersInSuspenseAccountId,'id','name')"
-                                        value="{{liabilityAccount.id}}">
+                                        value="{{assetAccount.id}}">
                                 </select>
                             </div>
                         </div>
